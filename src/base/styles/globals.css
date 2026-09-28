@@ -16,10 +16,10 @@
   --focus: oklch(52% 0.19 265);
   --image-outline: oklch(0% 0 0 / 0.1);
 
-  --btn-primary-from: oklch(60% 0.19 265);
-  --btn-primary-to: oklch(47% 0.19 265);
-  --btn-primary-edge-top: oklch(70% 0.15 265);
-  --btn-primary-edge-bottom: oklch(38% 0.17 265);
+  --btn-primary-from: oklch(55% 0.19 265);
+  --btn-primary-to: oklch(45% 0.19 265);
+  --btn-primary-edge-top: oklch(66% 0.16 265);
+  --btn-primary-edge-bottom: oklch(36% 0.17 265);
   --btn-primary-ink: oklch(98% 0.01 265);
 
   --btn-secondary-from: oklch(99% 0.003 255);
@@ -28,10 +28,10 @@
   --btn-secondary-edge-bottom: oklch(82% 0.01 255);
   --btn-secondary-ink: var(--ink);
 
-  --btn-destructive-from: oklch(62% 0.19 25);
-  --btn-destructive-to: oklch(50% 0.2 25);
-  --btn-destructive-edge-top: oklch(72% 0.15 25);
-  --btn-destructive-edge-bottom: oklch(40% 0.18 25);
+  --btn-destructive-from: oklch(55% 0.19 25);
+  --btn-destructive-to: oklch(48% 0.2 25);
+  --btn-destructive-edge-top: oklch(65% 0.16 25);
+  --btn-destructive-edge-bottom: oklch(38% 0.18 25);
   --btn-destructive-ink: oklch(98% 0.01 25);
 }
 
@@ -61,10 +61,10 @@
   --btn-secondary-edge-bottom: oklch(16% 0.012 258);
   --btn-secondary-ink: var(--ink);
 
-  --btn-destructive-from: oklch(70% 0.17 25);
-  --btn-destructive-to: oklch(58% 0.19 25);
-  --btn-destructive-edge-top: oklch(78% 0.12 25);
-  --btn-destructive-edge-bottom: oklch(46% 0.17 25);
+  --btn-destructive-from: oklch(74% 0.17 25);
+  --btn-destructive-to: oklch(62% 0.19 25);
+  --btn-destructive-edge-top: oklch(80% 0.12 25);
+  --btn-destructive-edge-bottom: oklch(50% 0.17 25);
   --btn-destructive-ink: oklch(16% 0.03 25);
 }
 

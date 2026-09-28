@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
-    "postinstall": "husky"
+    "postinstall": "husky",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -23,6 +24,7 @@
     "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.6.3",
     "@types/react": "^19.3.0",

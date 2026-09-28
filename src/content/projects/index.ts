@@ -9,7 +9,6 @@ import { payback } from './payback';
 import { shaza } from './shaza';
 import { takeda } from './takeda';
 
-
 export const buildingNow: CaseStudy[] = [shaza, maya];
 
 export const selectedWork: CaseStudy[] = [payback, takeda, descope, charmIndustrial, o1labs, akasec];
