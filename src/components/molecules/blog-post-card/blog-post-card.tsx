@@ -15,11 +15,11 @@ export default function BlogPostCard({ post, fullSlug, className }: BlogPostCard
     <Link
       className={cn(
         className,
-        'bg-zinc-transparent relative flex flex-col overflow-hidden rounded-xl border border-border hover:bg-zinc-900 hover:drop-shadow-border',
+        'bg-zinc-transparent border-border hover:drop-shadow-border relative flex flex-col overflow-hidden rounded-xl border hover:bg-zinc-900',
       )}
       href={{ url: `/${fullSlug}` }}
     >
-      <div className="relative max-h-[250px] min-h-[210px] border-b border-b-border bg-border">
+      <div className="border-b-border bg-border relative max-h-[250px] min-h-[210px] border-b">
         {post.image && <Image image={post.image} fill />}
       </div>
       <div className="flex flex-col gap-2 px-4 py-5">

@@ -8,7 +8,7 @@ export async function submitNewsletterForm(formData: FormData): Promise<{ error:
   try {
     const validation = newsletterFormSchema.safeParse(Object.fromEntries(formData));
 
-    if (!validation.success) return { error: validation.error.errors?.[0].message || 'Validation error' };
+    if (!validation.success) return { error: validation.error.issues[0]?.message || 'Validation error' };
 
     // i should use the `addNewsletterSubscriber` function here
     // but that requires paid plan in resend and im broke :)

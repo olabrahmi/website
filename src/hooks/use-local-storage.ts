@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react';
 
 export const useLocalStorage = <T>(key: string, initialValue: T) => {
-  const [storedValue, setStoredValue] = useState<T>(initialValue);
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    if (typeof window === 'undefined') return initialValue;
+
+    try {
+      const item = window.localStorage.getItem(key);
+
+      return item ? (JSON.parse(item) as T) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  });
 
   const setValue = (value: T | ((_val: T) => T)) => {
     try {
@@ -16,9 +26,14 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
   };
 
   useEffect(() => {
-    const item = window.localStorage.getItem(key);
+    try {
+      const item = window.localStorage.getItem(key);
 
-    setStoredValue(item ? JSON.parse(item) : initialValue);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setStoredValue(item ? (JSON.parse(item) as T) : initialValue);
+    } catch (error) {
+      console.error(error);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, setStoredValue]);
 

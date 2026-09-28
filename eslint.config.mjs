@@ -1,24 +1,16 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-import { FlatCompat } from '@eslint/eslintrc';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
 import importPlugin from 'eslint-plugin-import';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import filenamesPlugin from 'eslint-plugin-filenames-simple';
 import prettierPlugin from 'eslint-plugin-prettier';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
 const eslintConfig = defineConfig([
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...nextVitals,
+  ...nextTs,
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {

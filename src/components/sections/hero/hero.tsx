@@ -10,7 +10,7 @@ import type { HeroProps } from './hero.types';
 import { AuroraBackground } from './components/aurora-background';
 import ParsedTitle from './components/parsed-title';
 
-const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] };
+const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] as const };
 
 const variants = {
   hidden: { filter: 'blur(10px)', transform: 'translateY(20%)', opacity: 0 },
