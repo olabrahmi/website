@@ -19,7 +19,7 @@ export default function NotFound() {
 
   return (
     <main className="w-full">
-      <section className="container prose prose-invert flex min-h-[100vh] flex-col items-center justify-center">
+      <section className="prose prose-invert container flex min-h-[100vh] flex-col items-center justify-center">
         <h1>404: Page not found.</h1>
         <Link href="/" className="underline hover:opacity-80">
           &larr; Go back home

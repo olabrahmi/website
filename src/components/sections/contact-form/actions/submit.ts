@@ -8,7 +8,7 @@ export async function submitContactForm(formData: FormData): Promise<{ error: st
   try {
     const validation = contactFormSchema.safeParse(Object.fromEntries(formData));
 
-    if (!validation.success) return { error: validation.error.errors?.[0].message || 'Validation error' };
+    if (!validation.success) return { error: validation.error.issues[0]?.message || 'Validation error' };
 
     const mail = await sendContactEmail(validation.data);
 

@@ -17,7 +17,7 @@ export default async function BlogPost({ params }: NextPageProps) {
   return (
     <>
       <BlogPostHero post={post} createdAt={post.createdAt} />
-      <article className="container relative my-16">
+      <article className="relative container my-16">
         <Markdown content={post.content} />
       </article>
     </>
