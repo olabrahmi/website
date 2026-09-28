@@ -1,223 +1,257 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/typography";
-@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  color-scheme: light;
+
+  --paper: oklch(98.6% 0.004 250);
+  --surface: oklch(96.4% 0.006 250);
+  --ink: oklch(21% 0.02 262);
+  --ink-muted: oklch(46% 0.018 262);
+  --rule: oklch(89% 0.008 255);
+  --accent: oklch(52% 0.19 265);
+  --accent-ink: oklch(98% 0.01 265);
+  --pass: oklch(58% 0.13 155);
+  --focus: oklch(52% 0.19 265);
+  --image-outline: oklch(0% 0 0 / 0.1);
+
+  --btn-primary-from: oklch(60% 0.19 265);
+  --btn-primary-to: oklch(47% 0.19 265);
+  --btn-primary-edge-top: oklch(70% 0.15 265);
+  --btn-primary-edge-bottom: oklch(38% 0.17 265);
+  --btn-primary-ink: oklch(98% 0.01 265);
+
+  --btn-secondary-from: oklch(99% 0.003 255);
+  --btn-secondary-to: oklch(93% 0.006 255);
+  --btn-secondary-edge-top: oklch(100% 0 0);
+  --btn-secondary-edge-bottom: oklch(82% 0.01 255);
+  --btn-secondary-ink: var(--ink);
+
+  --btn-destructive-from: oklch(62% 0.19 25);
+  --btn-destructive-to: oklch(50% 0.2 25);
+  --btn-destructive-edge-top: oklch(72% 0.15 25);
+  --btn-destructive-edge-bottom: oklch(40% 0.18 25);
+  --btn-destructive-ink: oklch(98% 0.01 25);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --paper: oklch(17% 0.014 258);
+  --surface: oklch(21% 0.016 258);
+  --ink: oklch(94% 0.008 255);
+  --ink-muted: oklch(72% 0.014 258);
+  --rule: oklch(30% 0.016 258);
+  --accent: oklch(74% 0.13 265);
+  --accent-ink: oklch(18% 0.03 265);
+  --pass: oklch(76% 0.13 155);
+  --focus: oklch(74% 0.13 265);
+  --image-outline: oklch(100% 0 0 / 0.1);
+
+  --btn-primary-from: oklch(78% 0.13 265);
+  --btn-primary-to: oklch(66% 0.15 265);
+  --btn-primary-edge-top: oklch(86% 0.09 265);
+  --btn-primary-edge-bottom: oklch(55% 0.15 265);
+  --btn-primary-ink: oklch(18% 0.03 265);
+
+  --btn-secondary-from: oklch(30% 0.014 258);
+  --btn-secondary-to: oklch(24% 0.014 258);
+  --btn-secondary-edge-top: oklch(38% 0.014 258);
+  --btn-secondary-edge-bottom: oklch(16% 0.012 258);
+  --btn-secondary-ink: var(--ink);
+
+  --btn-destructive-from: oklch(70% 0.17 25);
+  --btn-destructive-to: oklch(58% 0.19 25);
+  --btn-destructive-edge-top: oklch(78% 0.12 25);
+  --btn-destructive-edge-bottom: oklch(46% 0.17 25);
+  --btn-destructive-ink: oklch(16% 0.03 25);
+}
+
 @theme inline {
-  --font-*: initial;
-  --font-serif: var(--font-geist-sans), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-sans:
-    var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --drop-shadow-3xl: 10px 10px 45px rgba(255, 255, 255, 0.15);
-  --drop-shadow-border: 0 0 4px rgba(100, 100, 100, 0.05);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-pass: var(--pass);
+  --color-focus: var(--focus);
 
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-
-  --accent-value: 255;
-
-  --color-accent-50: hsl(var(--accent-value), 75%, 98%);
-  --color-accent-100: hsl(var(--accent-value), 75%, 95%);
-  --color-accent-200: hsl(var(--accent-value), 75%, 90%);
-  --color-accent-300: hsl(var(--accent-value), 75%, 85%);
-  --color-accent-400: hsl(var(--accent-value), 75%, 75%);
-  --color-accent-500: hsl(var(--accent-value), 75%, 65%);
-  --color-accent-600: hsl(var(--accent-value), 75%, 55%);
-  --color-accent-700: hsl(var(--accent-value), 75%, 45%);
-  --color-accent-800: hsl(var(--accent-value), 75%, 35%);
-  --color-accent-900: hsl(var(--accent-value), 75%, 30%);
-  --color-accent-950: hsl(var(--accent-value), 75%, 20%);
-
-  --gradient-dark: var(--color-accent-700);
-  --gradient-light: var(--color-accent-400);
-  --gradient-darker: var(--color-accent-800);
-
-  --hero-gradient-text: circle at center, var(--gradient-dark), var(--gradient-light), var(--gradient-darker);
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-aurora: aurora 60s linear infinite;
-  --animate-line-shadow: line-shadow 20s linear infinite;
-  --animate-text-gradient: text-gradient 4s ease-in-out infinite alternate;
-}
-
-@keyframes accordion-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
-}
-
-@keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
-}
-
-@keyframes text-gradient {
-  0%,
-  15% {
-    background-position: 0 50%;
-  }
-  85%,
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-@keyframes aurora {
-  from {
-    background-position:
-      50% 50%,
-      50% 50%;
-  }
-  to {
-    background-position:
-      350% 50%,
-      350% 50%;
-  }
-}
-
-@keyframes line-shadow {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100% -100%;
-  }
-}
-
-@utility container {
-  margin-inline: auto;
-  padding-inline: 1.25rem;
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
-  }
-  @media (width >= 768px) {
-    max-width: 960px;
-  }
-}
-
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
-
-@utility text-balance {
-  text-wrap: balance;
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @layer base {
-  :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --text-gradient: linear-gradient(120deg, #fff, #adadad);
-    --text-gradient-inverted: linear-gradient(120deg, #18181b, #545151);
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 240 6% 90%;
-    --primary-foreground: 240 6% 10%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 345 87% 33%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-
-    --radius: 1.5rem;
+  html {
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: clip;
   }
 
   body {
-    @apply relative min-h-screen overflow-x-hidden bg-zinc-50 font-sans text-zinc-900;
-  }
-
-  main {
-    @apply min-h-[800px];
-  }
-}
-
-@layer utilities {
-  * {
-    @apply scroll-smooth text-zinc-900 transition-all duration-300 ease-in-out;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    overflow-x: clip;
+    text-wrap: pretty;
   }
 
   h1,
   h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-serif font-semibold tracking-tighter;
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+    font-style: normal;
   }
 
-  [data-radix-popper-content-wrapper],
-  [data-radix-popper-content-wrapper] * {
-    @apply transition-none;
+  ::selection {
+    background-color: color-mix(in oklch, var(--accent) 30%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    border-radius: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1;
+    background-image: linear-gradient(to bottom, var(--btn-from), var(--btn-to));
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: var(--btn-edge-top);
+    border-bottom-color: var(--btn-edge-bottom);
+    border-inline-color: color-mix(in oklch, var(--btn-edge-top), var(--btn-edge-bottom));
+    color: var(--btn-ink);
+    box-shadow: 0 1px 2px oklch(0% 0 0 / 0.08);
+    cursor: pointer;
+    transition-property: transform, filter, box-shadow;
+    transition-duration: 160ms;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  .btn[data-size='md'] {
+    height: 2.75rem;
+    padding-inline: 1.25rem;
+  }
+
+  .btn[data-size='sm'] {
+    height: 2.5rem;
+    padding-inline: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .btn[data-size='icon'] {
+    height: 2.5rem;
+    width: 2.5rem;
+    padding: 0;
+  }
+
+  .btn[data-variant='primary'] {
+    --btn-from: var(--btn-primary-from);
+    --btn-to: var(--btn-primary-to);
+    --btn-edge-top: var(--btn-primary-edge-top);
+    --btn-edge-bottom: var(--btn-primary-edge-bottom);
+    --btn-ink: var(--btn-primary-ink);
+  }
+
+  .btn[data-variant='secondary'] {
+    --btn-from: var(--btn-secondary-from);
+    --btn-to: var(--btn-secondary-to);
+    --btn-edge-top: var(--btn-secondary-edge-top);
+    --btn-edge-bottom: var(--btn-secondary-edge-bottom);
+    --btn-ink: var(--btn-secondary-ink);
+  }
+
+  .btn[data-variant='destructive'] {
+    --btn-from: var(--btn-destructive-from);
+    --btn-to: var(--btn-destructive-to);
+    --btn-edge-top: var(--btn-destructive-edge-top);
+    --btn-edge-bottom: var(--btn-destructive-edge-bottom);
+    --btn-ink: var(--btn-destructive-ink);
+  }
+
+  .btn[data-variant='ghost'] {
+    --btn-from: transparent;
+    --btn-to: transparent;
+    --btn-edge-top: transparent;
+    --btn-edge-bottom: transparent;
+    --btn-ink: var(--ink);
+    box-shadow: none;
+  }
+
+  .btn[data-variant='ghost']:active,
+  .btn[data-variant='ghost'][data-open='true'] {
+    --btn-from: color-mix(in oklch, var(--btn-secondary-from) 60%, transparent);
+    --btn-to: color-mix(in oklch, var(--btn-secondary-to) 60%, transparent);
+    --btn-edge-top: color-mix(in oklch, var(--btn-secondary-edge-top) 60%, transparent);
+    --btn-edge-bottom: color-mix(in oklch, var(--btn-secondary-edge-bottom) 60%, transparent);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn[data-variant='ghost']:hover {
+      --btn-from: color-mix(in oklch, var(--btn-secondary-from) 60%, transparent);
+      --btn-to: color-mix(in oklch, var(--btn-secondary-to) 60%, transparent);
+      --btn-edge-top: color-mix(in oklch, var(--btn-secondary-edge-top) 60%, transparent);
+      --btn-edge-bottom: color-mix(in oklch, var(--btn-secondary-edge-bottom) 60%, transparent);
+    }
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+    filter: brightness(0.96);
+    box-shadow: none;
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    filter: saturate(0.4);
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .img-outline {
+    outline: 1px solid var(--image-outline);
+    outline-offset: -1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition-duration: 0.01ms;
   }
 }
