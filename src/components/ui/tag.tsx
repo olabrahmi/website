@@ -6,7 +6,7 @@ export default function Tag({ children, className }: { children: ReactNode; clas
   return (
     <span
       className={cn(
-        'border-rule bg-surface text-ink-muted inline-flex items-center rounded-md border px-2 py-1 font-mono text-[0.8125rem] leading-none',
+        'bg-accent-soft text-accent inline-flex items-center rounded-full px-2.5 py-1 font-sans text-xs leading-none font-medium',
         className,
       )}
     >

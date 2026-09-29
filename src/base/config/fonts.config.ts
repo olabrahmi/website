@@ -1,19 +1,23 @@
-import { Bricolage_Grotesque, Geist, Geist_Mono } from 'next/font/google';
+import { DM_Sans, Geist, JetBrains_Mono } from 'next/font/google';
 
-export const displayFont = Bricolage_Grotesque({
-  variable: '--font-bricolage',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-export const bodyFont = Geist({
+/** Every title and heading, hero included. */
+export const displayFont = Geist({
   variable: '--font-geist',
   subsets: ['latin'],
   display: 'swap',
 });
 
-export const monoFont = Geist_Mono({
-  variable: '--font-geist-mono',
+/** All other text: body, labels, badges, buttons. */
+export const bodyFont = DM_Sans({
+  variable: '--font-dm-sans',
   subsets: ['latin'],
   display: 'swap',
+});
+
+/** Numbers in projects: metrics, dates, read time. */
+export const monoFont = JetBrains_Mono({
+  variable: '--font-jetbrains',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: false,
 });

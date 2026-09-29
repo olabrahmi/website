@@ -22,3 +22,11 @@ export const getNextProject = (slug: string) => {
 
   return allProjects[(index + 1) % allProjects.length];
 };
+
+/** Metrics still waiting on the owner's sign-off, as "project: label". */
+export const unconfirmedMetrics = () =>
+  allProjects.flatMap((project) =>
+    project.metrics
+      .filter((metric) => metric.confirm)
+      .map((metric) => `${project.name}: ${metric.value} ${metric.label}`),
+  );

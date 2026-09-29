@@ -1,34 +1,73 @@
-import { Container, Tag, TextLink } from '@/components/ui';
+import Link from 'next/link';
+
+import { Metric, Reveal, SpotlightCard } from '@/components/motion';
+import { ArrowRight, ArrowUpRight, Container, Tag } from '@/components/ui';
 import { buildingNow } from '@/content/projects';
 
-import PipelineTrace from './pipeline-trace';
 import SectionHeading from './section-heading';
+
+// Shaza has real bookings, so it gets the wider card.
+const spans = ['md:col-span-8', 'md:col-span-4'];
 
 export default function BuildingNow() {
   return (
-    <Container as="section" aria-labelledby="building-now" className="py-16 md:py-24">
-      <SectionHeading id="building-now">What I&apos;m building now</SectionHeading>
-      <ul className="border-rule mt-10 border-t">
-        {buildingNow.map((project) => (
-          <li key={project.slug} className="border-rule grid gap-6 border-b py-10 lg:grid-cols-12 lg:gap-10">
-            <h3 className="text-ink text-[clamp(2rem,1.4rem+2vw,3rem)] leading-none tracking-[-0.025em] lg:col-span-4">
-              {project.name}
-            </h3>
-            <div className="flex flex-col gap-6 lg:col-span-8">
-              <p className="text-ink max-w-[60ch] text-lg">{project.card.summary}</p>
-              {project.slug === 'maya' && <PipelineTrace />}
-              <ul className="flex flex-wrap gap-2" aria-label={`${project.name} stack`}>
-                {project.card.tags.map((tag) => (
-                  <li key={tag}>
-                    <Tag>{tag}</Tag>
-                  </li>
-                ))}
-              </ul>
-              <TextLink href={`/work/${project.slug}`} arrow>
-                {project.card.cta}
-              </TextLink>
-            </div>
-          </li>
+    <Container as="section" aria-labelledby="building-now" className="pt-8 pb-14 md:pt-10 md:pb-20">
+      <Reveal>
+        <SectionHeading id="building-now" eyebrow="AI agents">
+          What I&apos;m building
+        </SectionHeading>
+      </Reveal>
+      <ul className="mt-8 grid gap-4 md:grid-cols-12">
+        {buildingNow.map((project, index) => (
+          <Reveal as="li" key={project.slug} index={index} className={spans[index]}>
+            <SpotlightCard as="article" className="group/card flex h-full flex-col gap-6 p-6 md:p-7">
+              {/* The whole card is the link. */}
+              <Link
+                href={`/work/${project.slug}`}
+                transitionTypes={['nav-forward']}
+                className="absolute inset-0 z-10 cursor-pointer rounded-[inherit]"
+              >
+                <span className="sr-only">
+                  {project.name}: {project.card.cta}
+                </span>
+              </Link>
+              <span
+                aria-hidden="true"
+                className="cursor-label bg-ink text-paper rounded-full px-3 py-1.5 text-xs font-medium"
+              >
+                <span className="inline-flex items-center gap-1">
+                  {project.card.cta}
+                  <ArrowUpRight className="size-3.5" />
+                </span>
+              </span>
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="type-h3 text-ink text-2xl">{project.name}</h3>
+                <span className="type-eyebrow text-ink-faint">Agent</span>
+              </div>
+              <p className="text-ink max-w-[34ch] text-lg leading-snug">{project.card.summary}</p>
+              {project.metrics.length > 0 && (
+                <div className="grid grid-cols-2 gap-4">
+                  {project.metrics.slice(0, 2).map((metric) => (
+                    <Metric key={metric.label} metric={metric} />
+                  ))}
+                </div>
+              )}
+              <div className="mt-auto flex flex-col gap-5">
+                <ul className="flex flex-wrap gap-1.5" aria-label={`${project.name} stack`}>
+                  {project.card.tags.map((tag) => (
+                    <li key={tag}>
+                      <Tag>{tag}</Tag>
+                    </li>
+                  ))}
+                </ul>
+                {/* Phones: a visible link line. Desktop: none, the label follows the cursor instead. */}
+                <span className="text-ink inline-flex w-fit items-center gap-1.5 font-medium md:hidden">
+                  {project.card.cta}
+                  <ArrowRight className="text-accent size-4" />
+                </span>
+              </div>
+            </SpotlightCard>
+          </Reveal>
         ))}
       </ul>
     </Container>

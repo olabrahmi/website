@@ -56,7 +56,7 @@ const eslintConfig = defineConfig([
       'import/no-extraneous-dependencies': [
         2,
         {
-          devDependencies: ['**/*.test.*', '**/*.spec.*', '**/testutils/**', 'jest.config.ts', 'tailwind.config.ts', 'playwright.config.ts'],
+          devDependencies: ['tailwind.config.ts'],
         },
       ],
       'import/order': [

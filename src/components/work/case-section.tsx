@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import { Reveal } from '@/components/motion';
 import { cn } from '@/utils/cn';
 
 interface CaseSectionProps {
@@ -9,19 +10,20 @@ interface CaseSectionProps {
   className?: string;
 }
 
+/** One block of a case study. The id doubles as the anchor for CaseToc. */
 export default function CaseSection({ id, title, children, className }: CaseSectionProps) {
   return (
     <section
-      aria-labelledby={id}
-      className={cn('border-rule grid gap-6 border-t py-12 lg:grid-cols-12 lg:gap-10', className)}
+      id={id}
+      aria-labelledby={`${id}-title`}
+      className={cn('border-rule scroll-mt-36 border-t py-9 first:border-t-0 first:pt-0 lg:scroll-mt-32', className)}
     >
-      <h2
-        id={id}
-        className="text-ink text-[clamp(1.375rem,1.1rem+0.8vw,1.75rem)] leading-tight tracking-[-0.015em] lg:col-span-4"
-      >
-        {title}
-      </h2>
-      <div className="flex flex-col gap-5 lg:col-span-8">{children}</div>
+      <Reveal className="flex flex-col gap-5">
+        <h2 id={`${id}-title`} className="type-h3 text-ink text-[1.375rem]">
+          {title}
+        </h2>
+        {children}
+      </Reveal>
     </section>
   );
 }

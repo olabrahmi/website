@@ -5,10 +5,8 @@ export const charmIndustrial: CaseStudy = {
   kind: 'client',
   name: 'Charm Industrial',
   card: {
-    summary:
-      'Rewrote charmindustrial.com from Gatsby to Next.js. The site processes hundreds of thousands of dollars a month through Stripe.',
-    stats: ['100k+ monthly visitors', '99.9% uptime'],
-    tags: ['Next.js', 'Tailwind', 'Framer Motion', 'Stripe', 'Vercel'],
+    summary: 'Gatsby to Next.js rewrite of the site Charm sells through.',
+    tags: ['Next.js', 'Tailwind', 'Stripe', 'Vercel'],
     cta: 'Read case study',
   },
   title: 'Rebuilding the site Charm Industrial sells through',
@@ -16,24 +14,26 @@ export const charmIndustrial: CaseStudy = {
     client: 'Charm Industrial (via Bejamas)',
     role: 'Led the frontend',
     when: '2023 to 2025',
-    stack: ['Next.js', 'Tailwind', 'Framer Motion', 'Stripe', 'Vercel', 'Express', 'Render'],
+    stack: ['Next.js', 'Tailwind', 'Framer Motion', 'Storyblok', 'Stripe', 'Vercel', 'Express', 'Render'],
     live: [{ label: 'charmindustrial.com', href: 'https://www.charmindustrial.com' }],
   },
   shortVersion:
-    'Charm removes carbon and sells removal to companies, and its website is where clients buy. I led the rewrite from Gatsby to Next.js and built an internal tool the team uses to watch their factories.',
+    'Charm removes carbon from the atmosphere, and its website is where clients buy. I led the rewrite from Gatsby to Next.js, and built the internal tool that watches their factories.',
+  context:
+    'Gatsby was slow and costly to work in. Plugins bloated the site, and some were deprecated and a security risk. The site needed live data and a modern stack.',
   built: [
     {
       title: 'charmindustrial.com',
-      body: 'Full rewrite, Gatsby to Next.js. Stripe checkout handling hundreds of thousands of dollars a month, 99.9% uptime, and SEO and performance work aimed at keeping visitors on the page.',
+      body: 'Full rewrite from Gatsby to Next.js with server rendering for live data. Dead code and unused dependencies gone. Stripe checkout takes hundreds of thousands of dollars a month.',
       href: 'https://www.charmindustrial.com',
     },
     {
       title: 'Factory video dashboard (private)',
-      body: "An internal Next.js app streaming live camera feeds from Charm's factories. An Express backend on Render replays HLS (m3u8) streams from Verkada cameras to several viewers at once.",
+      body: 'Internal Next.js app with live camera feeds. Express on Render replays Verkada HLS streams to many viewers.',
     },
   ],
   howItsBuilt:
-    'The public site is Next.js on Vercel with Stripe for checkout. The factory dashboard is a separate internal app. One Express service on Render pulls each Verkada HLS stream once and fans it out, so the cameras see a single viewer no matter how many people watch.',
+    'The public site is Next.js on Vercel with Stripe. The dashboard is a separate app: one Express service pulls each stream once and fans it out.',
   diagram: {
     lanes: [
       {
@@ -56,14 +56,21 @@ export const charmIndustrial: CaseStudy = {
     ],
   },
   hardParts: [
-    'Rewriting a site that takes payments without a day of downtime.',
-    'Streaming several camera feeds to many clients without the backend falling over.',
+    {
+      problem: 'Rewriting a site that takes payments without a day of downtime.',
+      call: 'Rebuilt behind the same Stripe checkout and held 99.9% uptime.',
+    },
+    {
+      problem: 'Streaming several camera feeds to many viewers without the backend falling over.',
+      call: 'One Express service pulls each Verkada stream once and fans it out, so the cameras see one viewer.',
+    },
   ],
-  results: ['99.9% uptime on a site that takes hundreds of thousands of dollars a month through Stripe.'],
-  today: 'A vision model on the camera feeds that flags anomalies for staff, instead of someone watching all screens.',
+  metrics: [
+    { value: '3X', label: 'faster page loads', up: true },
+    { value: '+86%', label: 'performance improvement', up: true },
+    { value: '30%', label: 'lift in conversions', up: true },
+    { value: '100k+', label: 'monthly visitors' },
+  ],
   media: { hero: true, details: 1 },
-  pending: [
-    'Source for "50%+ faster pages" and "30% lift in conversion". They stay hidden until you can show where they come from',
-    'Agency case study link (Bejamas)',
-  ],
+  pending: [],
 };

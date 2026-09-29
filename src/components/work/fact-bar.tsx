@@ -1,41 +1,25 @@
-import type { ReactNode } from 'react';
-
-import { TextLink } from '@/components/ui';
 import type { CaseStudyFacts } from '@/content/types';
 
+/** Client, role, when and team as rounded chips. The live link sits beside the title, the stack at the bottom. */
 export default function FactBar({ facts }: { facts: CaseStudyFacts }) {
-  const rows: [string, ReactNode][] = [
+  const rows = [
     ['Client', facts.client],
-    ['My role', facts.role],
-  ];
-
-  if (facts.when) rows.push(['When', facts.when]);
-  if (facts.team) rows.push(['Team', facts.team]);
-
-  rows.push(['Stack', facts.stack.join(', ')]);
-  rows.push([
-    'Live',
-    facts.live?.length ? (
-      <span className="flex flex-wrap gap-x-4 gap-y-1">
-        {facts.live.map((link) => (
-          <TextLink key={link.href} href={link.href}>
-            {link.label}
-          </TextLink>
-        ))}
-      </span>
-    ) : (
-      'Private'
-    ),
-  ]);
+    ['Role', facts.role],
+    ['When', facts.when],
+    ['Team', facts.team],
+  ].filter((row): row is [string, string] => !!row[1]);
 
   return (
-    <dl className="border-rule grid gap-x-8 gap-y-4 border-y py-6 font-mono text-[0.8125rem] sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="flex flex-wrap gap-2">
       {rows.map(([term, value]) => (
-        <div key={term} className="flex flex-col gap-1">
-          <dt className="text-ink-muted">{term}</dt>
-          <dd className="text-ink">{value}</dd>
-        </div>
+        <li
+          key={term}
+          className="border-rule bg-surface inline-flex items-center gap-2 rounded-2xl border px-3.5 py-1.5 text-[0.8125rem] leading-snug"
+        >
+          <span className="type-eyebrow text-ink-faint shrink-0">{term}</span>
+          <span className="text-ink">{value}</span>
+        </li>
       ))}
-    </dl>
+    </ul>
   );
 }

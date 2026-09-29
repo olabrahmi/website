@@ -1,27 +1,44 @@
-import { cn } from '@/utils/cn';
+import { ArrowRight } from '@/components/ui';
 import type { Diagram } from '@/content/types';
+import { cn } from '@/utils/cn';
 
+/**
+ * Phones: a vertical rail, one dot per step, label and note on one row.
+ * md and up: a wrapping row of cards with arrows between them.
+ */
 export default function ArchitectureDiagram({ diagram, name }: { diagram: Diagram; name: string }) {
   return (
-    <figure className="flex flex-col gap-8" aria-label={`${name} architecture`}>
+    <figure className="flex flex-col gap-7" aria-label={`${name} architecture`}>
       {diagram.lanes.map((lane) => (
         <div key={lane.label} className="flex flex-col gap-3">
-          <figcaption className="text-ink-muted font-mono text-[0.8125rem]">{lane.label}</figcaption>
-          <ol className="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-x-5 md:gap-y-4">
+          <figcaption className="type-eyebrow text-ink-faint">{lane.label}</figcaption>
+          <ol className="border-rule flex flex-col gap-3 border-l md:flex-row md:flex-wrap md:items-stretch md:gap-2 md:border-l-0">
             {lane.nodes.map((node, index) => (
-              <li
-                key={node.label}
-                className={cn(
-                  'bg-surface relative flex min-w-0 flex-col justify-center gap-0.5 rounded-lg border px-3.5 py-2.5 md:min-w-36 md:flex-1',
-                  node.human ? 'border-accent bg-paper border-2' : 'border-rule',
-                )}
-              >
-                <span className="text-ink text-[0.9375rem] leading-snug font-medium">{node.label}</span>
-                {node.note && <span className="text-ink-muted font-mono text-xs leading-snug">{node.note}</span>}
-                {index < lane.nodes.length - 1 && (
+              <li key={node.label} className="contents">
+                <div
+                  className={cn(
+                    'relative flex min-w-0 flex-col gap-0.5 pl-5 md:min-w-32 md:rounded-lg md:border md:px-3.5 md:py-2.5',
+                    node.human ? 'md:border-accent md:bg-accent-soft' : 'md:border-rule md:bg-surface',
+                  )}
+                >
                   <span
                     aria-hidden="true"
-                    className="bg-rule absolute -bottom-3 left-1/2 h-3 w-px -translate-x-1/2 md:top-1/2 md:-right-5 md:bottom-auto md:left-auto md:h-px md:w-5 md:translate-x-0 md:-translate-y-1/2"
+                    className={cn(
+                      'absolute top-[0.55rem] left-[-0.3125rem] size-2.5 rounded-full border-2 md:hidden',
+                      node.human ? 'border-accent bg-paper' : 'border-rule bg-surface',
+                    )}
+                  />
+                  <span
+                    className={cn('text-[0.9375rem] leading-snug font-medium', node.human ? 'text-accent' : 'text-ink')}
+                  >
+                    {node.label}
+                  </span>
+                  {node.note && <span className="text-ink-muted text-xs leading-snug">{node.note}</span>}
+                </div>
+                {index < lane.nodes.length - 1 && (
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="text-ink-faint hidden size-4 shrink-0 self-center md:block"
                   />
                 )}
               </li>

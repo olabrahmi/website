@@ -5,10 +5,6 @@ import { description, person, siteUrl } from '@/content/site';
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fafbfd' },
-    { media: '(prefers-color-scheme: dark)', color: '#16181d' },
-  ],
 };
 
 export const metadata: Metadata = {

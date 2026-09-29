@@ -1,17 +1,22 @@
-import { Button, Container } from '@/components/ui';
+import { AuroraBackground } from '@/components/motion';
+import { ArrowRight, Button, Container } from '@/components/ui';
 import { notFound } from '@/content/site';
 
 export default function NotFound() {
   return (
     <main>
-      <Container className="pt-32 pb-16 md:pt-44 md:pb-24">
-        <h1 className="text-ink max-w-[18ch] text-[clamp(2.25rem,1.3rem+3.6vw,4rem)] leading-[1.05] tracking-[-0.025em]">
-          {notFound.message}
-        </h1>
-        <div className="mt-8">
-          <Button href="/#work">{notFound.button}</Button>
-        </div>
-      </Container>
+      <AuroraBackground className="items-stretch justify-start pt-32 pb-14 md:pt-44 md:pb-20">
+        <Container>
+          <p className="type-eyebrow text-accent">404</p>
+          <h1 className="type-display-2 text-ink mt-4 max-w-[18ch]">{notFound.message}</h1>
+          <div className="mt-7">
+            <Button href="/#work">
+              {notFound.button}
+              <ArrowRight className="btn-arrow" />
+            </Button>
+          </div>
+        </Container>
+      </AuroraBackground>
     </main>
   );
 }

@@ -2,83 +2,98 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Palette: one saturated indigo-violet, #4125f9 (hue 274), green means a real
+ * gain, everything else is purple-tinted neutral. OKLCH keeps lightness steps perceptually even.
+ */
 :root {
   color-scheme: light;
 
-  --paper: oklch(98.6% 0.004 250);
-  --surface: oklch(96.4% 0.006 250);
-  --ink: oklch(21% 0.02 262);
-  --ink-muted: oklch(46% 0.018 262);
-  --rule: oklch(89% 0.008 255);
-  --accent: oklch(52% 0.19 265);
-  --accent-ink: oklch(98% 0.01 265);
-  --pass: oklch(58% 0.13 155);
-  --focus: oklch(52% 0.19 265);
+  --paper: oklch(98.8% 0.004 275);
+  --surface: oklch(96.5% 0.008 275);
+  --surface-2: oklch(93.5% 0.012 275);
+  --ink: oklch(20% 0.02 275);
+  --ink-muted: oklch(47% 0.02 275);
+  --ink-faint: oklch(62% 0.015 275);
+  --rule: oklch(90% 0.01 275);
+  --accent: #4125f9;
+  --accent-soft: oklch(48.5% 0.282 274 / 0.09);
+  --accent-ink: oklch(98% 0.01 275);
+  --pass: oklch(55% 0.15 152);
+  --focus: #4125f9;
   --image-outline: oklch(0% 0 0 / 0.1);
+  --aurora-a: oklch(55% 0.16 275 / 0.16);
+  --aurora-b: oklch(60% 0.12 270 / 0.1);
 
-  --btn-primary-from: oklch(55% 0.19 265);
-  --btn-primary-to: oklch(45% 0.19 265);
-  --btn-primary-edge-top: oklch(66% 0.16 265);
-  --btn-primary-edge-bottom: oklch(36% 0.17 265);
-  --btn-primary-ink: oklch(98% 0.01 265);
+  /*
+   * Buttons: a full pill with a subtle top-to-bottom gradient, one uniform lighter ring, an inner top
+   * highlight and a thin dark outer ring. Same border color all the way around.
+   */
+  --btn-primary-ring: oklch(0% 0 0 / 0.18);
+  --btn-primary-ink: oklch(98% 0.01 275);
 
-  --btn-secondary-from: oklch(99% 0.003 255);
-  --btn-secondary-to: oklch(93% 0.006 255);
-  --btn-secondary-edge-top: oklch(100% 0 0);
-  --btn-secondary-edge-bottom: oklch(82% 0.01 255);
+  --btn-secondary-from: oklch(100% 0 0);
+  --btn-secondary-to: oklch(95.5% 0.008 275);
+  --btn-secondary-border: oklch(86% 0.01 275);
+  --btn-secondary-ring: oklch(0% 0 0 / 0.06);
   --btn-secondary-ink: var(--ink);
 
-  --btn-destructive-from: oklch(55% 0.19 25);
-  --btn-destructive-to: oklch(48% 0.2 25);
-  --btn-destructive-edge-top: oklch(65% 0.16 25);
-  --btn-destructive-edge-bottom: oklch(38% 0.18 25);
+  --btn-destructive-from: oklch(56% 0.2 25);
+  --btn-destructive-to: oklch(46% 0.2 25);
+  --btn-destructive-border: oklch(65% 0.15 25);
+  --btn-destructive-ring: oklch(0% 0 0 / 0.35);
   --btn-destructive-ink: oklch(98% 0.01 25);
 }
 
 .dark {
   color-scheme: dark;
 
-  --paper: oklch(17% 0.014 258);
-  --surface: oklch(21% 0.016 258);
-  --ink: oklch(94% 0.008 255);
-  --ink-muted: oklch(72% 0.014 258);
-  --rule: oklch(30% 0.016 258);
-  --accent: oklch(74% 0.13 265);
-  --accent-ink: oklch(18% 0.03 265);
-  --pass: oklch(76% 0.13 155);
-  --focus: oklch(74% 0.13 265);
+  --paper: oklch(14.5% 0.018 275);
+  --surface: oklch(18.5% 0.022 275);
+  --surface-2: oklch(22% 0.026 275);
+  --ink: oklch(96% 0.006 275);
+  --ink-muted: oklch(70% 0.018 275);
+  --ink-faint: oklch(52% 0.016 275);
+  --rule: oklch(27% 0.02 275);
+  --accent: oklch(72% 0.15 276);
+  --accent-soft: oklch(72% 0.15 276 / 0.15);
+  --accent-ink: oklch(16% 0.03 275);
+  --pass: oklch(80% 0.17 152);
+  --focus: oklch(72% 0.15 276);
   --image-outline: oklch(100% 0 0 / 0.1);
+  --aurora-a: oklch(48% 0.16 275 / 0.34);
+  --aurora-b: oklch(45% 0.12 270 / 0.22);
 
-  --btn-primary-from: oklch(78% 0.13 265);
-  --btn-primary-to: oklch(66% 0.15 265);
-  --btn-primary-edge-top: oklch(86% 0.09 265);
-  --btn-primary-edge-bottom: oklch(55% 0.15 265);
-  --btn-primary-ink: oklch(18% 0.03 265);
+  --btn-primary-ring: oklch(0% 0 0 / 0.4);
+  --btn-primary-ink: oklch(98% 0.01 275);
 
-  --btn-secondary-from: oklch(30% 0.014 258);
-  --btn-secondary-to: oklch(24% 0.014 258);
-  --btn-secondary-edge-top: oklch(38% 0.014 258);
-  --btn-secondary-edge-bottom: oklch(16% 0.012 258);
+  --btn-secondary-from: oklch(30% 0.02 275);
+  --btn-secondary-to: oklch(24% 0.02 275);
+  --btn-secondary-border: oklch(38% 0.02 275);
+  --btn-secondary-ring: oklch(0% 0 0 / 0.5);
   --btn-secondary-ink: var(--ink);
 
-  --btn-destructive-from: oklch(74% 0.17 25);
-  --btn-destructive-to: oklch(62% 0.19 25);
-  --btn-destructive-edge-top: oklch(80% 0.12 25);
-  --btn-destructive-edge-bottom: oklch(50% 0.17 25);
-  --btn-destructive-ink: oklch(16% 0.03 25);
+  --btn-destructive-from: oklch(60% 0.2 25);
+  --btn-destructive-to: oklch(48% 0.2 25);
+  --btn-destructive-border: oklch(68% 0.15 25);
+  --btn-destructive-ring: oklch(0% 0 0 / 0.6);
+  --btn-destructive-ink: oklch(98% 0.01 25);
 }
 
 @theme inline {
-  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --color-paper: var(--paper);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
   --color-rule: var(--rule);
   --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
   --color-pass: var(--pass);
   --color-focus: var(--focus);
 
@@ -91,16 +106,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 8rem;
     overflow-x: clip;
   }
 
   body {
     background-color: var(--paper);
     color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: 1.0625rem;
+    font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
     line-height: 1.6;
+    letter-spacing: -0.03em;
     overflow-x: clip;
     text-wrap: pretty;
   }
@@ -108,9 +124,8 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-optical-sizing: auto;
+    font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
     text-wrap: balance;
     font-style: normal;
   }
@@ -132,6 +147,60 @@
   }
 }
 
+/*
+ * Type roles. Named type-* (not text-*): tailwind-merge reads unknown text-* classes as
+ * colors and silently drops them when a real text color is merged in.
+ */
+@utility type-display-1 {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.075em;
+}
+
+@utility type-display-2 {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.068em;
+}
+
+@utility type-h2 {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 650;
+  font-size: clamp(1.625rem, 1.2rem + 1.4vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+}
+
+@utility type-h3 {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+/* Numbers in projects are always JetBrains Mono. */
+@utility type-metric {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 1.35rem + 1.7vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.08em;
+}
+
+@utility type-eyebrow {
+  font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
 @layer components {
   .btn {
     display: inline-flex;
@@ -139,18 +208,18 @@
     justify-content: center;
     gap: 0.5rem;
     white-space: nowrap;
-    border-radius: 0.625rem;
-    font-size: 0.9375rem;
-    font-weight: 500;
+    border-radius: 9999px;
+    font-weight: 600;
+    letter-spacing: -0.045em;
     line-height: 1;
     background-image: linear-gradient(to bottom, var(--btn-from), var(--btn-to));
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: var(--btn-edge-top);
-    border-bottom-color: var(--btn-edge-bottom);
-    border-inline-color: color-mix(in oklch, var(--btn-edge-top), var(--btn-edge-bottom));
+    background-origin: border-box;
+    border: 1px solid var(--btn-border);
     color: var(--btn-ink);
-    box-shadow: 0 1px 2px oklch(0% 0 0 / 0.08);
+    box-shadow:
+      inset 0 1px 1px oklch(100% 0 0 / 0.22),
+      0 0 0 1px var(--btn-ring),
+      0 1px 2px oklch(0% 0 0 / 0.12);
     cursor: pointer;
     transition-property: transform, filter, box-shadow;
     transition-duration: 160ms;
@@ -160,14 +229,15 @@
   }
 
   .btn[data-size='md'] {
-    height: 2.75rem;
+    height: 2.5rem;
     padding-inline: 1.25rem;
+    font-size: 0.9375rem;
   }
 
   .btn[data-size='sm'] {
-    height: 2.5rem;
+    height: 2rem;
     padding-inline: 1rem;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
   }
 
   .btn[data-size='icon'] {
@@ -176,35 +246,49 @@
     padding: 0;
   }
 
+  .btn-arrow {
+    width: 1.125rem;
+    height: 1.125rem;
+    transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /*
+   * Primary: sampled from the reference button. Fill drops fast through the top third (#6248fa to #4125f9),
+   * then settles to #3a20e0. The border is white at 20% over the fill, so it reads lighter than the
+   * fill everywhere. A soft inner glow lifts the sides. Same in light and dark mode.
+   */
   .btn[data-variant='primary'] {
-    --btn-from: var(--btn-primary-from);
-    --btn-to: var(--btn-primary-to);
-    --btn-edge-top: var(--btn-primary-edge-top);
-    --btn-edge-bottom: var(--btn-primary-edge-bottom);
-    --btn-ink: var(--btn-primary-ink);
+    --btn-border: oklch(100% 0 0 / 0.2);
+    --btn-ring: var(--btn-primary-ring);
+    --btn-ink: #fff;
+    background-image: linear-gradient(180deg, #6248fa 0%, #4a2ffa 14%, #4125f9 34%, #3f23f2 56%, #3a20e0 100%);
+    box-shadow:
+      inset 0 0 7px oklch(100% 0 0 / 0.16),
+      0 0 0 1px var(--btn-ring),
+      0 1px 2px oklch(0% 0 0 / 0.12);
   }
 
   .btn[data-variant='secondary'] {
     --btn-from: var(--btn-secondary-from);
     --btn-to: var(--btn-secondary-to);
-    --btn-edge-top: var(--btn-secondary-edge-top);
-    --btn-edge-bottom: var(--btn-secondary-edge-bottom);
+    --btn-border: var(--btn-secondary-border);
+    --btn-ring: var(--btn-secondary-ring);
     --btn-ink: var(--btn-secondary-ink);
   }
 
   .btn[data-variant='destructive'] {
     --btn-from: var(--btn-destructive-from);
     --btn-to: var(--btn-destructive-to);
-    --btn-edge-top: var(--btn-destructive-edge-top);
-    --btn-edge-bottom: var(--btn-destructive-edge-bottom);
+    --btn-border: var(--btn-destructive-border);
+    --btn-ring: var(--btn-destructive-ring);
     --btn-ink: var(--btn-destructive-ink);
   }
 
   .btn[data-variant='ghost'] {
     --btn-from: transparent;
     --btn-to: transparent;
-    --btn-edge-top: transparent;
-    --btn-edge-bottom: transparent;
+    --btn-border: transparent;
+    --btn-ring: transparent;
     --btn-ink: var(--ink);
     box-shadow: none;
   }
@@ -213,8 +297,6 @@
   .btn[data-variant='ghost'][data-open='true'] {
     --btn-from: color-mix(in oklch, var(--btn-secondary-from) 60%, transparent);
     --btn-to: color-mix(in oklch, var(--btn-secondary-to) 60%, transparent);
-    --btn-edge-top: color-mix(in oklch, var(--btn-secondary-edge-top) 60%, transparent);
-    --btn-edge-bottom: color-mix(in oklch, var(--btn-secondary-edge-bottom) 60%, transparent);
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -222,18 +304,23 @@
       filter: brightness(1.05);
     }
 
+    .btn:hover .btn-arrow {
+      transform: translateX(2px);
+    }
+
+    .btn:hover .btn-arrow-down {
+      transform: translateY(2px);
+    }
+
     .btn[data-variant='ghost']:hover {
       --btn-from: color-mix(in oklch, var(--btn-secondary-from) 60%, transparent);
       --btn-to: color-mix(in oklch, var(--btn-secondary-to) 60%, transparent);
-      --btn-edge-top: color-mix(in oklch, var(--btn-secondary-edge-top) 60%, transparent);
-      --btn-edge-bottom: color-mix(in oklch, var(--btn-secondary-edge-bottom) 60%, transparent);
     }
   }
 
   .btn:active {
     transform: scale(0.97);
     filter: brightness(0.96);
-    box-shadow: none;
   }
 
   .btn:disabled,
@@ -244,14 +331,172 @@
     pointer-events: none;
   }
 
-  .rise {
-    animation: rise 400ms cubic-bezier(0.23, 1, 0.32, 1) both;
-    animation-delay: calc(var(--i, 0) * 60ms);
-  }
-
   .img-outline {
     outline: 1px solid var(--image-outline);
     outline-offset: -1px;
+  }
+
+  /* Hero entrance. Pure CSS so the hero is visible without JavaScript. */
+  .rise {
+    animation: rise 500ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  .rise-word {
+    display: inline-block;
+    animation: rise-word 600ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+
+  /*
+   * Aurora bands and stripes for AuroraBackground. Painted once, then drifted with a transform (compositor only).
+   * Light mode cuts white stripes through the bands, dark mode black ones. Colors are the original blue and indigo.
+   */
+  .aurora-layer {
+    --aurora-1: #3b82f6;
+    --aurora-2: #a5b4fc;
+    --aurora-3: #93c5fd;
+    --aurora-4: #ddd6fe;
+    --aurora-5: #60a5fa;
+    --aurora-bands: repeating-linear-gradient(
+      100deg,
+      var(--aurora-1) 10%,
+      var(--aurora-2) 15%,
+      var(--aurora-3) 20%,
+      var(--aurora-4) 25%,
+      var(--aurora-5) 30%
+    );
+    background-image:
+      repeating-linear-gradient(100deg, #fff 0%, #fff 7%, transparent 10%, transparent 12%, #fff 16%),
+      var(--aurora-bands);
+    will-change: transform;
+    animation: aurora-drift 60s ease-in-out infinite alternate;
+  }
+
+  .dark .aurora-layer {
+    background-image:
+      repeating-linear-gradient(100deg, #000 0%, #000 7%, transparent 10%, transparent 12%, #000 16%),
+      var(--aurora-bands);
+  }
+
+  /* Card with a pointer-following accent edge. SpotlightCard sets --mx / --my. */
+  .spot {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--rule);
+    border-radius: 1rem;
+    background-color: var(--surface);
+    transition:
+      border-color 200ms var(--ease-out-strong),
+      transform 200ms var(--ease-out-strong);
+  }
+
+  .spot::before,
+  .spot::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 200ms var(--ease-out-strong);
+  }
+
+  .spot::before {
+    padding: 1px;
+    background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), var(--accent), transparent 70%);
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .spot::after {
+    z-index: -1;
+    background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), var(--accent-soft), transparent 65%);
+  }
+
+  /*
+   * Label that follows the pointer inside a SpotlightCard: it reads the same --mx / --my the glow uses, so it
+   * costs no extra JavaScript. No transform transition: it sticks to the cursor. Mouse only.
+   */
+  .cursor-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    display: none;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translate(calc(var(--mx, 50%) + 14px), calc(var(--my, 50%) + 18px));
+    transition: opacity 150ms var(--ease-out-strong);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cursor-label {
+      display: block;
+    }
+
+    .spot:hover .cursor-label {
+      opacity: 1;
+    }
+
+    .spot:hover {
+      border-color: color-mix(in oklch, var(--accent) 30%, var(--rule));
+      transform: translateY(-2px);
+    }
+
+    .spot:hover::before,
+    .spot:hover::after {
+      opacity: 1;
+    }
+  }
+}
+
+/*
+ * Scroll reveal. Gated on html.js (set by the head script), so with JavaScript off nothing is hidden.
+ * The failsafe shows anything still hidden 2.5s after load, but only until RevealProvider starts and adds
+ * html.reveal-ready. Once it is running, elements wait for their scroll, however long that takes. Only ever put
+ * data-reveal on below-the-fold wrappers, never on cards themselves.
+ */
+[data-reveal] {
+  transition:
+    opacity 600ms var(--ease-out-strong),
+    translate 600ms var(--ease-out-strong);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+html.js [data-reveal]:not([data-in]) {
+  opacity: 0;
+  translate: 0 16px;
+}
+
+html.js:not(.reveal-ready) [data-reveal]:not([data-in]) {
+  animation: reveal-failsafe 0s linear 2.5s forwards;
+}
+
+/*
+ * Wipe: an element is revealed by a line moving left to right (clip-path), no fade. Same html.js gate and
+ * failsafe as [data-reveal], so nothing stays hidden without JavaScript.
+ */
+[data-wipe] {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 700ms var(--ease-out-strong);
+}
+
+html.js [data-wipe]:not([data-in]) {
+  clip-path: inset(0 100% 0 0);
+}
+
+html.js:not(.reveal-ready) [data-wipe]:not([data-in]) {
+  animation: wipe-failsafe 0s linear 2.5s forwards;
+}
+
+@keyframes wipe-failsafe {
+  to {
+    clip-path: inset(0 0 0 0);
   }
 }
 
@@ -266,6 +511,19 @@
   }
 }
 
+@keyframes rise-word {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -275,12 +533,144 @@
   }
 }
 
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Logo strip tracker: fills over exactly one interval, then the key changes and it restarts. */
+
+@keyframes aurora-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .btn {
+  .aurora-layer {
+    animation: none;
+  }
+
+  .btn,
+  .btn-arrow,
+  .spot {
     transition-duration: 0.01ms;
   }
 
-  .rise {
+  .rise,
+  .rise-word {
     animation-name: fade-in;
+  }
+
+  html.js [data-reveal]:not([data-in]) {
+    translate: none;
+  }
+
+  [data-wipe] {
+    transition-duration: 0.01ms;
+  }
+
+  [data-reveal] {
+    transition-duration: 200ms;
+    transition-delay: 0s;
+  }
+}
+
+/*
+ * Page transitions (React <ViewTransition>, driven by Link transitionTypes).
+ * Forward: old page slides left, new page arrives from the right. Back: the reverse.
+ * Header and footer stay put. Logos and metrics morph between card and case study.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(.nav-forward) {
+  --slide-offset: -48px;
+  animation:
+    150ms ease-in both vt-fade reverse,
+    400ms ease-in-out both vt-slide reverse;
+}
+
+::view-transition-new(.nav-forward) {
+  --slide-offset: 48px;
+  animation:
+    210ms ease-out 150ms both vt-fade,
+    400ms ease-in-out both vt-slide;
+}
+
+::view-transition-old(.nav-back) {
+  --slide-offset: 48px;
+  animation:
+    150ms ease-in both vt-fade reverse,
+    400ms ease-in-out both vt-slide reverse;
+}
+
+::view-transition-new(.nav-back) {
+  --slide-offset: -48px;
+  animation:
+    210ms ease-out 150ms both vt-fade,
+    400ms ease-in-out both vt-slide;
+}
+
+::view-transition-group(.morph) {
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+::view-transition-image-pair(.morph) {
+  animation-name: vt-via-blur;
+}
+
+@keyframes vt-fade {
+  from {
+    filter: blur(3px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes vt-slide {
+  from {
+    translate: var(--slide-offset);
+  }
+  to {
+    translate: 0;
+  }
+}
+
+@keyframes vt-via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

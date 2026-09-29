@@ -5,10 +5,8 @@ export const descope: CaseStudy = {
   kind: 'client',
   name: 'Descope',
   card: {
-    summary:
-      'Led the frontend on four Descope sites, including a 1,500-page docs site and a global hackathon for AI developers.',
-    stats: ['4 sites shipped', 'Core Web Vitals passing on mobile and desktop'],
-    tags: ['Next.js', 'Contentful', 'Fumadocs', 'CSS Modules', 'Vercel'],
+    summary: 'Frontend lead on four sites, including 1,500 pages of docs.',
+    tags: ['Next.js', 'Contentful', 'Fumadocs', 'Vercel'],
     cta: 'Read case study',
   },
   title: 'Four sites for Descope, one frontend lead',
@@ -25,31 +23,33 @@ export const descope: CaseStudy = {
     ],
   },
   shortVersion:
-    'Descope is an identity and auth platform. I led the frontend across its marketing site redesign, its developer docs, its AI site and a hackathon site. All static, all fast, all editable by the marketing team without a developer.',
+    'Descope is an auth platform. I led the frontend across four sites: a full redesign, 1,500+ pages of docs, an AI site and a global hackathon. Marketing publishes on all of them without waiting on engineers.',
+  context:
+    'A returning client. First a flexible site, then a full redesign to match a new brand. Traffic was high, so the move could not disrupt it.',
   built: [
     {
       title: 'descope.com',
-      body: 'Full redesign from an outdated design and React version. Next.js, CSS Modules and Contentful, with static pages that revalidate in real time when content changes. It passes Core Web Vitals on mobile and desktop.',
+      body: 'Full redesign and move to a headless CMS. Reusable components, content migrated with SEO intact, static pages that revalidate when content changes.',
       href: 'https://www.descope.com',
     },
     {
       title: 'docs.descope.com',
-      body: '1,500+ statically rendered pages on Fumadocs and Next.js, covering 20+ frontend and backend SDKs. Built for developers deciding whether to adopt Descope.',
+      body: '1,500+ static pages on Fumadocs covering 20+ SDKs, built for developers deciding whether to adopt Descope.',
       href: 'https://docs.descope.com',
     },
     {
       title: 'globalmcphackathon.com',
-      body: "A site for Descope's global MCP hackathon for AI developers, with in-person events in San Francisco and Tel Aviv. Fixed dates, a compressed timeline, and a CMS set up so future editions reuse it.",
+      body: 'Landing page for the global MCP hackathon for AI developers, with events in San Francisco and Tel Aviv. Live within weeks, in the Descope look, and marketing can duplicate it for the next edition.',
       href: 'https://globalmcphackathon.com',
     },
     {
       title: 'descope.ai',
-      body: 'A light Next.js and Contentful site with Lottie animations, green on PageSpeed Insights.',
+      body: 'Light Next.js and Contentful site with Lottie animations. Green on PageSpeed Insights.',
       href: 'https://www.descope.ai',
     },
   ],
   howItsBuilt:
-    'Contentful holds the marketing content and pushes changes to static Next.js pages through on-demand revalidation. The docs are a separate Fumadocs build so 1,500 pages stay fast to build and to load. The hackathon and AI sites reuse the same CMS and component approach.',
+    'Contentful pushes changes to static Next.js pages through on-demand revalidation. Docs are a separate Fumadocs build.',
   diagram: {
     lanes: [
       {
@@ -71,20 +71,26 @@ export const descope: CaseStudy = {
       },
       {
         label: 'globalmcphackathon.com',
-        nodes: [{ label: 'Contentful' }, { label: 'Next.js' }, { label: 'Reused for later editions' }],
+        nodes: [{ label: 'Contentful' }, { label: 'Next.js' }, { label: 'Duplicated for later editions' }],
       },
     ],
   },
   hardParts: [
-    'Keeping 1,500 docs pages fast to build and fast to load.',
-    'Shipping the hackathon site on a fixed launch date without breaking the parent brand.',
+    {
+      problem: 'Keeping 1,500 docs pages fast to build and to load.',
+      call: 'Static rendering on Fumadocs, kept as its own build apart from the marketing site.',
+    },
+    {
+      problem: 'A fixed launch date for the hackathon site, without breaking the parent brand.',
+      call: 'Reused the Contentful and component setup from descope.com, so it looked like Descope from day one.',
+    },
   ],
-  results: [
-    'descope.com passes Core Web Vitals on mobile and desktop, and descope.ai is green on PageSpeed Insights.',
-    'The marketing team edits all four sites without a developer.',
+  metrics: [
+    { value: '4', label: 'sites shipped' },
+    { value: '1,500+', label: 'docs pages' },
+    { value: '20+', label: 'SDKs documented' },
+    { value: 'Pass', label: 'Core Web Vitals, mobile and desktop', up: true },
   ],
-  today:
-    'An agent that reads SDK changelogs and drafts docs updates for a human to approve. The MCP hackathon fits the same story: I built the front door for AI developers.',
   media: { hero: true, details: 2, beforeAfter: true },
-  pending: ['Agency case study link (Bejamas)', 'Hackathon case study link', 'Before and after videos for descope.com'],
+  pending: [],
 };

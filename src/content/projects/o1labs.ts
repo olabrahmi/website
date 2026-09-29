@@ -5,26 +5,34 @@ export const o1labs: CaseStudy = {
   kind: 'client',
   name: 'o1Labs',
   card: {
-    summary: "Built part of a 50+ section library so o1Labs' marketers build pages without developers.",
-    stats: ['50+ reusable sections', 'Instant publish'],
-    tags: ['Next.js', 'Sanity', 'Vercel'],
+    summary: 'A page builder marketers run with no developer needed.',
+    tags: ['Next.js', 'Sanity', 'Algolia', 'Vercel'],
     cta: 'Read case study',
   },
   title: "A page builder o1Labs' marketing team runs alone",
   facts: {
     client: 'o1Labs (via Bejamas)',
     role: 'Frontend developer',
-    stack: ['Next.js', 'Sanity', 'Vercel'],
+    when: 'Feb 2024 to Apr 2025',
+    stack: ['Next.js', 'Sanity', 'Algolia', 'Vercel'],
     live: [{ label: 'o1labs.org', href: 'https://www.o1labs.org' }],
   },
   shortVersion:
-    'o1Labs builds zero-knowledge cryptography tooling. We rebuilt their site on Next.js and Sanity with a library of 50+ sections. When marketing hits publish, the change is live right away.',
+    'o1Labs builds zero-knowledge tooling. Their site felt outdated and marketing needed a developer for every new page. We rebuilt it as a page builder marketing runs alone.',
+  context:
+    'The old site buried the products, and the blog lived on Medium, away from the site. Adding a page meant asking a developer.',
+  builtTitle: 'What we built',
   built: [
-    { body: 'Part of the 50+ section library in Sanity and Next.js.' },
-    { body: 'On-demand revalidation, so published content goes live immediately.' },
+    {
+      title: 'Page builder',
+      body: 'Sanity CMS with live preview and a library of 50+ reusable sections. Marketers compose pages themselves.',
+    },
+    { title: 'Product pages', body: 'A dedicated page for each o1Labs product.' },
+    { title: 'Blog, in the site', body: 'Moved off Medium into the site, with Algolia search.' },
+    { title: 'Instant publish', body: 'On-demand revalidation. Hit publish and the page is live.' },
   ],
   howItsBuilt:
-    'Marketers assemble pages from sections in Sanity. Publishing fires a revalidation request, and Next.js rebuilds only the affected pages on Vercel.',
+    'Marketers assemble pages from sections in Sanity. Publishing triggers revalidation, Vercel serves the new page.',
   diagram: {
     lanes: [
       {
@@ -39,14 +47,11 @@ export const o1labs: CaseStudy = {
     ],
   },
   hardParts: [],
-  results: ['Marketers publish pages and see them live right away, without asking a developer.'],
-  today:
-    'An agent that assembles a first-draft landing page from a brief using the existing sections, for a marketer to edit.',
-  media: { hero: true, details: 2 },
-  pending: [
-    'Exact dates on o1Labs',
-    'Which sections were yours',
-    'Hard parts for this project',
-    'Agency case study link (Bejamas)',
+  metrics: [
+    { value: '50+', label: 'reusable sections' },
+    { value: 'Instant', label: 'publish, via on-demand revalidation' },
+    { value: '0', label: 'dev tickets to publish a page', up: true },
   ],
+  media: { hero: true, details: 2 },
+  pending: [],
 };

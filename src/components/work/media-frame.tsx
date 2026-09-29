@@ -1,9 +1,7 @@
-import fs from 'node:fs';
-import path from 'node:path';
-
 import Image from 'next/image';
 
 import { cn } from '@/utils/cn';
+import { publicFileExists } from '@/utils/public-files';
 
 import LoopVideo from './loop-video';
 
@@ -16,12 +14,14 @@ interface MediaFrameProps {
   priority?: boolean;
 }
 
-const publicPath = (slug: string, file: string) => path.join(process.cwd(), 'public', 'projects', slug, file);
-
+/**
+ * Shows public/projects/<slug>-<name>.webp or .webm, e.g. payback-hero.webp. A clip wins over an image, and the
+ * image becomes its poster. Missing file: a dashed placeholder in development, nothing in production.
+ */
 export default function MediaFrame({ slug, name, alt, aspect = '16 / 10', className, priority }: MediaFrameProps) {
-  const base = `/projects/${slug}/${name}`;
-  const hasVideo = fs.existsSync(publicPath(slug, `${name}.webm`));
-  const hasImage = fs.existsSync(publicPath(slug, `${name}.webp`));
+  const base = `/projects/${slug}-${name}`;
+  const hasVideo = publicFileExists(`${base.slice(1)}.webm`);
+  const hasImage = publicFileExists(`${base.slice(1)}.webp`);
 
   if (!hasVideo && !hasImage) {
     if (process.env.NODE_ENV !== 'development') return null;
@@ -51,7 +51,7 @@ export default function MediaFrame({ slug, name, alt, aspect = '16 / 10', classN
           src={`${base}.webp`}
           alt={alt}
           fill
-          sizes="(min-width: 1200px) 1136px, 100vw"
+          sizes="(min-width: 1040px) 976px, 100vw"
           className="object-cover"
           priority={priority}
         />

@@ -15,14 +15,14 @@ interface TextLinkProps {
 export default function TextLink({ href, children, arrow, className }: TextLinkProps) {
   const external = href.startsWith('http') || href.startsWith('mailto:');
   const classes = cn(
-    'group/link inline-flex items-center gap-1.5 font-medium text-ink underline decoration-rule decoration-1 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-accent',
+    'group/link inline-flex items-center gap-1.5 font-medium text-ink underline decoration-accent/40 decoration-1 underline-offset-4 transition-[text-decoration-color] duration-150 hover:decoration-accent',
     className,
   );
   const content = (
     <>
       {children}
       {arrow && (
-        <ArrowRight className="ease-out-strong size-4 shrink-0 transition-transform duration-150 motion-reduce:transition-none [@media(hover:hover)]:group-hover/link:translate-x-0.5" />
+        <ArrowRight className="text-accent ease-out-strong size-4 shrink-0 transition-transform duration-150 motion-reduce:transition-none [@media(hover:hover)]:group-hover/link:translate-x-0.5" />
       )}
     </>
   );

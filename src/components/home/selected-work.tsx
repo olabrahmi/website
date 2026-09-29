@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import { ViewTransition } from 'react';
 
-import { Logo } from '@/components/logos';
+import { ProjectMark } from '@/components/logos';
+import { Metric, Reveal, SpotlightCard } from '@/components/motion';
 import { ArrowRight, Container, Tag } from '@/components/ui';
-import type { LogoName } from '@/content/logos';
 import { selectedWork } from '@/content/projects';
 import { workIntro } from '@/content/site';
 
@@ -10,47 +11,68 @@ import SectionHeading from './section-heading';
 
 export default function SelectedWork() {
   return (
-    <Container as="section" id="work" aria-labelledby="selected-work" className="py-16 md:py-24">
-      <SectionHeading id="selected-work" intro={workIntro}>
-        Selected work
-      </SectionHeading>
-      <ul className="border-rule mt-10 border-t">
-        {selectedWork.map((project) => (
-          <li key={project.slug} className="border-rule border-b">
-            <article className="group/row [@media(hover:hover)]:hover:bg-surface relative grid gap-5 px-0 py-8 transition-colors duration-150 lg:grid-cols-12 lg:gap-8 lg:px-4">
-              <div className="lg:col-span-3">
-                {project.name === 'Akasec' ? (
-                  <span className="font-display text-xl font-semibold tracking-[-0.01em]">Akasec</span>
-                ) : (
-                  <Logo name={project.name as LogoName} />
-                )}
-              </div>
-              <div className="flex flex-col gap-4 lg:col-span-5">
-                <p className="text-ink max-w-[52ch]">{project.card.summary}</p>
-                <ul className="flex flex-wrap gap-2" aria-label={`${project.name} stack`}>
-                  {project.card.tags.map((tag) => (
+    <Container as="section" id="work" aria-labelledby="selected-work" className="py-14 md:py-20">
+      <Reveal>
+        <SectionHeading id="selected-work" eyebrow="Client work" intro={workIntro}>
+          Selected work
+        </SectionHeading>
+      </Reveal>
+      <ul className="mt-8 grid gap-4 md:grid-cols-2">
+        {selectedWork.map((project, index) => (
+          <Reveal as="li" key={project.slug} index={index % 2}>
+            <SpotlightCard
+              as="article"
+              className="group/card has-[a:focus-visible]:outline-focus flex h-full cursor-pointer flex-col gap-6 p-6 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2"
+            >
+              {/* Heading for crawlers and screen readers: the logo above is an image, not a heading. */}
+              <h3 className="sr-only">{project.title}</h3>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                <div className="text-ink shrink-0">
+                  <ViewTransition name={`work-${project.slug}-logo`} share="morph" default="none">
+                    <ProjectMark name={project.name} />
+                  </ViewTransition>
+                </div>
+                <ul className="flex flex-wrap gap-1.5 sm:justify-end" aria-label={`${project.name} stack`}>
+                  {project.card.tags.slice(0, 4).map((tag) => (
                     <li key={tag}>
                       <Tag>{tag}</Tag>
                     </li>
                   ))}
                 </ul>
               </div>
-              <ul className="text-ink-muted flex flex-col gap-1 font-mono text-[0.8125rem] tabular-nums lg:col-span-2">
-                {project.card.stats.map((stat) => (
-                  <li key={stat}>{stat}</li>
-                ))}
-              </ul>
-              <div className="lg:col-span-2 lg:justify-self-end">
-                <Link
-                  href={`/work/${project.slug}`}
-                  className="text-ink inline-flex items-center gap-1.5 font-medium after:absolute after:inset-0 after:content-['']"
-                >
-                  {project.card.cta}
-                  <ArrowRight className="ease-out-strong size-4 transition-transform duration-150 motion-reduce:transition-none [@media(hover:hover)]:group-hover/row:translate-x-0.5" />
-                </Link>
-              </div>
-            </article>
-          </li>
+              <p className="text-ink min-h-[2lh] max-w-[34ch] text-[1.0625rem] leading-snug">{project.card.summary}</p>
+              <ViewTransition name={`work-${project.slug}-metrics`} share="morph" default="none">
+                <div className="grid grid-cols-2 gap-4">
+                  {project.metrics.slice(0, 2).map((metric) => (
+                    <Metric key={metric.label} metric={metric} size="md" />
+                  ))}
+                </div>
+              </ViewTransition>
+              {/*
+                The whole card is the link: a real anchor covering it, with descriptive text for crawlers and screen
+                readers. It must not be the button itself: the button's hover filter would make it the containing
+                block of a stretched pseudo-element and shrink the click area to the button.
+              */}
+              <Link
+                href={`/work/${project.slug}`}
+                transitionTypes={['nav-forward']}
+                className="absolute inset-0 z-10 cursor-pointer rounded-[inherit]"
+              >
+                <span className="sr-only">
+                  {project.card.cta}: {project.name}
+                </span>
+              </Link>
+              <span
+                aria-hidden="true"
+                data-variant="secondary"
+                data-size="md"
+                className="btn mt-auto w-full transition-[filter,transform] group-active/card:scale-[0.98] [@media(hover:hover)]:group-hover/card:brightness-105"
+              >
+                {project.card.cta}
+                <ArrowRight className="btn-arrow transition-transform [@media(hover:hover)]:group-hover/card:translate-x-0.5" />
+              </span>
+            </SpotlightCard>
+          </Reveal>
         ))}
       </ul>
     </Container>

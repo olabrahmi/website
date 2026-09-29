@@ -5,46 +5,57 @@ export const shaza: CaseStudy = {
   kind: 'agent',
   name: 'Shaza',
   card: {
-    summary:
-      "A WhatsApp agent that books hotel rooms. It checks live availability with the hotel's channel manager and confirms the reservation in the chat. 20+ real bookings from hotels in Morocco so far.",
-    stats: ['20+ real reservations', 'Hotels in Morocco'],
-    tags: ['Claude Sonnet', 'Claude Haiku', 'n8n', 'WhatsApp', 'Next.js'],
+    summary: 'AI agent that answers hotel guests on WhatsApp, Booking.com, Airbnb and email, and books rooms.',
+    tags: ['Claude', 'n8n', 'WhatsApp', 'Booking.com', 'Airbnb'],
     cta: 'See how it books',
   },
-  title: 'Shaza: an AI agent that takes hotel bookings on WhatsApp',
+  title: 'Shaza: an AI agent that answers hotel guests and books rooms',
   facts: {
-    client: 'Own product',
+    client: 'Own product, sold to hotels',
     role: 'Solo, end to end',
     when: '2026',
-    stack: ['n8n (self-hosted)', 'Claude Sonnet', 'Claude Haiku', 'WhatsApp', 'Next.js', 'Drizzle', 'Neon Postgres'],
+    stack: [
+      'n8n (self-hosted)',
+      'Claude',
+      'WhatsApp',
+      'Booking.com',
+      'Airbnb',
+      'Email',
+      'Next.js',
+      'Drizzle',
+      'Neon Postgres',
+    ],
   },
   shortVersion:
-    "Hotels in Morocco get most booking questions on WhatsApp, and staff answer them by hand. Shaza answers instead: it understands the request, checks real availability with the hotel's channel manager, and books the room in the conversation. It has recorded 20+ confirmed reservations.",
+    "Hotels in Morocco get booking questions everywhere, and staff answer by hand. Shaza answers on WhatsApp, Booking.com, Airbnb and email. It checks live availability with the hotel's channel manager and books the room.",
   built: [
     {
-      body: 'The agent workflow on a self-hosted n8n server: WhatsApp in, tool calls to the channel manager, reservation out.',
+      title: 'Agent workflow',
+      body: 'Self-hosted n8n: messages in from every channel, tool calls to the channel manager, reply and reservation out.',
     },
     {
-      body: "A detailed system prompt encoding each hotel's rules: rooms, prices, policies, what to confirm before booking, and when to hand off to staff.",
+      title: 'Hotel rules',
+      body: 'A system prompt per hotel: rooms, prices, policies, what to confirm, when to hand off to staff.',
     },
     {
-      body: 'A model split for cost: Claude Sonnet handles reasoning and tool calls, Claude Haiku writes the guest-facing replies.',
+      title: 'Model split',
+      body: 'Claude Sonnet reasons and calls tools. Claude Haiku writes the replies. Cheaper, still natural.',
     },
-    { body: 'A Next.js admin dashboard for hotel staff, on Drizzle and Neon Postgres.' },
+    { title: 'Staff dashboard', body: 'Next.js admin on Drizzle and Neon Postgres.' },
   ],
   howItsBuilt:
-    'Every guest message goes through one n8n workflow. Sonnet decides what to do and calls the channel manager for availability. Haiku turns the result into a short, natural reply. The model never states availability on its own: it only repeats what the channel manager returned.',
+    'Every message goes through one n8n workflow. Sonnet decides and checks availability, Haiku writes the reply. The model only repeats what the channel manager returned.',
   diagram: {
     lanes: [
       {
         label: 'Booking flow',
         nodes: [
-          { label: 'Guest on WhatsApp', note: 'Asks for dates and a room' },
+          { label: 'Guest message', note: 'WhatsApp, Booking.com, Airbnb or email' },
           { label: 'n8n workflow', note: 'Self-hosted' },
           { label: 'Claude Sonnet', note: 'Reasoning and tool calls' },
           { label: 'Channel manager', note: 'Live availability' },
           { label: 'Claude Haiku', note: 'Writes the reply' },
-          { label: 'Reservation confirmed', note: 'In the same chat' },
+          { label: 'Reservation confirmed', note: 'Reply in the same thread' },
         ],
       },
       {
@@ -59,20 +70,21 @@ export const shaza: CaseStudy = {
     ],
   },
   hardParts: [
-    "Never promising a room that isn't free. Availability comes from the channel manager, never from the model.",
-    'Keeping replies natural and cheap at the same time. The Sonnet and Haiku split solves that.',
+    {
+      problem: "Never promising a room that isn't free.",
+      call: 'Availability comes from the channel manager, never from the model.',
+    },
+    {
+      problem: 'Replies that are natural and cheap at once.',
+      call: 'Sonnet for reasoning and tools, Haiku for the guest-facing text.',
+    },
   ],
-  results: ['20+ confirmed reservations from hotels in Morocco.'],
-  measuring: {
-    intro: 'Numbers I still owe this page:',
-    items: ['Number of hotels', 'Conversation-to-booking rate', 'Cost per conversation'],
-  },
-  next: 'A test set of real guest conversations, so I catch regressions when the prompt or the model changes.',
-  media: { hero: true, details: 2 },
-  pending: [
-    'Number of hotels using Shaza',
-    'Conversation-to-booking rate',
-    'Cost per conversation',
-    'Public URL for Shaza, if there is one (fact bar says Private until then)',
+  metrics: [
+    { value: '20+', label: 'confirmed reservations', up: true },
+    { value: '81%', label: 'conversation-to-booking rate', up: true },
+    { value: '3', label: 'hotels using it' },
   ],
+  next: 'Real guest conversations as a regression set for prompt and model changes.',
+  media: { hero: true, details: 0 },
+  pending: [],
 };

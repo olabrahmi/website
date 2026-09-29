@@ -1,5 +1,9 @@
+import Image from 'next/image';
+
 import type { LogoName } from '@/content/logos';
 import { cn } from '@/utils/cn';
+
+import type { LogoSources } from './logo-sources';
 
 const PaybackIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-6 shrink-0">
@@ -8,19 +12,48 @@ const PaybackIcon = () => (
 );
 
 /**
- * Only PAYBACK has a real vector mark. The other names are typeset stand-ins
- * until official SVGs are added here. Everything paints with currentColor.
+ * Real marks come from public/logos/<slug>-light.svg and <slug>-dark.svg, named by the artwork's color:
+ * -light is the white logo (shown in dark mode), -dark is the dark logo (shown in light mode).
+ * Both are rendered and CSS picks one from the `dark` class, so there is no flash on load.
+ * One variant alone is used for both themes. No file at all falls back to the typeset name below
+ * (PAYBACK keeps its built-in icon). Typeset names paint with currentColor.
  */
 const wordmarks: Record<LogoName, { text: string; className: string; icon?: boolean }> = {
-  PAYBACK: { text: 'PAYBACK', className: 'font-semibold tracking-[0.14em]', icon: true },
+  PAYBACK: { text: 'PAYBACK', className: 'font-semibold tracking-[0.06em]', icon: true },
   Takeda: { text: 'Takeda', className: 'font-semibold tracking-[-0.02em]' },
   Descope: { text: 'descope', className: 'font-semibold tracking-[-0.03em]' },
-  'Charm Industrial': { text: 'CHARM INDUSTRIAL', className: 'text-[0.9375rem] font-semibold tracking-[0.18em]' },
+  'Charm Industrial': { text: 'CHARM INDUSTRIAL', className: 'text-[0.9375rem] font-semibold tracking-[0.08em]' },
   o1Labs: { text: 'o1Labs', className: 'font-semibold tracking-[-0.01em]' },
-  'Palais Shazam': { text: 'Palais Shazam', className: 'font-medium tracking-[0.02em]' },
+  'Palais Shazam': { text: 'Palais Shazam', className: 'font-medium tracking-[-0.01em]' },
+  Akasec: { text: 'akasec', className: 'font-extrabold tracking-[-0.02em]' },
 };
 
-export default function Logo({ name, className }: { name: LogoName; className?: string }) {
+interface LogoProps {
+  name: LogoName;
+  /** Which files exist, from getLogoSources on the server. No files: the typeset name is used. */
+  sources?: LogoSources;
+  className?: string;
+}
+
+export default function Logo({ name, sources, className }: LogoProps) {
+  const light = sources?.onLight ?? sources?.onDark;
+  const dark = sources?.onDark ?? sources?.onLight;
+
+  if (light || dark) {
+    const size = cn('h-6 w-auto max-w-full object-contain sm:h-7', className);
+
+    return (
+      <span className="inline-flex max-w-full items-center">
+        {light && (
+          <Image src={light} alt={name} width={120} height={32} unoptimized className={cn(size, 'dark:hidden')} />
+        )}
+        {dark && (
+          <Image src={dark} alt={name} width={120} height={32} unoptimized className={cn(size, 'hidden dark:block')} />
+        )}
+      </span>
+    );
+  }
+
   const mark = wordmarks[name];
 
   return (
