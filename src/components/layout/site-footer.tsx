@@ -22,7 +22,7 @@ const links = [{ label: 'Email', href: `mailto:${person.email}` }, ...socials];
  */
 export default function SiteFooter() {
   return (
-    <footer className="border-rule relative isolate mt-16 w-full overflow-hidden border-t pt-10 pb-12 md:pt-12 md:pb-16">
+    <footer className="border-rule relative isolate mt-10 w-full overflow-hidden border-t py-6 md:py-5">
       <AuroraLayers
         flip
         showRadialGradient={false}
@@ -30,14 +30,14 @@ export default function SiteFooter() {
       />
 
       <Container>
-        <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-          <div className="flex flex-col gap-4">
-            <SiteMark className="text-ink h-10 w-auto self-start" />
+        <div className="flex flex-col items-center gap-5 text-center md:flex-row md:justify-between md:text-left">
+          <div className="flex flex-col items-center gap-2 md:flex-row md:gap-5">
+            <SiteMark className="text-ink h-7 w-auto" />
             <LocalTime />
           </div>
 
-          <div className="flex flex-col gap-4 md:items-end">
-            <ul className="flex items-center gap-2">
+          <div className="flex flex-col items-center gap-3 md:flex-row md:gap-5">
+            <ul className="flex items-center justify-center gap-2">
               {links.map((link) => {
                 const Icon = icons[link.label];
                 const external = link.href.startsWith('http');
@@ -48,13 +48,13 @@ export default function SiteFooter() {
                       href={link.href}
                       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       className={cn(
-                        'border-rule bg-surface text-ink grid size-10 cursor-pointer place-items-center rounded-full border',
+                        'border-rule bg-surface text-ink grid size-9 cursor-pointer place-items-center rounded-full border',
                         'transition-[background-color,transform] duration-150 active:scale-[0.96]',
                         '[@media(hover:hover)]:hover:bg-surface-2',
                       )}
                     >
                       <span className="sr-only">{link.label === 'Email' ? 'Email me' : `Visit my ${link.label}`}</span>
-                      {Icon && <Icon className="size-[1.125rem]" />}
+                      {Icon && <Icon className="size-4" />}
                     </a>
                   </li>
                 );

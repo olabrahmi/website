@@ -8,13 +8,13 @@ export default function Faq() {
   return (
     <Container as="section" id="faq" aria-labelledby="faq-heading" className="py-14 md:py-20">
       <Reveal>
-        <SectionHeading id="faq-heading" eyebrow={faq.eyebrow}>
+        <SectionHeading id="faq-heading" eyebrow={faq.eyebrow} align="center">
           {faq.heading}
         </SectionHeading>
       </Reveal>
       <Reveal index={1}>
         {/* Native details: every answer is in the HTML even when closed, and it needs no JavaScript. */}
-        <div className="mt-8 flex max-w-[40rem] flex-col gap-2">
+        <div className="mt-8 flex max-w-[40rem] flex-col gap-2 md:mx-auto">
           {faq.items.map((item, index) => (
             <details key={item.question} open={index === 0} className="border-rule bg-surface group rounded-xl border">
               <summary className="text-ink flex cursor-pointer list-none items-center justify-between gap-4 p-4 [&::-webkit-details-marker]:hidden">

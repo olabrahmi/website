@@ -14,18 +14,16 @@ export default function Hero() {
       <Container as="section" className="flex flex-col items-start text-left md:items-center md:text-center">
         <p
           style={step(0)}
-          className="rise border-rule bg-surface text-ink-muted mb-6 inline-flex items-center gap-2.5 rounded-2xl border py-1.5 pr-3.5 pl-2.5 text-left text-[0.8125rem] leading-snug font-medium sm:rounded-full sm:py-1 sm:pr-3"
+          className="rise border-rule bg-surface text-ink-muted mb-6 hidden items-center gap-2.5 rounded-full border py-1 pr-3 pl-2.5 text-left text-[0.8125rem] leading-snug font-medium sm:inline-flex"
         >
           <span aria-hidden="true" className="relative flex size-2">
             <span className="bg-pass absolute inset-0 animate-ping rounded-full opacity-60 motion-reduce:animate-none" />
             <span className="bg-pass relative size-2 rounded-full" />
           </span>
-          {/* Phones: two deliberate lines. From sm up: one line with a dot between. */}
-          <span className="flex flex-col sm:flex-row sm:gap-1.5">
+          {/* Hidden on phones. From sm up: one line with a dot between. */}
+          <span className="flex gap-1.5">
             <span>{role}</span>
-            <span aria-hidden="true" className="hidden sm:inline">
-              &middot;
-            </span>
+            <span aria-hidden="true">&middot;</span>
             <span>{terms}</span>
           </span>
         </p>

@@ -54,7 +54,7 @@ export default function ThemeToggle() {
       <span className="relative block size-[1.125rem]">
         <span
           data-theme-icon=""
-          className="blur-0 absolute inset-0 scale-100 opacity-100 transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none dark:scale-25 dark:opacity-0 dark:blur-[4px]"
+          className="absolute inset-0 scale-100 opacity-100 blur-[0px] transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none dark:scale-25 dark:opacity-0 dark:blur-[4px]"
         >
           <svg
             viewBox="0 0 24 24"
@@ -72,7 +72,7 @@ export default function ThemeToggle() {
         </span>
         <span
           data-theme-icon=""
-          className="dark:blur-0 absolute inset-0 scale-25 opacity-0 blur-[4px] transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none dark:scale-100 dark:opacity-100"
+          className="absolute inset-0 scale-25 opacity-0 blur-[4px] transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none dark:scale-100 dark:opacity-100 dark:blur-[0px]"
         >
           <svg
             viewBox="0 0 24 24"
