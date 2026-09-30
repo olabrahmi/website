@@ -1,20 +1,27 @@
-import { notFound } from 'next/navigation';
+import { ViewTransition } from 'react';
 
-import { getPageBySlug, getPageMetadata } from '@/base/services/storyblok';
-import { PageBuilder } from '@/components/templates/page-builder';
+import { getLogoSources } from '@/components/logos/logo-sources';
+import { About, Capabilities, Contact, Faq, Hero, LogoStrip, Work } from '@/components/home';
+import { logoNames } from '@/content/logos';
+import { homeGraph, serializeJsonLd } from '@/utils/json-ld';
 
-export default async function HomePage() {
-  const page = await getPageBySlug('home');
+const logoSources = Object.fromEntries(logoNames.map((name) => [name, getLogoSources(name)]));
 
-  if (!page) notFound();
+const slide = { 'nav-forward': 'nav-forward', 'nav-back': 'nav-back', default: 'none' } as const;
 
+export default function HomePage() {
   return (
-    <main className="flex flex-col gap-10">
-      <PageBuilder sections={page.sections ?? []} />
-    </main>
+    <ViewTransition enter={slide} exit={slide} default="none">
+      <main>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeGraph()) }} />
+        <Hero />
+        <LogoStrip sources={logoSources} />
+        <Work />
+        <Capabilities />
+        <About />
+        <Faq />
+        <Contact />
+      </main>
+    </ViewTransition>
   );
-}
-
-export async function generateMetadata() {
-  return await getPageMetadata('home');
 }

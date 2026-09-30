@@ -1,30 +1,22 @@
-'use client';
-
-import Link from 'next/link';
-import { useEffect } from 'react';
+import { AuroraBackground } from '@/components/motion';
+import { ArrowRight, Button, Container } from '@/components/ui';
+import { notFound } from '@/content/site';
 
 export default function NotFound() {
-  useEffect(() => {
-    const header = document.getElementsByTagName('header')[0];
-    header.style.display = 'none';
-
-    const footer = document.getElementsByTagName('footer')[0];
-    footer.style.display = 'none';
-
-    return () => {
-      header.style.display = 'flex';
-      footer.style.display = 'flex';
-    };
-  }, []);
-
   return (
-    <main className="w-full">
-      <section className="container prose prose-invert flex min-h-[100vh] flex-col items-center justify-center">
-        <h1>404: Page not found.</h1>
-        <Link href="/" className="underline hover:opacity-80">
-          &larr; Go back home
-        </Link>
-      </section>
+    <main>
+      <AuroraBackground className="items-stretch justify-start pt-32 pb-14 md:pt-44 md:pb-20">
+        <Container>
+          <p className="type-eyebrow text-accent">404</p>
+          <h1 className="type-display-2 text-ink mt-4 max-w-[18ch]">{notFound.message}</h1>
+          <div className="mt-7">
+            <Button href="/#work">
+              {notFound.button}
+              <ArrowRight className="btn-arrow" />
+            </Button>
+          </div>
+        </Container>
+      </AuroraBackground>
     </main>
   );
 }
