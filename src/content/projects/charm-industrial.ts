@@ -10,6 +10,9 @@ export const charmIndustrial: CaseStudy = {
     cta: 'Read case study',
   },
   title: 'Rebuilding the site Charm Industrial sells through',
+  seoDescription:
+    "I led Charm Industrial's rewrite from Gatsby to Next.js and built the internal dashboard that streams live factory cameras to many viewers with Express.",
+  updated: '2026-09-30',
   facts: {
     client: 'Charm Industrial (via Bejamas)',
     role: 'Led the frontend',
@@ -71,6 +74,10 @@ export const charmIndustrial: CaseStudy = {
     { value: '30%', label: 'lift in conversions', up: true },
     { value: '100k+', label: 'monthly visitors' },
   ],
-  media: { hero: true, details: 1 },
+  media: {
+    hero: true,
+    details: 1,
+    alt: { hero: 'Charm Industrial homepage with live tonnes of carbon dioxide removed' },
+  },
   pending: [],
 };

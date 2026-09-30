@@ -4,16 +4,21 @@ import { allProjects } from '@/content/projects';
 import { siteUrl } from '@/content/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const latest = new Date(
+    allProjects
+      .map((project) => project.updated)
+      .sort()
+      .at(-1) ?? Date.now(),
+  );
   const pages = [''].map((path) => ({
     url: `${siteUrl}${path}`,
-    lastModified: now,
+    lastModified: latest,
     changeFrequency: 'monthly' as const,
     priority: path === '' ? 1 : 0.6,
   }));
   const work = allProjects.map((project) => ({
     url: `${siteUrl}/work/${project.slug}`,
-    lastModified: now,
+    lastModified: new Date(project.updated),
     changeFrequency: 'yearly' as const,
     priority: 0.8,
   }));

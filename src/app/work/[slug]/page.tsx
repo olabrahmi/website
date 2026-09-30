@@ -18,6 +18,7 @@ import {
 } from '@/components/work';
 import { allProjects, getNextProject, getProject, unconfirmedMetrics } from '@/content/projects';
 import type { TocItem } from '@/components/work/case-toc';
+import { caseStudyGraph, serializeJsonLd } from '@/utils/json-ld';
 import { readMinutes } from '@/utils/read-time';
 
 export const dynamicParams = false;
@@ -45,9 +46,13 @@ export async function generateMetadata({ params }: PageProps<'/work/[slug]'>): P
 
   return {
     title: project.title,
-    description: project.shortVersion,
+    description: project.seoDescription ?? project.shortVersion,
     alternates: { canonical: `/work/${project.slug}` },
-    openGraph: { title: project.title, description: project.shortVersion, url: `/work/${project.slug}` },
+    openGraph: {
+      title: project.title,
+      description: project.seoDescription ?? project.shortVersion,
+      url: `/work/${project.slug}`,
+    },
   };
 }
 
@@ -72,6 +77,10 @@ export default async function WorkPage({ params }: PageProps<'/work/[slug]'>) {
   return (
     <ViewTransition enter={slide} exit={slide} default="none">
       <main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(caseStudyGraph(project)) }}
+        />
         <Container className="pt-28 md:pt-36">
           <div className="flex items-center justify-between gap-4">
             <Link
@@ -123,7 +132,13 @@ export default async function WorkPage({ params }: PageProps<'/work/[slug]'>) {
           <p className="text-ink mt-8 max-w-[60ch] text-lg leading-relaxed">{project.shortVersion}</p>
 
           {project.media.hero && (
-            <MediaFrame slug={project.slug} name="hero" alt={`${project.name} screenshot`} className="mt-8" priority />
+            <MediaFrame
+              slug={project.slug}
+              name="hero"
+              alt={project.media.alt?.hero ?? `${project.name} screenshot`}
+              className="mt-8"
+              priority
+            />
           )}
           {project.media.beforeAfter && (
             <div className="mt-3">
@@ -174,7 +189,7 @@ export default async function WorkPage({ params }: PageProps<'/work/[slug]'>) {
                         key={index}
                         slug={project.slug}
                         name={`detail-${index + 1}`}
-                        alt={`${project.name} detail ${index + 1}`}
+                        alt={project.media.alt?.details?.[index] ?? `${project.name} detail ${index + 1}`}
                         aspect="4 / 3"
                       />
                     ))}

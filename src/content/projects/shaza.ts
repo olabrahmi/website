@@ -10,6 +10,9 @@ export const shaza: CaseStudy = {
     cta: 'See how it books',
   },
   title: 'Shaza: an AI agent that answers hotel guests and books rooms',
+  seoDescription:
+    'Shaza is an AI agent I built solo. It answers hotel guests on WhatsApp, Booking.com, Airbnb and email, checks live availability and books the room itself.',
+  updated: '2026-09-30',
   facts: {
     client: 'Own product, sold to hotels',
     role: 'Solo, end to end',

@@ -10,6 +10,9 @@ export const o1labs: CaseStudy = {
     cta: 'Read case study',
   },
   title: "A page builder o1Labs' marketing team runs alone",
+  seoDescription:
+    "I rebuilt o1Labs' site as a page builder on Next.js and Sanity, so marketing publishes new pages alone, with product pages, Algolia search and instant publish.",
+  updated: '2026-09-30',
   facts: {
     client: 'o1Labs (via Bejamas)',
     role: 'Frontend developer',
@@ -52,6 +55,10 @@ export const o1labs: CaseStudy = {
     { value: 'Instant', label: 'publish, via on-demand revalidation' },
     { value: '0', label: 'dev tickets to publish a page', up: true },
   ],
-  media: { hero: true, details: 2 },
+  media: {
+    hero: true,
+    details: 2,
+    alt: { hero: 'o1Labs homepage about zero knowledge cryptography, Mina Protocol and o1js' },
+  },
   pending: [],
 };

@@ -10,6 +10,9 @@ export const payback: CaseStudy = {
     cta: 'Read case study',
   },
   title: "Owning the frontend of PAYBACK's sign-up flow",
+  seoDescription:
+    "How I own the frontend of PAYBACK's sign-up flow in Next.js, with Datadog SLOs, circuit breakers and 24/7 on-call, on a site with 1.1M+ monthly visitors.",
+  updated: '2026-09-30',
   facts: {
     client: 'PAYBACK (via iMedia24)',
     role: 'Senior Frontend Developer, frontend owner of enrollment',
@@ -79,6 +82,6 @@ export const payback: CaseStudy = {
     { value: '1.1M+', label: 'monthly visitors', up: true },
     { value: '100%', label: 'test coverage', up: true },
   ],
-  media: { hero: true, details: 0 },
+  media: { hero: true, details: 0, alt: { hero: 'PAYBACK sign-up step where members pick a card and partners' } },
   pending: [],
 };

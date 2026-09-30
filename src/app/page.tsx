@@ -1,20 +1,9 @@
 import { ViewTransition } from 'react';
 
 import { getLogoSources } from '@/components/logos/logo-sources';
-import { About, Contact, Hero, LogoStrip, Work } from '@/components/home';
+import { About, Capabilities, Contact, Faq, Hero, LogoStrip, Work } from '@/components/home';
 import { logoNames } from '@/content/logos';
-import { person, siteUrl, socials } from '@/content/site';
-
-const personJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: person.name,
-  jobTitle: person.jobTitle,
-  url: siteUrl,
-  email: `mailto:${person.email}`,
-  address: { '@type': 'PostalAddress', addressLocality: 'Casablanca', addressCountry: 'MA' },
-  sameAs: socials.map((link) => link.href),
-};
+import { homeGraph, serializeJsonLd } from '@/utils/json-ld';
 
 const logoSources = Object.fromEntries(logoNames.map((name) => [name, getLogoSources(name)]));
 
@@ -24,11 +13,13 @@ export default function HomePage() {
   return (
     <ViewTransition enter={slide} exit={slide} default="none">
       <main>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeGraph()) }} />
         <Hero />
         <LogoStrip sources={logoSources} />
         <Work />
+        <Capabilities />
         <About />
+        <Faq />
         <Contact />
       </main>
     </ViewTransition>

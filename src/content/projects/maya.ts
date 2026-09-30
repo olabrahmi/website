@@ -10,6 +10,9 @@ export const maya: CaseStudy = {
     cta: 'Read how it works',
   },
   title: 'Maya: a coding agent that opens its own pull requests',
+  seoDescription:
+    'Maya is a coding agent I built solo. It turns Linear tickets into tested pull requests with headless Claude Code, and has run on 50+ of my own tickets.',
+  updated: '2026-09-30',
   facts: {
     client: 'Personal project',
     role: 'Solo',

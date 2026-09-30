@@ -10,6 +10,9 @@ export const akasec: CaseStudy = {
     cta: 'Read case study',
   },
   title: 'Tickets, QR check-in and a live agenda for a cybersecurity crowd',
+  seoDescription:
+    "Every year I build the Cyber Odyssey site for Akasec, Morocco's biggest student cybersecurity club: ticketing, QR check-in and a live agenda. Solo, full stack.",
+  updated: '2026-09-30',
   facts: {
     client: 'Akasec, 1337 Khouribga',
     role: 'Solo, full stack',
@@ -61,6 +64,10 @@ export const akasec: CaseStudy = {
     { value: '3,000+', label: 'attendees across all editions', up: true },
     { value: '3', label: 'editions built, 2023 to 2025' },
   ],
-  media: { hero: true, details: 2 },
+  media: {
+    hero: true,
+    details: 2,
+    alt: { hero: 'Akasec homepage with members at computers at a cybersecurity event' },
+  },
   pending: [],
 };

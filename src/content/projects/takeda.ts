@@ -10,6 +10,7 @@ export const takeda: CaseStudy = {
     cta: 'Read case study',
   },
   title: 'Rebuilding takeda.com for 2M+ monthly visitors',
+  updated: '2026-09-30',
   facts: {
     client: 'Takeda (via Bejamas)',
     role: 'Frontend developer',
@@ -46,6 +47,6 @@ export const takeda: CaseStudy = {
     { value: '100+', label: 'reusable sections' },
     { value: '30+', label: 'engineers on the rebuild' },
   ],
-  media: { hero: true, details: 0 },
+  media: { hero: true, details: 0, alt: { hero: 'Takeda global homepage with a red hero banner and a news carousel' } },
   pending: [],
 };

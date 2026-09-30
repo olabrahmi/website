@@ -10,6 +10,9 @@ export const descope: CaseStudy = {
     cta: 'Read case study',
   },
   title: 'Four sites for Descope, one frontend lead',
+  seoDescription:
+    'I led the frontend for four Descope sites: a redesign, 1,500+ pages of docs, an AI site and a hackathon. Marketing publishes without waiting on engineers.',
+  updated: '2026-09-30',
   facts: {
     client: 'Descope (via Bejamas)',
     role: 'Led the frontend',
@@ -91,6 +94,11 @@ export const descope: CaseStudy = {
     { value: '20+', label: 'SDKs documented' },
     { value: 'Pass', label: 'Core Web Vitals, mobile and desktop', up: true },
   ],
-  media: { hero: true, details: 2, beforeAfter: true },
+  media: {
+    hero: true,
+    details: 2,
+    beforeAfter: true,
+    alt: { hero: 'Descope homepage: identity journeys for customers and AI agents' },
+  },
   pending: [],
 };

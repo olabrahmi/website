@@ -60,6 +60,8 @@ export interface CaseStudyMedia {
   hero: boolean;
   details: number;
   beforeAfter?: boolean;
+  /** What is on screen, under 15 words. Falls back to "<name> screenshot" and "<name> detail N". */
+  alt?: { hero?: string; details?: string[] };
 }
 
 export interface CaseStudy {
@@ -69,6 +71,10 @@ export interface CaseStudy {
   /** Home cards show metrics[0] and metrics[1]. */
   card: CaseStudyCard;
   title: string;
+  /** Meta description for search, 150 to 160 characters. Falls back to shortVersion. */
+  seoDescription?: string;
+  /** Last real content change, ISO date. Drives sitemap lastModified and Article dateModified. */
+  updated: string;
   facts: CaseStudyFacts;
   shortVersion: string;
   context?: string;
@@ -92,4 +98,17 @@ export interface CaseStudy {
 export interface SocialLink {
   label: string;
   href: string;
+}
+
+export interface Capability {
+  title: string;
+  body: string;
+  /** Slugs from src/content/projects. Each one must prove the claim in `body`. */
+  proof: string[];
+}
+
+export interface FaqItem {
+  question: string;
+  /** 40 to 60 words. First sentence answers the question on its own. */
+  answer: string;
 }
