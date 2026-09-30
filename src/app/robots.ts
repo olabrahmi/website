@@ -1,11 +1,10 @@
 import type { MetadataRoute } from 'next';
 
+import { siteUrl } from '@/content/site';
+
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: '*',
-      allow: ['/', '/home', '/contact', '/blog', '/blog/*'],
-    },
-    sitemap: `${process.env.NEXT_PUBLIC_SITE_URL}/sitemap.xml`,
+    rules: { userAgent: '*', allow: '/' },
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }

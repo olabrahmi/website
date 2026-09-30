@@ -1,20 +1,36 @@
-import { notFound } from 'next/navigation';
+import { ViewTransition } from 'react';
 
-import { getPageBySlug, getPageMetadata } from '@/services/storyblok';
-import { PageBuilder } from '@/components/templates/page-builder';
+import { getLogoSources } from '@/components/logos/logo-sources';
+import { About, Contact, Hero, LogoStrip, Work } from '@/components/home';
+import { logoNames } from '@/content/logos';
+import { person, siteUrl, socials } from '@/content/site';
 
-export default async function HomePage() {
-  const page = await getPageBySlug('home');
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: person.name,
+  jobTitle: person.jobTitle,
+  url: siteUrl,
+  email: `mailto:${person.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Casablanca', addressCountry: 'MA' },
+  sameAs: socials.map((link) => link.href),
+};
 
-  if (!page) notFound();
+const logoSources = Object.fromEntries(logoNames.map((name) => [name, getLogoSources(name)]));
 
+const slide = { 'nav-forward': 'nav-forward', 'nav-back': 'nav-back', default: 'none' } as const;
+
+export default function HomePage() {
   return (
-    <main className="flex flex-col gap-10">
-      <PageBuilder sections={page.sections ?? []} />
-    </main>
+    <ViewTransition enter={slide} exit={slide} default="none">
+      <main>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
+        <Hero />
+        <LogoStrip sources={logoSources} />
+        <Work />
+        <About />
+        <Contact />
+      </main>
+    </ViewTransition>
   );
-}
-
-export async function generateMetadata() {
-  return await getPageMetadata('home');
 }

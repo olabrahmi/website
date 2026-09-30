@@ -1,26 +1,16 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'a.storyblok.com',
-        port: '',
-        pathname: '/f/**',
-      },
-    ],
+  async redirects() {
+    return [
+      { source: '/contact', destination: '/#contact', permanent: true },
+      { source: '/home', destination: '/', permanent: true },
+      // The CV page is gone: the buttons download the PDF directly.
+      { source: '/cv', destination: '/', permanent: false },
+      // The blog is hidden for now. Temporary redirects, so nothing gets cached as gone.
+      { source: '/blog', destination: '/', permanent: false },
+      { source: '/blog/:slug', destination: '/', permanent: false },
+    ];
   },
 };
 

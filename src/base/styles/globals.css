@@ -1,223 +1,739 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/typography";
-@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --font-*: initial;
-  --font-serif: var(--font-geist-sans), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-sans:
-    var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-
-  --drop-shadow-3xl: 10px 10px 45px rgba(255, 255, 255, 0.15);
-  --drop-shadow-border: 0 0 4px rgba(100, 100, 100, 0.05);
-
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-
-  --accent-value: 255;
-
-  --color-accent-50: hsl(var(--accent-value), 75%, 98%);
-  --color-accent-100: hsl(var(--accent-value), 75%, 95%);
-  --color-accent-200: hsl(var(--accent-value), 75%, 90%);
-  --color-accent-300: hsl(var(--accent-value), 75%, 85%);
-  --color-accent-400: hsl(var(--accent-value), 75%, 75%);
-  --color-accent-500: hsl(var(--accent-value), 75%, 65%);
-  --color-accent-600: hsl(var(--accent-value), 75%, 55%);
-  --color-accent-700: hsl(var(--accent-value), 75%, 45%);
-  --color-accent-800: hsl(var(--accent-value), 75%, 35%);
-  --color-accent-900: hsl(var(--accent-value), 75%, 30%);
-  --color-accent-950: hsl(var(--accent-value), 75%, 20%);
-
-  --gradient-dark: var(--color-accent-700);
-  --gradient-light: var(--color-accent-400);
-  --gradient-darker: var(--color-accent-800);
-
-  --hero-gradient-text: circle at center, var(--gradient-dark), var(--gradient-light), var(--gradient-darker);
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-aurora: aurora 60s linear infinite;
-  --animate-line-shadow: line-shadow 20s linear infinite;
-  --animate-text-gradient: text-gradient 4s ease-in-out infinite alternate;
-}
-
-@keyframes accordion-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
-}
-
-@keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
-}
-
-@keyframes text-gradient {
-  0%,
-  15% {
-    background-position: 0 50%;
-  }
-  85%,
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-@keyframes aurora {
-  from {
-    background-position:
-      50% 50%,
-      50% 50%;
-  }
-  to {
-    background-position:
-      350% 50%,
-      350% 50%;
-  }
-}
-
-@keyframes line-shadow {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100% -100%;
-  }
-}
-
-@utility container {
-  margin-inline: auto;
-  padding-inline: 1.25rem;
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
-  }
-  @media (width >= 768px) {
-    max-width: 960px;
-  }
-}
-
 /*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+ * Palette: one saturated indigo-violet, #4125f9 (hue 274), green means a real
+ * gain, everything else is purple-tinted neutral. OKLCH keeps lightness steps perceptually even.
+ */
+:root {
+  color-scheme: light;
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
+  --paper: oklch(98.8% 0.004 275);
+  --surface: oklch(96.5% 0.008 275);
+  --surface-2: oklch(93.5% 0.012 275);
+  --ink: oklch(20% 0.02 275);
+  --ink-muted: oklch(47% 0.02 275);
+  --ink-faint: oklch(62% 0.015 275);
+  --rule: oklch(90% 0.01 275);
+  --accent: #4125f9;
+  --accent-soft: oklch(48.5% 0.282 274 / 0.09);
+  --accent-ink: oklch(98% 0.01 275);
+  --pass: oklch(55% 0.15 152);
+  --focus: #4125f9;
+  --image-outline: oklch(0% 0 0 / 0.1);
+  --aurora-a: oklch(55% 0.16 275 / 0.16);
+  --aurora-b: oklch(60% 0.12 270 / 0.1);
+
+  /*
+   * Buttons: a full pill with a subtle top-to-bottom gradient, one uniform lighter ring, an inner top
+   * highlight and a thin dark outer ring. Same border color all the way around.
+   */
+  --btn-primary-ring: oklch(0% 0 0 / 0.18);
+  --btn-primary-ink: oklch(98% 0.01 275);
+
+  --btn-secondary-from: oklch(100% 0 0);
+  --btn-secondary-to: oklch(95.5% 0.008 275);
+  --btn-secondary-border: oklch(86% 0.01 275);
+  --btn-secondary-ring: oklch(0% 0 0 / 0.06);
+  --btn-secondary-ink: var(--ink);
+
+  --btn-destructive-from: oklch(56% 0.2 25);
+  --btn-destructive-to: oklch(46% 0.2 25);
+  --btn-destructive-border: oklch(65% 0.15 25);
+  --btn-destructive-ring: oklch(0% 0 0 / 0.35);
+  --btn-destructive-ink: oklch(98% 0.01 25);
 }
 
-@utility text-balance {
-  text-wrap: balance;
+.dark {
+  color-scheme: dark;
+
+  --paper: oklch(14.5% 0.018 275);
+  --surface: oklch(18.5% 0.022 275);
+  --surface-2: oklch(22% 0.026 275);
+  --ink: oklch(96% 0.006 275);
+  --ink-muted: oklch(70% 0.018 275);
+  --ink-faint: oklch(52% 0.016 275);
+  --rule: oklch(27% 0.02 275);
+  --accent: oklch(72% 0.15 276);
+  --accent-soft: oklch(72% 0.15 276 / 0.15);
+  --accent-ink: oklch(16% 0.03 275);
+  --pass: oklch(80% 0.17 152);
+  --focus: oklch(72% 0.15 276);
+  --image-outline: oklch(100% 0 0 / 0.1);
+  --aurora-a: oklch(48% 0.16 275 / 0.34);
+  --aurora-b: oklch(45% 0.12 270 / 0.22);
+
+  --btn-primary-ring: oklch(0% 0 0 / 0.4);
+  --btn-primary-ink: oklch(98% 0.01 275);
+
+  --btn-secondary-from: oklch(30% 0.02 275);
+  --btn-secondary-to: oklch(24% 0.02 275);
+  --btn-secondary-border: oklch(38% 0.02 275);
+  --btn-secondary-ring: oklch(0% 0 0 / 0.5);
+  --btn-secondary-ink: var(--ink);
+
+  --btn-destructive-from: oklch(60% 0.2 25);
+  --btn-destructive-to: oklch(48% 0.2 25);
+  --btn-destructive-border: oklch(68% 0.15 25);
+  --btn-destructive-ring: oklch(0% 0 0 / 0.6);
+  --btn-destructive-ink: oklch(98% 0.01 25);
+}
+
+@theme inline {
+  --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-pass: var(--pass);
+  --color-focus: var(--focus);
+
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @layer base {
-  :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --text-gradient: linear-gradient(120deg, #fff, #adadad);
-    --text-gradient-inverted: linear-gradient(120deg, #18181b, #545151);
-
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 240 6% 90%;
-    --primary-foreground: 240 6% 10%;
-
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 345 87% 33%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-
-    --radius: 1.5rem;
+  html {
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    scroll-padding-top: 8rem;
+    overflow-x: clip;
   }
 
   body {
-    @apply relative min-h-screen overflow-x-hidden bg-zinc-50 font-sans text-zinc-900;
-  }
-
-  main {
-    @apply min-h-[800px];
-  }
-}
-
-@layer utilities {
-  * {
-    @apply scroll-smooth text-zinc-900 transition-all duration-300 ease-in-out;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: -0.03em;
+    overflow-x: clip;
+    text-wrap: pretty;
   }
 
   h1,
   h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-serif font-semibold tracking-tighter;
+  h3 {
+    font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    text-wrap: balance;
+    font-style: normal;
   }
 
-  [data-radix-popper-content-wrapper],
-  [data-radix-popper-content-wrapper] * {
-    @apply transition-none;
+  ::selection {
+    background-color: color-mix(in oklch, var(--accent) 30%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/*
+ * Type roles. Named type-* (not text-*): tailwind-merge reads unknown text-* classes as
+ * colors and silently drops them when a real text color is merged in.
+ */
+@utility type-display-1 {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.075em;
+}
+
+@utility type-display-2 {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.068em;
+}
+
+@utility type-h2 {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 650;
+  font-size: clamp(1.625rem, 1.2rem + 1.4vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+}
+
+@utility type-h3 {
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+}
+
+/* Numbers in projects are always JetBrains Mono. */
+@utility type-metric {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 1.35rem + 1.7vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.08em;
+}
+
+@utility type-eyebrow {
+  font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    border-radius: 9999px;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    background-image: linear-gradient(to bottom, var(--btn-from), var(--btn-to));
+    background-origin: border-box;
+    border: 1px solid var(--btn-border);
+    color: var(--btn-ink);
+    box-shadow:
+      inset 0 1px 1px oklch(100% 0 0 / 0.22),
+      0 0 0 1px var(--btn-ring),
+      0 1px 2px oklch(0% 0 0 / 0.12);
+    cursor: pointer;
+    transition-property: transform, filter, box-shadow;
+    transition-duration: 160ms;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  .btn[data-size='md'] {
+    height: 2.5rem;
+    padding-inline: 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .btn[data-size='sm'] {
+    height: 2rem;
+    padding-inline: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .btn[data-size='icon'] {
+    height: 2.5rem;
+    width: 2.5rem;
+    padding: 0;
+  }
+
+  .btn-arrow {
+    width: 1.125rem;
+    height: 1.125rem;
+    transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /*
+   * Primary: sampled from the reference button. Fill drops fast through the top third (#6248fa to #4125f9),
+   * then settles to #3a20e0. The border is white at 20% over the fill, so it reads lighter than the
+   * fill everywhere. A soft inner glow lifts the sides. Same in light and dark mode.
+   */
+  .btn[data-variant='primary'] {
+    --btn-border: oklch(100% 0 0 / 0.2);
+    --btn-ring: var(--btn-primary-ring);
+    --btn-ink: #fff;
+    background-image: linear-gradient(180deg, #6248fa 0%, #4a2ffa 14%, #4125f9 34%, #3f23f2 56%, #3a20e0 100%);
+    box-shadow:
+      inset 0 0 7px oklch(100% 0 0 / 0.16),
+      0 0 0 1px var(--btn-ring),
+      0 1px 2px oklch(0% 0 0 / 0.12);
+  }
+
+  .btn[data-variant='secondary'] {
+    --btn-from: var(--btn-secondary-from);
+    --btn-to: var(--btn-secondary-to);
+    --btn-border: var(--btn-secondary-border);
+    --btn-ring: var(--btn-secondary-ring);
+    --btn-ink: var(--btn-secondary-ink);
+  }
+
+  .btn[data-variant='destructive'] {
+    --btn-from: var(--btn-destructive-from);
+    --btn-to: var(--btn-destructive-to);
+    --btn-border: var(--btn-destructive-border);
+    --btn-ring: var(--btn-destructive-ring);
+    --btn-ink: var(--btn-destructive-ink);
+  }
+
+  .btn[data-variant='ghost'] {
+    --btn-from: transparent;
+    --btn-to: transparent;
+    --btn-border: transparent;
+    --btn-ring: transparent;
+    --btn-ink: var(--ink);
+    box-shadow: none;
+  }
+
+  .btn[data-variant='ghost']:active,
+  .btn[data-variant='ghost'][data-open='true'] {
+    --btn-from: color-mix(in oklch, var(--btn-secondary-from) 60%, transparent);
+    --btn-to: color-mix(in oklch, var(--btn-secondary-to) 60%, transparent);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn:hover .btn-arrow {
+      transform: translateX(2px);
+    }
+
+    .btn:hover .btn-arrow-down {
+      transform: translateY(2px);
+    }
+
+    .btn[data-variant='ghost']:hover {
+      --btn-from: color-mix(in oklch, var(--btn-secondary-from) 60%, transparent);
+      --btn-to: color-mix(in oklch, var(--btn-secondary-to) 60%, transparent);
+    }
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+    filter: brightness(0.96);
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled='true'] {
+    filter: saturate(0.4);
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .img-outline {
+    outline: 1px solid var(--image-outline);
+    outline-offset: -1px;
+  }
+
+  /* Hero entrance. Pure CSS so the hero is visible without JavaScript. */
+  .rise {
+    animation: rise 500ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  .rise-word {
+    display: inline-block;
+    animation: rise-word 600ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: calc(var(--i, 0) * 40ms);
+  }
+
+  /*
+   * Aurora for AuroraBackground, built from three cheap layers (all gradients, no blur filter, no blend modes):
+   *   - two curtain layers of soft diagonal bands, different angle and period, drifting in opposite directions, so
+   *     the bands slide through each other and shimmer
+   *   - one layer of large soft glows that breathes
+   * Every layer is painted once and animated with transform only, so it runs on the compositor.
+   * Blue, indigo and violet only (the accent family). Light mode keeps the same layers, just fainter.
+   */
+  .aurora-curtain,
+  .aurora-glow {
+    position: absolute;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .aurora-curtain {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 170%;
+  }
+
+  .aurora-curtain-a {
+    opacity: 0.55;
+    background-image: repeating-linear-gradient(
+      100deg,
+      transparent 0%,
+      oklch(66% 0.2 255 / 0.7) 3%,
+      oklch(58% 0.24 275 / 1) 7%,
+      oklch(70% 0.19 295 / 0.7) 11%,
+      transparent 17%,
+      transparent 30%
+    );
+    animation: aurora-slide-left 24s ease-in-out infinite alternate;
+  }
+
+  .aurora-curtain-b {
+    opacity: 0.45;
+    background-image: repeating-linear-gradient(
+      96deg,
+      transparent 0%,
+      oklch(82% 0.12 220 / 0.65) 3%,
+      oklch(62% 0.23 268 / 0.95) 6.5%,
+      oklch(74% 0.17 285 / 0.6) 10%,
+      transparent 15%,
+      transparent 26%
+    );
+    animation: aurora-slide-right 18s ease-in-out infinite alternate;
+  }
+
+  .aurora-glow {
+    inset: -12% -8%;
+    opacity: 0.55;
+    background-image:
+      radial-gradient(38% 55% at 78% 8%, oklch(62% 0.21 262 / 0.75), transparent 72%),
+      radial-gradient(34% 50% at 52% 24%, oklch(58% 0.23 280 / 0.5), transparent 72%),
+      radial-gradient(42% 60% at 92% 52%, oklch(70% 0.17 295 / 0.45), transparent 72%),
+      radial-gradient(30% 45% at 25% 18%, oklch(72% 0.13 230 / 0.35), transparent 72%);
+    animation: aurora-breathe 12s ease-in-out infinite alternate;
+  }
+
+  .dark .aurora-curtain-a {
+    opacity: 0.85;
+  }
+
+  .dark .aurora-curtain-b {
+    opacity: 0.7;
+  }
+
+  .dark .aurora-glow {
+    opacity: 0.7;
+  }
+
+  /* Card with a pointer-following accent edge. SpotlightCard sets --mx / --my. */
+  .spot {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--rule);
+    border-radius: 1rem;
+    background-color: var(--surface);
+    transition:
+      border-color 200ms var(--ease-out-strong),
+      transform 200ms var(--ease-out-strong);
+  }
+
+  .spot::before,
+  .spot::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 200ms var(--ease-out-strong);
+  }
+
+  .spot::before {
+    padding: 1px;
+    background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), var(--accent), transparent 70%);
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .spot::after {
+    z-index: -1;
+    background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), var(--accent-soft), transparent 65%);
+  }
+
+  /*
+   * Label that follows the pointer inside a SpotlightCard: it reads the same --mx / --my the glow uses, so it
+   * costs no extra JavaScript. No transform transition: it sticks to the cursor. Mouse only.
+   */
+  .cursor-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    display: none;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translate(calc(var(--mx, 50%) + 14px), calc(var(--my, 50%) + 18px));
+    transition: opacity 150ms var(--ease-out-strong);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cursor-label {
+      display: block;
+    }
+
+    .spot:hover .cursor-label {
+      opacity: 1;
+    }
+
+    .spot:hover {
+      /* Above its siblings: each card is its own stacking context, so a later card would cover the cursor label. */
+      z-index: 30;
+      border-color: color-mix(in oklch, var(--accent) 30%, var(--rule));
+      transform: translateY(-2px);
+    }
+
+    .spot:hover::before,
+    .spot:hover::after {
+      opacity: 1;
+    }
+  }
+}
+
+/*
+ * Scroll reveal. Gated on html.js (set by the head script), so with JavaScript off nothing is hidden.
+ * The failsafe shows anything still hidden 2.5s after load, but only until RevealProvider starts and adds
+ * html.reveal-ready. Once it is running, elements wait for their scroll, however long that takes. Only ever put
+ * data-reveal on below-the-fold wrappers, never on cards themselves.
+ */
+[data-reveal] {
+  transition:
+    opacity 600ms var(--ease-out-strong),
+    translate 600ms var(--ease-out-strong);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+html.js [data-reveal]:not([data-in]) {
+  opacity: 0;
+  translate: 0 16px;
+}
+
+html.js:not(.reveal-ready) [data-reveal]:not([data-in]) {
+  animation: reveal-failsafe 0s linear 2.5s forwards;
+}
+
+/*
+ * Wipe: an element is revealed by a line moving left to right (clip-path), no fade. Same html.js gate and
+ * failsafe as [data-reveal], so nothing stays hidden without JavaScript.
+ */
+[data-wipe] {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 700ms var(--ease-out-strong);
+}
+
+html.js [data-wipe]:not([data-in]) {
+  clip-path: inset(0 100% 0 0);
+}
+
+html.js:not(.reveal-ready) [data-wipe]:not([data-in]) {
+  animation: wipe-failsafe 0s linear 2.5s forwards;
+}
+
+@keyframes wipe-failsafe {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise-word {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Logo strip tracker: fills over exactly one interval, then the key changes and it restarts. */
+
+@keyframes aurora-slide-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-41%, 0, 0);
+  }
+}
+
+@keyframes aurora-slide-right {
+  from {
+    transform: translate3d(-41%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes aurora-breathe {
+  from {
+    transform: translate3d(-3%, 2%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, -3%, 0) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-curtain,
+  .aurora-glow {
+    animation: none;
+  }
+
+  .btn,
+  .btn-arrow,
+  .spot {
+    transition-duration: 0.01ms;
+  }
+
+  .rise,
+  .rise-word {
+    animation-name: fade-in;
+  }
+
+  html.js [data-reveal]:not([data-in]) {
+    translate: none;
+  }
+
+  [data-wipe] {
+    transition-duration: 0.01ms;
+  }
+
+  [data-reveal] {
+    transition-duration: 200ms;
+    transition-delay: 0s;
+  }
+}
+
+/*
+ * Page transitions (React <ViewTransition>, driven by Link transitionTypes).
+ * Forward: old page slides left, new page arrives from the right. Back: the reverse.
+ * Header and footer stay put. Logos and metrics morph between card and case study.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(.nav-forward) {
+  --slide-offset: -48px;
+  animation:
+    150ms ease-in both vt-fade reverse,
+    400ms ease-in-out both vt-slide reverse;
+}
+
+::view-transition-new(.nav-forward) {
+  --slide-offset: 48px;
+  animation:
+    210ms ease-out 150ms both vt-fade,
+    400ms ease-in-out both vt-slide;
+}
+
+::view-transition-old(.nav-back) {
+  --slide-offset: 48px;
+  animation:
+    150ms ease-in both vt-fade reverse,
+    400ms ease-in-out both vt-slide reverse;
+}
+
+::view-transition-new(.nav-back) {
+  --slide-offset: -48px;
+  animation:
+    210ms ease-out 150ms both vt-fade,
+    400ms ease-in-out both vt-slide;
+}
+
+::view-transition-group(.morph) {
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+::view-transition-image-pair(.morph) {
+  animation-name: vt-via-blur;
+}
+
+@keyframes vt-fade {
+  from {
+    filter: blur(3px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes vt-slide {
+  from {
+    translate: var(--slide-offset);
+  }
+  to {
+    translate: 0;
+  }
+}
+
+@keyframes vt-via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }
