@@ -1,13 +1,9 @@
-/** '20:59:14 GMT'. Always GMT, wherever the visitor is. */
-export const formatLocalTime = (date: Date = new Date()): string => {
-  const parts = new Intl.DateTimeFormat('en-GB', {
+/** '02:58:28 PM', in GMT, whatever the visitor's own timezone is. */
+export const formatLocalTime = (date: Date = new Date()): string =>
+  date.toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    hourCycle: 'h23',
+    hour12: true,
     timeZone: 'UTC',
-  }).formatToParts(date);
-  const get = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value ?? '';
-
-  return `${get('hour')}:${get('minute')}:${get('second')} GMT`;
-};
+  });

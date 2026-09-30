@@ -1,4 +1,4 @@
-export { AuroraBackground } from './aurora-background';
+export { AuroraBackground, AuroraLayers } from './aurora-background';
 export { default as InlineClip } from './inline-clip';
 export { default as Metric } from './metric';
 export { default as MetricBand } from './metric-band';

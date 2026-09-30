@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import { person } from '@/content/site';
 import { formatLocalTime } from '@/utils/format-local-time';
 
 export default function LocalTime() {
@@ -21,7 +20,7 @@ export default function LocalTime() {
 
   return (
     <span className="text-ink-muted text-sm tabular-nums">
-      <span aria-live="off">{time ?? '--:--:-- ---'}</span> &middot; {person.location}
+      Local Time: <span aria-live="off">{time ?? '--:--:-- --'}</span>
     </span>
   );
 }

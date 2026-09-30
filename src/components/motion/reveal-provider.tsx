@@ -24,7 +24,9 @@ export default function RevealProvider() {
     document.documentElement.classList.add('reveal-ready');
 
     const pending = Array.from(
-      document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-in]), [data-wipe]:not([data-in])'),
+      document.querySelectorAll<HTMLElement>(
+        '[data-reveal]:not([data-in]), [data-wipe]:not([data-in]):not([data-repeat])',
+      ),
     );
 
     if (pending.length === 0) return;

@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'motion/react';
 import { useSyncExternalStore } from 'react';
 
 import { applyTheme, readStoredTheme, themeForHour } from '@/utils/theme';
@@ -37,22 +36,8 @@ const subscribe = (notify: () => void) => {
   };
 };
 
-const noopSubscribe = () => () => {};
-
-const iconState = {
-  visible: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-  hidden: { opacity: 0, scale: 0.25, filter: 'blur(4px)' },
-};
-
-const spring = { type: 'spring', duration: 0.3, bounce: 0 } as const;
-
 export default function ThemeToggle() {
   const isDark = useSyncExternalStore(subscribe, rootIsDark, () => false);
-  const mounted = useSyncExternalStore(
-    noopSubscribe,
-    () => true,
-    () => false,
-  );
 
   return (
     <button
@@ -61,40 +46,47 @@ export default function ThemeToggle() {
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       onClick={() => applyTheme(isDark ? 'light' : 'dark', { persist: true })}
     >
+      {/*
+        Both icons are in the server HTML and CSS picks the visible one from the `dark` class, which the head script
+        sets before first paint. Nothing waits for hydration, so the right icon is there on a cold first load.
+        The swap is a CSS transition: opacity, scale and blur.
+      */}
       <span className="relative block size-[1.125rem]">
-        <motion.svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="absolute inset-0 size-[1.125rem]"
-          initial={false}
-          animate={mounted && !isDark ? 'visible' : 'hidden'}
-          variants={iconState}
-          transition={spring}
-          aria-hidden="true"
+        <span
+          data-theme-icon=""
+          className="blur-0 absolute inset-0 scale-100 opacity-100 transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none dark:scale-25 dark:opacity-0 dark:blur-[4px]"
         >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-        </motion.svg>
-        <motion.svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="absolute inset-0 size-[1.125rem]"
-          initial={false}
-          animate={mounted && isDark ? 'visible' : 'hidden'}
-          variants={iconState}
-          transition={spring}
-          aria-hidden="true"
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="size-full"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+        </span>
+        <span
+          data-theme-icon=""
+          className="dark:blur-0 absolute inset-0 scale-25 opacity-0 blur-[4px] transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none dark:scale-100 dark:opacity-100"
         >
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </motion.svg>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="size-full"
+            aria-hidden="true"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </span>
       </span>
     </button>
   );

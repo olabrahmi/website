@@ -1,7 +1,7 @@
 import { ViewTransition } from 'react';
 
 import { getLogoSources } from '@/components/logos/logo-sources';
-import { About, BuildingNow, Contact, Hero, LogoStrip, SelectedWork } from '@/components/home';
+import { About, Contact, Hero, LogoStrip, Work } from '@/components/home';
 import { logoNames } from '@/content/logos';
 import { person, siteUrl, socials } from '@/content/site';
 
@@ -12,7 +12,7 @@ const personJsonLd = {
   jobTitle: person.jobTitle,
   url: siteUrl,
   email: `mailto:${person.email}`,
-  address: { '@type': 'PostalAddress', addressLocality: 'Rabat', addressCountry: 'MA' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Casablanca', addressCountry: 'MA' },
   sameAs: socials.map((link) => link.href),
 };
 
@@ -27,8 +27,7 @@ export default function HomePage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
         <Hero />
         <LogoStrip sources={logoSources} />
-        <BuildingNow />
-        <SelectedWork />
+        <Work />
         <About />
         <Contact />
       </main>

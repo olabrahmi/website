@@ -5,27 +5,25 @@ export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://labrahmi.me'
 export const person = {
   name: 'Oussama Labrahmi',
   jobTitle: 'Senior product engineer',
-  location: 'Rabat, Morocco',
+  location: 'Casablanca, Morocco',
   email: 'oussama@labrahmi.me',
   callUrl: 'https://cal.com/labrahmi/15min',
-  /** Rate-limited route, see src/app/api/cv/route.ts. The PDF itself is in private/cv. */
-  cvPath: '/api/cv',
 } as const;
 
 export const description =
   'Oussama Labrahmi, senior product engineer building web platforms and AI agent workflows. Case studies from PAYBACK, Takeda, Descope and more.';
 
 export const socials: SocialLink[] = [
-  { label: 'GitHub', href: 'https://github.com/0sssama' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/oussama-labrahmi' },
-  { label: 'X', href: 'https://x.com/0sssama' },
+  { label: 'GitHub', href: 'https://github.com/olabrahmi' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/olabrahmi/' },
 ];
 
 /** Blog is hidden for now: add `{ label: 'Blog', href: '/blog' }` back with the route. */
 export const nav = [
   { label: 'Work', href: '/#work' },
   { label: 'About', href: '/#about' },
-  { label: 'Download CV', href: '/api/cv', download: true },
+  // Hidden on phones: the hero already has this button.
+  { label: 'Email me', href: `mailto:${person.email}` },
 ] as const;
 
 export const hero = {
@@ -41,7 +39,7 @@ export const about = {
     "Six years building across Europe and the US. I own PAYBACK's sign-up flow and I'm stakeholder and technical advisor at Dali.",
     'I also build coding agents for fun, mostly late at night.',
   ],
-  facts: ['Rabat, Morocco', '1337 alum', '6 years', 'Advisor at Dali'],
+  facts: ['Casablanca, Morocco', '1337 alum', '6 years', 'Advisor at Dali'],
 } as const;
 
 export const contact = {
@@ -54,4 +52,4 @@ export const notFound = {
   button: 'See my work',
 } as const;
 
-export const workIntro = 'Enterprise platforms, product sites, one security event I rebuild every year.';
+export const workIntro = "AI agents I'm building now, and the platforms I've shipped for clients.";

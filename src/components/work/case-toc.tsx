@@ -16,7 +16,7 @@ export interface TocItem {
  *   sections ──▶ IntersectionObserver ──▶ active id ──▶ sliding pill
  *                                                    └▶ (phones) chip scrolls to center
  *
- *   lg and up: a sticky rail beside the text.   Below lg: a sticky chip bar under the header.
+ *   lg and up: a sticky rail beside the text.   Below lg: a floating island under the header.
  */
 export default function CaseToc({ items, className }: { items: TocItem[]; className?: string }) {
   const [active, setActive] = useState(items[0]?.id);
@@ -60,7 +60,9 @@ export default function CaseToc({ items, className }: { items: TocItem[]; classN
     <nav
       aria-label="On this page"
       className={cn(
-        'bg-paper/85 border-rule sticky top-[4.5rem] z-30 -mx-5 border-b px-5 py-2 backdrop-blur-md sm:-mx-8 sm:px-8 lg:top-32 lg:z-auto lg:mx-0 lg:self-start lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none',
+        // Phones and tablets: a floating island under the header, above its blur (z-49) and the header (z-50).
+        // lg and up: a plain sticky rail in the left column.
+        'bg-paper/80 border-rule sticky top-[4.75rem] z-[51] mx-auto w-fit max-w-full rounded-full border p-1 shadow-[0_10px_30px_-12px_oklch(0%_0_0/0.45)] backdrop-blur-md lg:top-32 lg:z-auto lg:mx-0 lg:w-auto lg:self-start lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none',
         className,
       )}
     >

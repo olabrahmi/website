@@ -1,23 +1,16 @@
 import Link from 'next/link';
 
 import { Metric, Reveal, SpotlightCard } from '@/components/motion';
-import { ArrowRight, ArrowUpRight, Container, Tag } from '@/components/ui';
+import { ArrowRight, ArrowUpRight, Tag } from '@/components/ui';
 import { buildingNow } from '@/content/projects';
-
-import SectionHeading from './section-heading';
 
 // Shaza has real bookings, so it gets the wider card.
 const spans = ['md:col-span-8', 'md:col-span-4'];
 
-export default function BuildingNow() {
+export default function AgentCards() {
   return (
-    <Container as="section" aria-labelledby="building-now" className="pt-8 pb-14 md:pt-10 md:pb-20">
-      <Reveal>
-        <SectionHeading id="building-now" eyebrow="AI agents">
-          What I&apos;m building
-        </SectionHeading>
-      </Reveal>
-      <ul className="mt-8 grid gap-4 md:grid-cols-12">
+    <>
+      <ul className="mt-6 grid gap-4 md:grid-cols-12">
         {buildingNow.map((project, index) => (
           <Reveal as="li" key={project.slug} index={index} className={spans[index]}>
             <SpotlightCard as="article" className="group/card flex h-full flex-col gap-6 p-6 md:p-7">
@@ -41,7 +34,7 @@ export default function BuildingNow() {
                 </span>
               </span>
               <div className="flex items-center justify-between gap-4">
-                <h3 className="type-h3 text-ink text-2xl">{project.name}</h3>
+                <h4 className="type-h3 text-ink text-2xl">{project.name}</h4>
                 <span className="type-eyebrow text-ink-faint">Agent</span>
               </div>
               <p className="text-ink max-w-[34ch] text-lg leading-snug">{project.card.summary}</p>
@@ -70,6 +63,6 @@ export default function BuildingNow() {
           </Reveal>
         ))}
       </ul>
-    </Container>
+    </>
   );
 }

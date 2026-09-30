@@ -28,6 +28,9 @@ const wordmarks: Record<LogoName, { text: string; className: string; icon?: bool
   Akasec: { text: 'akasec', className: 'font-extrabold tracking-[-0.02em]' },
 };
 
+/** The Palais Shazam mark is the wordmark only (no arches, no tagline), a little taller than the rest to read as big. */
+const heights: Partial<Record<LogoName, string>> = { 'Palais Shazam': 'h-7 sm:h-8' };
+
 interface LogoProps {
   name: LogoName;
   /** Which files exist, from getLogoSources on the server. No files: the typeset name is used. */
@@ -40,7 +43,7 @@ export default function Logo({ name, sources, className }: LogoProps) {
   const dark = sources?.onDark ?? sources?.onLight;
 
   if (light || dark) {
-    const size = cn('h-6 w-auto max-w-full object-contain sm:h-7', className);
+    const size = cn('h-6 w-auto max-w-full object-contain sm:h-7', heights[name], className);
 
     return (
       <span className="inline-flex max-w-full items-center">

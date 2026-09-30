@@ -39,7 +39,8 @@ export function applyTheme(theme: Theme, { persist = false }: { persist?: boolea
   const freeze = document.createElement('style');
 
   // One frame without transitions, so colors switch together instead of fading at different speeds.
-  freeze.textContent = '*,*::before,*::after{transition:none!important}';
+  // The toggle's own icons keep their transition, so the swap still animates.
+  freeze.textContent = '*:not([data-theme-icon]),*::before,*::after{transition:none!important}';
   document.head.appendChild(freeze);
 
   root.classList.toggle('dark', theme === 'dark');

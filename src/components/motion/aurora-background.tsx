@@ -8,16 +8,45 @@ interface AuroraBackgroundProps extends HTMLProps<HTMLDivElement> {
 }
 
 /**
- * Hero aurora, from the v2 branch (src/components/sections/hero/components/aurora-background.tsx), rebuilt to be cheap.
- * The original animated background-position under a blur filter, a mix-blend-difference layer and a fixed
- * background, which repainted the whole hero every frame (about 700ms of main-thread work per 3 seconds).
+ * Hero aurora. The v2 original drew its look with background-position animation, a blur filter and a
+ * mix-blend-difference layer, which repainted the hero every frame (about 700ms of main-thread work per 3 seconds).
+ * This keeps the feel with layers that cost nothing per frame:
  *
  *   container (static, masked to glow from the top right, contain: paint)
- *     └─ .aurora-layer  200% wide, gradients painted ONCE, drifts sideways with a transform animation
+ *     ├─ .aurora-glow           soft blue, indigo and violet glows, breathing slowly
+ *     ├─ .aurora-curtain-a      diagonal bands drifting left
+ *     └─ .aurora-curtain-b      finer bands at another angle and speed, drifting right
  *
- * A transform animation runs on the compositor: no layout, no repaint, no main thread. The bands and stripes are the
- * same gradients and colors as before (see .aurora-layer in globals.css).
+ * The two curtains slide through each other, which is what makes it shimmer. All transform animations: compositor only.
+ * See .aurora-* in globals.css.
+ *
+ * AuroraLayers is the effect on its own (the footer uses it, flipped so the glow sits at the bottom).
  */
+export const AuroraLayers = ({
+  className,
+  flip = false,
+  showRadialGradient = true,
+}: {
+  className?: string;
+  /** Mirrors the effect vertically, so the glow that starts at the top right starts at the bottom right. */
+  flip?: boolean;
+  showRadialGradient?: boolean;
+}) => (
+  <div
+    aria-hidden="true"
+    className={cn(
+      'pointer-events-none absolute inset-0 overflow-hidden [contain:paint]',
+      showRadialGradient && '[mask-image:radial-gradient(ellipse_90%_100%_at_75%_0%,black_20%,transparent_80%)]',
+      flip && '-scale-y-100',
+      className,
+    )}
+  >
+    <div className="aurora-glow" />
+    <div className="aurora-curtain aurora-curtain-a" />
+    <div className="aurora-curtain aurora-curtain-b" />
+  </div>
+);
+
 export const AuroraBackground = ({
   className,
   children,
@@ -29,15 +58,7 @@ export const AuroraBackground = ({
       className={cn('bg-paper relative flex min-h-[500px] flex-col items-center justify-center', className)}
       {...props}
     >
-      <div
-        aria-hidden="true"
-        className={cn(
-          'pointer-events-none absolute inset-0 overflow-hidden [contain:paint]',
-          showRadialGradient && '[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,transparent_70%)]',
-        )}
-      >
-        <div className="aurora-layer absolute inset-y-0 left-0 w-[200%] opacity-50" />
-      </div>
+      <AuroraLayers showRadialGradient={showRadialGradient} />
       <div className="relative z-10 w-full">{children}</div>
     </div>
   );

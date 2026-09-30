@@ -1,6 +1,6 @@
 export default function HeaderBlurEffect() {
   return (
-    <div className="pointer-events-none fixed top-0 z-49 h-28 w-full md:h-40">
+    <div className="pointer-events-none fixed top-0 z-49 h-20 w-full md:h-40">
       <div
         className="pointer-events-none absolute inset-0 rounded-[inherit]"
         style={{

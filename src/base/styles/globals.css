@@ -349,34 +349,76 @@
   }
 
   /*
-   * Aurora bands and stripes for AuroraBackground. Painted once, then drifted with a transform (compositor only).
-   * Light mode cuts white stripes through the bands, dark mode black ones. Colors are the original blue and indigo.
+   * Aurora for AuroraBackground, built from three cheap layers (all gradients, no blur filter, no blend modes):
+   *   - two curtain layers of soft diagonal bands, different angle and period, drifting in opposite directions, so
+   *     the bands slide through each other and shimmer
+   *   - one layer of large soft glows that breathes
+   * Every layer is painted once and animated with transform only, so it runs on the compositor.
+   * Blue, indigo and violet only (the accent family). Light mode keeps the same layers, just fainter.
    */
-  .aurora-layer {
-    --aurora-1: #3b82f6;
-    --aurora-2: #a5b4fc;
-    --aurora-3: #93c5fd;
-    --aurora-4: #ddd6fe;
-    --aurora-5: #60a5fa;
-    --aurora-bands: repeating-linear-gradient(
-      100deg,
-      var(--aurora-1) 10%,
-      var(--aurora-2) 15%,
-      var(--aurora-3) 20%,
-      var(--aurora-4) 25%,
-      var(--aurora-5) 30%
-    );
-    background-image:
-      repeating-linear-gradient(100deg, #fff 0%, #fff 7%, transparent 10%, transparent 12%, #fff 16%),
-      var(--aurora-bands);
+  .aurora-curtain,
+  .aurora-glow {
+    position: absolute;
+    pointer-events: none;
     will-change: transform;
-    animation: aurora-drift 60s ease-in-out infinite alternate;
   }
 
-  .dark .aurora-layer {
+  .aurora-curtain {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 170%;
+  }
+
+  .aurora-curtain-a {
+    opacity: 0.55;
+    background-image: repeating-linear-gradient(
+      100deg,
+      transparent 0%,
+      oklch(66% 0.2 255 / 0.7) 3%,
+      oklch(58% 0.24 275 / 1) 7%,
+      oklch(70% 0.19 295 / 0.7) 11%,
+      transparent 17%,
+      transparent 30%
+    );
+    animation: aurora-slide-left 24s ease-in-out infinite alternate;
+  }
+
+  .aurora-curtain-b {
+    opacity: 0.45;
+    background-image: repeating-linear-gradient(
+      96deg,
+      transparent 0%,
+      oklch(82% 0.12 220 / 0.65) 3%,
+      oklch(62% 0.23 268 / 0.95) 6.5%,
+      oklch(74% 0.17 285 / 0.6) 10%,
+      transparent 15%,
+      transparent 26%
+    );
+    animation: aurora-slide-right 18s ease-in-out infinite alternate;
+  }
+
+  .aurora-glow {
+    inset: -12% -8%;
+    opacity: 0.55;
     background-image:
-      repeating-linear-gradient(100deg, #000 0%, #000 7%, transparent 10%, transparent 12%, #000 16%),
-      var(--aurora-bands);
+      radial-gradient(38% 55% at 78% 8%, oklch(62% 0.21 262 / 0.75), transparent 72%),
+      radial-gradient(34% 50% at 52% 24%, oklch(58% 0.23 280 / 0.5), transparent 72%),
+      radial-gradient(42% 60% at 92% 52%, oklch(70% 0.17 295 / 0.45), transparent 72%),
+      radial-gradient(30% 45% at 25% 18%, oklch(72% 0.13 230 / 0.35), transparent 72%);
+    animation: aurora-breathe 12s ease-in-out infinite alternate;
+  }
+
+  .dark .aurora-curtain-a {
+    opacity: 0.85;
+  }
+
+  .dark .aurora-curtain-b {
+    opacity: 0.7;
+  }
+
+  .dark .aurora-glow {
+    opacity: 0.7;
   }
 
   /* Card with a pointer-following accent edge. SpotlightCard sets --mx / --my. */
@@ -444,6 +486,8 @@
     }
 
     .spot:hover {
+      /* Above its siblings: each card is its own stacking context, so a later card would cover the cursor label. */
+      z-index: 30;
       border-color: color-mix(in oklch, var(--accent) 30%, var(--rule));
       transform: translateY(-2px);
     }
@@ -542,17 +586,36 @@ html.js:not(.reveal-ready) [data-wipe]:not([data-in]) {
 
 /* Logo strip tracker: fills over exactly one interval, then the key changes and it restarts. */
 
-@keyframes aurora-drift {
+@keyframes aurora-slide-left {
   from {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-41%, 0, 0);
+  }
+}
+
+@keyframes aurora-slide-right {
+  from {
+    transform: translate3d(-41%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes aurora-breathe {
+  from {
+    transform: translate3d(-3%, 2%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, -3%, 0) scale(1.1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora-layer {
+  .aurora-curtain,
+  .aurora-glow {
     animation: none;
   }
 

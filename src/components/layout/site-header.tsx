@@ -4,8 +4,7 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { nav, person } from '@/content/site';
-import { useCvDownload } from '@/hooks/use-cv-download';
+import { nav } from '@/content/site';
 import { cn } from '@/utils/cn';
 
 import HeaderBlurEffect from './header-blur-effect';
@@ -18,7 +17,6 @@ import ThemeToggle from './theme-toggle';
  */
 export default function SiteHeader() {
   const [hovered, setHovered] = useState<string | null>(null);
-  const cv = useCvDownload();
 
   return (
     <>
@@ -35,12 +33,12 @@ export default function SiteHeader() {
           <div className="flex items-center gap-2">
             <nav aria-label="Main" className="flex items-center" onPointerLeave={() => setHovered(null)}>
               {nav.map((item) => {
-                const isDownload = 'download' in item;
+                const isMail = item.href.startsWith('mailto:');
                 const className = cn(
                   'relative isolate rounded-full px-3 py-2 text-base font-medium transition-colors duration-150 sm:px-4',
-                  hovered === item.href ? 'text-accent' : 'text-ink-muted',
+                  hovered === item.href ? 'text-accent' : 'text-ink',
                   // On phones the hero already has this button.
-                  isDownload && 'max-sm:hidden',
+                  isMail && 'max-sm:hidden',
                 );
                 const onPointerEnter = (event: React.PointerEvent) => {
                   if (event.pointerType === 'mouse') setHovered(item.href);
@@ -54,18 +52,12 @@ export default function SiteHeader() {
                         transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
                       />
                     )}
-                    {isDownload && cv.blocked ? 'Email for CV' : item.label}
+                    {item.label}
                   </>
                 );
 
-                return isDownload ? (
-                  <a
-                    key={item.href}
-                    href={cv.blocked ? `mailto:${person.email}?subject=CV` : item.href}
-                    {...(cv.blocked ? {} : { download: true, onClick: cv.onClick })}
-                    className={className}
-                    onPointerEnter={onPointerEnter}
-                  >
+                return isMail ? (
+                  <a key={item.href} href={item.href} className={className} onPointerEnter={onPointerEnter}>
                     {content}
                   </a>
                 ) : (

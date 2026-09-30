@@ -3,21 +3,13 @@ import { ViewTransition } from 'react';
 
 import { ProjectMark } from '@/components/logos';
 import { Metric, Reveal, SpotlightCard } from '@/components/motion';
-import { ArrowRight, Container, Tag } from '@/components/ui';
+import { ArrowRight, Tag } from '@/components/ui';
 import { selectedWork } from '@/content/projects';
-import { workIntro } from '@/content/site';
 
-import SectionHeading from './section-heading';
-
-export default function SelectedWork() {
+export default function ClientCards() {
   return (
-    <Container as="section" id="work" aria-labelledby="selected-work" className="py-14 md:py-20">
-      <Reveal>
-        <SectionHeading id="selected-work" eyebrow="Client work" intro={workIntro}>
-          Selected work
-        </SectionHeading>
-      </Reveal>
-      <ul className="mt-8 grid gap-4 md:grid-cols-2">
+    <>
+      <ul className="mt-6 grid gap-4 md:grid-cols-2">
         {selectedWork.map((project, index) => (
           <Reveal as="li" key={project.slug} index={index % 2}>
             <SpotlightCard
@@ -25,7 +17,7 @@ export default function SelectedWork() {
               className="group/card has-[a:focus-visible]:outline-focus flex h-full cursor-pointer flex-col gap-6 p-6 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2"
             >
               {/* Heading for crawlers and screen readers: the logo above is an image, not a heading. */}
-              <h3 className="sr-only">{project.title}</h3>
+              <h4 className="sr-only">{project.title}</h4>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                 <div className="text-ink shrink-0">
                   <ViewTransition name={`work-${project.slug}-logo`} share="morph" default="none">
@@ -75,6 +67,6 @@ export default function SelectedWork() {
           </Reveal>
         ))}
       </ul>
-    </Container>
+    </>
   );
 }

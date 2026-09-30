@@ -55,11 +55,11 @@ arrow. `confirm: true` marks a number that is not sourced yet: it shows a badge 
 Everything goes in `public/`. Drop the file in with the right name and it shows up. There is nothing to register or
 generate, and a missing file never breaks the build.
 
-| Asset              | Where             | Name                                                                                                                                                            |
-| ------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Screenshots, clips | `public/projects` | `<slug>-hero`, `<slug>-detail-1`, `<slug>-detail-2` as `.webp` or `.webm`. Descope also has `descope-before` and `descope-after`. A `.webm` wins over a `.webp` |
-| Logos              | `public/logos`    | `<slug>-light.svg` is the white artwork (shown in dark mode), `<slug>-dark.svg` is the dark artwork (shown in light mode). One file alone is used for both      |
-| CV                 | `private/cv`      | `oussama-labrahmi-cv.pdf`, exactly this name. Not public: `/api/cv` serves it, limited to 5 downloads per visitor per 24 hours                                  |
+| Asset              | Where             | Name                                                                                                                                                                                                                          |
+| ------------------ | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Screenshots, clips | `public/projects` | `<slug>-hero`, `<slug>-detail-1`, `<slug>-detail-2` as `.webp` or `.webm`. Descope also has `descope-before` and `descope-after`. A `.webm` wins over a `.webp`                                                               |
+| Logos              | `public/logos`    | `<slug>-light.svg` is the white artwork (shown in dark mode), `<slug>-dark.svg` is the dark artwork (shown in light mode). One file alone is used for both                                                                    |
+| CV                 | `private/cv`      | `oussama-labrahmi-cv.pdf`, exactly this name. Not served by the site: it is sent by email on request. It is generated: edit `private/cv/build_cv.py` (content mirrors `src/content`) and run `python3 private/cv/build_cv.py` |
 
 Project slugs: `shaza`, `maya`, `payback`, `takeda`, `descope`, `charm-industrial`, `o1labs`, `akasec`. Logo slugs are the
 lowercase name with dashes (`palais-shazam`, `o1labs`), except Charm Industrial, whose files are `charm-light.svg` and

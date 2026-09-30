@@ -1,8 +1,6 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // The CV is read from private/ at request time, so make sure it ships with the /api/cv function.
-  outputFileTracingIncludes: { '/api/cv': ['./private/cv/**'] },
   async redirects() {
     return [
       { source: '/contact', destination: '/#contact', permanent: true },
