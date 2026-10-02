@@ -1,7 +1,7 @@
 import { ViewTransition } from 'react';
 
 import { getLogoSources } from '@/components/logos/logo-sources';
-import { About, Capabilities, Contact, Faq, Hero, LogoStrip, Work } from '@/components/home';
+import { About, Capabilities, Contact, Faq, Hero, LogoStrip, Testimonials, Work } from '@/components/home';
 import { logoNames } from '@/content/logos';
 import { homeGraph, serializeJsonLd } from '@/utils/json-ld';
 
@@ -17,6 +17,7 @@ export default function HomePage() {
         <Hero />
         <LogoStrip sources={logoSources} />
         <Work />
+        <Testimonials />
         <Capabilities />
         <About />
         <Faq />

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ViewTransition } from 'react';
 
+import { Contact } from '@/components/home';
 import { ProjectMark, hasProjectMark } from '@/components/logos';
 import { MetricBand } from '@/components/motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Button, Container, Tag, TextLink } from '@/components/ui';
@@ -250,6 +251,7 @@ export default async function WorkPage({ params }: PageProps<'/work/[slug]'>) {
             <NextProject project={next} />
           </footer>
         </Container>
+        <Contact />
       </main>
     </ViewTransition>
   );

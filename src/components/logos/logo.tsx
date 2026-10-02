@@ -31,6 +31,20 @@ const wordmarks: Record<LogoName, { text: string; className: string; icon?: bool
 /** The Palais Shazam mark is the wordmark only (no arches, no tagline), a little taller than the rest to read as big. */
 const heights: Partial<Record<LogoName, string>> = { 'Palais Shazam': 'h-7 sm:h-8' };
 
+/**
+ * Each SVG's own size. next/image warns when the rendered height matches the attribute but the width does not, which
+ * a shared 120x32 did for Palais Shazam at 32px tall. Real dimensions also reserve the right aspect ratio.
+ */
+const intrinsic: Record<LogoName, { width: number; height: number }> = {
+  PAYBACK: { width: 1711, height: 384 },
+  Takeda: { width: 1417, height: 476 },
+  Descope: { width: 1417, height: 325 },
+  'Charm Industrial': { width: 1417, height: 325 },
+  o1Labs: { width: 732, height: 476 },
+  'Palais Shazam': { width: 2340, height: 480 },
+  Akasec: { width: 1417, height: 470 },
+};
+
 interface LogoProps {
   name: LogoName;
   /** Which files exist, from getLogoSources on the server. No files: the typeset name is used. */
@@ -47,11 +61,9 @@ export default function Logo({ name, sources, className }: LogoProps) {
 
     return (
       <span className="inline-flex max-w-full items-center">
-        {light && (
-          <Image src={light} alt={name} width={120} height={32} unoptimized className={cn(size, 'dark:hidden')} />
-        )}
+        {light && <Image src={light} alt={name} {...intrinsic[name]} unoptimized className={cn(size, 'dark:hidden')} />}
         {dark && (
-          <Image src={dark} alt={name} width={120} height={32} unoptimized className={cn(size, 'hidden dark:block')} />
+          <Image src={dark} alt={name} {...intrinsic[name]} unoptimized className={cn(size, 'hidden dark:block')} />
         )}
       </span>
     );

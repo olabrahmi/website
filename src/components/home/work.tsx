@@ -1,6 +1,5 @@
 import { Reveal } from '@/components/motion';
 import { Container } from '@/components/ui';
-import { workIntro } from '@/content/site';
 
 import AgentCards from './agent-cards';
 import ClientCards from './client-cards';
@@ -14,7 +13,7 @@ export default function Work() {
   return (
     <Container as="section" id="work" aria-labelledby="work-heading" className="py-14 md:py-20">
       <Reveal>
-        <SectionHeading id="work-heading" eyebrow="Work" intro={workIntro}>
+        <SectionHeading id="work-heading" eyebrow="Work">
           Selected work
         </SectionHeading>
       </Reveal>
@@ -22,7 +21,7 @@ export default function Work() {
       <div className="mt-10">
         <Reveal>
           <p className="type-eyebrow text-accent">AI agents</p>
-          <h3 className="type-h3 text-ink mt-2 text-2xl">What I&apos;m building</h3>
+          <h3 className="type-h3 text-ink mt-2 text-2xl">My own products</h3>
         </Reveal>
         <AgentCards />
       </div>

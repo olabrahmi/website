@@ -18,8 +18,10 @@ export const metadata: Metadata = {
   authors: [{ name: person.name, url: siteUrl }],
   creator: person.name,
   keywords: [
-    'full-stack product engineer',
+    'senior product engineer',
     'freelance Next.js developer',
+    'freelance product engineer',
+    'AI agent developer',
     'senior frontend engineer',
     'backend engineer',
     'Datadog monitoring',

@@ -40,6 +40,7 @@ oussama@labrahmi.me. Do not link Bejamas case studies or cite Bejamas as a sourc
   client component, so it receives logo URLs from the home page as a prop.
 - Copy and case studies: `src/content` (typed by `types.ts`). One source of truth: cards read `metrics`, nothing is
   duplicated. `up: true` means a real gain (green). Team sizes and counts stay in ink.
+  Keep every project at 4 metrics or fewer (the band has 4 columns). FAQ answers are 20 to 35 words.
 - Case study page: `src/app/work/[slug]/page.tsx`. Sections hide themselves when empty (no hard parts, no metrics, fewer
   than three sections means no section index).
 - Global CSS, tokens, type roles, buttons, aurora keyframes, view transitions: `src/base/styles/globals.css`.
@@ -110,5 +111,5 @@ Dark from 19:00 to 06:59 (visitor's clock), light otherwise, until the visitor p
 - Footer: full width, no card, no borders, no grid. It reuses the hero aurora through `AuroraLayers` (`flip`, so the glow
   sits along the bottom); the content is inside `Container`. Icons come from v2 in `src/components/ui/social-icons.tsx`
   (Email, GitHub, LinkedIn; no X, the owner does not use it). The clock reads "Local Time: 02:58:28 PM" (12-hour, in GMT).
-  The hero status line still says CET.
+  The hero status line says GMT too.
 - `next/font/google` needs network at build time.

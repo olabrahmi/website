@@ -5,14 +5,14 @@ export const descope: CaseStudy = {
   kind: 'client',
   name: 'Descope',
   card: {
-    summary: 'Frontend lead on four sites, including 1,500 pages of docs.',
+    summary: 'Frontend lead on descope.com, its docs, an AI site and a hackathon site.',
     tags: ['Next.js', 'Contentful', 'Fumadocs', 'Vercel'],
     cta: 'Read case study',
   },
   title: 'Four sites for Descope, one frontend lead',
   seoDescription:
-    'I led the frontend for four Descope sites: a redesign, 1,500+ pages of docs, an AI site and a hackathon. Marketing publishes without waiting on engineers.',
-  updated: '2026-09-30',
+    'I led the frontend and 10+ engineers on four Descope sites: a redesign, 1,500+ pages of docs, an AI site and a hackathon site live in one week.',
+  updated: '2026-10-02',
   facts: {
     client: 'Descope (via Bejamas)',
     role: 'Led the frontend',
@@ -26,7 +26,7 @@ export const descope: CaseStudy = {
     ],
   },
   shortVersion:
-    'Descope is an auth platform. I led the frontend across four sites: a full redesign, 1,500+ pages of docs, an AI site and a global hackathon. Marketing publishes on all of them without waiting on engineers.',
+    'Descope is an auth platform. I led 10+ engineers across four sites: a redesign, 1,500+ pages of docs, an AI site and a hackathon site. Marketing publishes on all four alone.',
   context:
     'A returning client. First a flexible site, then a full redesign to match a new brand. Traffic was high, so the move could not disrupt it.',
   built: [
@@ -42,7 +42,7 @@ export const descope: CaseStudy = {
     },
     {
       title: 'globalmcphackathon.com',
-      body: 'Landing page for the global MCP hackathon for AI developers, with events in San Francisco and Tel Aviv. Live within weeks, in the Descope look, and marketing can duplicate it for the next edition.',
+      body: 'Landing page for the global MCP hackathon, with events in San Francisco and Tel Aviv. Live in one week, in the Descope look. Marketing can duplicate it for the next edition.',
       href: 'https://globalmcphackathon.com',
     },
     {
@@ -85,13 +85,13 @@ export const descope: CaseStudy = {
     },
     {
       problem: 'A fixed launch date for the hackathon site, without breaking the parent brand.',
-      call: 'Reused the Contentful and component setup from descope.com, so it looked like Descope from day one.',
+      call: 'Reused the Contentful and component setup from descope.com. Live in one week, Descope from day one.',
     },
   ],
   metrics: [
-    { value: '4', label: 'sites shipped' },
+    { value: '10+', label: 'engineers led' },
     { value: '1,500+', label: 'docs pages' },
-    { value: '20+', label: 'SDKs documented' },
+    { value: '1 week', label: 'to launch the hackathon site', up: true },
     { value: 'Pass', label: 'Core Web Vitals, mobile and desktop', up: true },
   ],
   media: {
