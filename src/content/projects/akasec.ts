@@ -9,7 +9,7 @@ export const akasec: CaseStudy = {
     tags: ['Next.js', 'GSAP', 'Neon Postgres', 'QR tickets'],
     cta: 'Read case study',
   },
-  title: 'Tickets, QR check-in and a live agenda for a cybersecurity crowd',
+  title: "Tickets, QR check-in and a live agenda for Morocco's biggest cybersecurity event",
   seoDescription:
     "Every year I build the Cyber Odyssey site for Akasec, Morocco's biggest student cybersecurity club: ticketing, QR check-in and a live agenda. Solo, full stack.",
   updated: '2026-10-02',

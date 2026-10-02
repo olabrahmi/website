@@ -48,13 +48,13 @@ export default function SiteFooter() {
                       href={link.href}
                       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       className={cn(
-                        'border-rule bg-surface text-ink grid size-9 cursor-pointer place-items-center rounded-full border',
+                        'border-rule bg-surface text-ink grid size-7 cursor-pointer place-items-center rounded-full border',
                         'transition-[background-color,transform] duration-150 active:scale-[0.96]',
                         '[@media(hover:hover)]:hover:bg-surface-2',
                       )}
                     >
                       <span className="sr-only">{link.label === 'Email' ? 'Email me' : `Visit my ${link.label}`}</span>
-                      {Icon && <Icon className="size-4" />}
+                      {Icon && <Icon className="size-3.5" />}
                     </a>
                   </li>
                 );

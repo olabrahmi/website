@@ -44,10 +44,13 @@ export default function RevealProvider() {
       { rootMargin: '0px 0px -10% 0px' },
     );
 
-    for (const element of pending) {
-      if (element.getBoundingClientRect().top < window.innerHeight) show(element);
+    // Read every position first, then write: showing an element between reads would force a layout each time.
+    const tops = pending.map((element) => element.getBoundingClientRect().top);
+
+    pending.forEach((element, index) => {
+      if (tops[index] < window.innerHeight) show(element);
       else observer.observe(element);
-    }
+    });
 
     return () => observer.disconnect();
   }, [pathname]);
