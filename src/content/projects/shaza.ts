@@ -5,14 +5,14 @@ export const shaza: CaseStudy = {
   kind: 'agent',
   name: 'Shaza',
   card: {
-    summary: 'AI agent that answers hotel guests on WhatsApp, Booking.com, Airbnb and email, and books rooms.',
+    summary: 'Answers hotel guests on WhatsApp, Booking.com, Airbnb and email, in any language. Then books the room.',
     tags: ['Claude', 'n8n', 'WhatsApp', 'Booking.com', 'Airbnb'],
     cta: 'See how it books',
   },
   title: 'Shaza: an AI agent that answers hotel guests and books rooms',
   seoDescription:
-    'Shaza is an AI agent I built solo. It answers hotel guests on WhatsApp, Booking.com, Airbnb and email, checks live availability and books the room itself.',
-  updated: '2026-09-30',
+    'Shaza is an AI agent I built solo. It answers hotel guests on WhatsApp, Booking.com, Airbnb and email, in any language, and books the room itself.',
+  updated: '2026-10-02',
   facts: {
     client: 'Own product, sold to hotels',
     role: 'Solo, end to end',
@@ -30,7 +30,7 @@ export const shaza: CaseStudy = {
     ],
   },
   shortVersion:
-    "Hotels in Morocco get booking questions everywhere, and staff answer by hand. Shaza answers on WhatsApp, Booking.com, Airbnb and email. It checks live availability with the hotel's channel manager and books the room.",
+    'Shaza answers hotel guests instantly, in any language, on WhatsApp, Booking.com, Airbnb and email. It checks live availability and books the room. Staff get 3+ hours a day back.',
   built: [
     {
       title: 'Agent workflow',
@@ -83,8 +83,9 @@ export const shaza: CaseStudy = {
     },
   ],
   metrics: [
-    { value: '20+', label: 'confirmed reservations', up: true },
-    { value: '81%', label: 'conversation-to-booking rate', up: true },
+    { value: '20+', label: 'rooms booked', up: true },
+    { value: '81%', label: 'of conversations end in a booking', up: true },
+    { value: '3h+', label: 'saved for staff each day', up: true },
     { value: '3', label: 'hotels using it' },
   ],
   next: 'Real guest conversations as a regression set for prompt and model changes.',

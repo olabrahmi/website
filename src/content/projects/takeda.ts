@@ -5,12 +5,14 @@ export const takeda: CaseStudy = {
   kind: 'client',
   name: 'Takeda',
   card: {
-    summary: 'takeda.com, moved from PHP to Next.js with 30+ engineers.',
+    summary: 'takeda.com, moved from PHP to Next.js with 30+ engineers. 2M+ monthly visitors.',
     tags: ['Next.js', 'Tailwind', 'Sanity', 'Vercel'],
     cta: 'Read case study',
   },
   title: 'Rebuilding takeda.com for 2M+ monthly visitors',
-  updated: '2026-09-30',
+  seoDescription:
+    'I was one of 30+ engineers rebuilding takeda.com from PHP to Next.js, Tailwind and Sanity on Vercel. 2M+ monthly visitors, 100+ reusable sections.',
+  updated: '2026-10-02',
   facts: {
     client: 'Takeda (via Bejamas)',
     role: 'Frontend developer',

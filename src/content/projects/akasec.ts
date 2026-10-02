@@ -5,14 +5,14 @@ export const akasec: CaseStudy = {
   kind: 'client',
   name: 'Akasec',
   card: {
-    summary: 'Tickets, QR check-in and live agenda for Cyber Odyssey.',
+    summary: 'Tickets, QR check-in and a live agenda for Cyber Odyssey. Built solo, every year.',
     tags: ['Next.js', 'GSAP', 'Neon Postgres', 'QR tickets'],
     cta: 'Read case study',
   },
   title: 'Tickets, QR check-in and a live agenda for a cybersecurity crowd',
   seoDescription:
     "Every year I build the Cyber Odyssey site for Akasec, Morocco's biggest student cybersecurity club: ticketing, QR check-in and a live agenda. Solo, full stack.",
-  updated: '2026-09-30',
+  updated: '2026-10-02',
   facts: {
     client: 'Akasec, 1337 Khouribga',
     role: 'Solo, full stack',
@@ -61,8 +61,9 @@ export const akasec: CaseStudy = {
   },
   hardParts: [{ problem: 'Keeping sign-ups from being abused.', call: 'Rate limits on sign-up requests.' }],
   metrics: [
-    { value: '3,000+', label: 'attendees across all editions', up: true },
+    { value: '800', label: 'attendees in 2025', up: true },
     { value: '3', label: 'editions built, 2023 to 2025' },
+    { value: '1 min', label: 'to check in a guest' },
   ],
   media: {
     hero: true,

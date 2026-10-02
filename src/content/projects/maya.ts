@@ -5,14 +5,14 @@ export const maya: CaseStudy = {
   kind: 'agent',
   name: 'Maya',
   card: {
-    summary: 'Coding agent that turns Linear tickets into tested pull requests. It opens PRs, I merge them.',
+    summary: 'Turns Linear tickets into tested pull requests. It opens them. I review and merge.',
     tags: ['Claude Code', 'Ollama', 'BullMQ', 'Redis'],
     cta: 'Read how it works',
   },
   title: 'Maya: a coding agent that opens its own pull requests',
   seoDescription:
-    'Maya is a coding agent I built solo. It turns Linear tickets into tested pull requests with headless Claude Code, and has run on 50+ of my own tickets.',
-  updated: '2026-09-30',
+    'Maya is a coding agent I built solo. It turns Linear tickets into tested pull requests with headless Claude Code. I merge 80% of them without changes.',
+  updated: '2026-10-02',
   facts: {
     client: 'Personal project',
     role: 'Solo',
@@ -20,7 +20,7 @@ export const maya: CaseStudy = {
     stack: ['Claude Code', 'Ollama', 'BullMQ', 'Redis', 'GitHub CLI', 'Telegram'],
   },
   shortVersion:
-    'I wanted to see how far a coding agent gets on real tickets with guardrails instead of freedom. Maya has run on 50+ of my own Linear tickets. It works each one in its own worktree, loops on lint and tests, and opens a PR. I review and merge.',
+    'Maya turns my Linear tickets into tested pull requests, in about 30 minutes and for about $2 each. It has done 50+. I merge 80% of them without changes.',
   built: [
     { title: 'Queue', body: 'Linear webhook into BullMQ on Redis, one job per ticket.' },
     { title: 'Worktrees', body: 'A fresh git worktree per ticket, so runs never touch each other.' },
@@ -53,7 +53,12 @@ export const maya: CaseStudy = {
     ],
   },
   hardParts: [],
-  metrics: [],
+  metrics: [
+    { value: '80%', label: 'of PRs merged without changes', up: true },
+    { value: '~$2', label: 'cost per ticket' },
+    { value: '~30 min', label: 'per ticket' },
+    { value: '50+', label: 'tickets done' },
+  ],
   media: { hero: true, details: 0 },
   pending: [],
 };

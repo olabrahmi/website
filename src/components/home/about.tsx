@@ -1,9 +1,25 @@
 import { InlineClip, Reveal } from '@/components/motion';
-import { Container } from '@/components/ui';
+import { Container, TextLink } from '@/components/ui';
 import { cn } from '@/utils/cn';
 import { about } from '@/content/site';
 
 import SectionHeading from './section-heading';
+
+// '{dali}' in a line becomes a link from about.links.
+function renderLine(line: string) {
+  return line.split(/(\{\w+\})/).map((part, index) => {
+    const key = part.match(/^\{(\w+)\}$/)?.[1] as keyof typeof about.links | undefined;
+    const link = key ? about.links[key] : undefined;
+
+    return link ? (
+      <TextLink key={index} href={link.href}>
+        {link.label}
+      </TextLink>
+    ) : (
+      part
+    );
+  });
+}
 
 export default function About() {
   return (
@@ -21,7 +37,7 @@ export default function About() {
             // The last line carries the clip, so its column is wider: text and clip stay on one line.
             return (
               <p key={line} className={cn('md:mx-auto', last ? 'max-w-[60ch]' : 'max-w-[36ch]')}>
-                {line}
+                {renderLine(line)}
                 {last && (
                   <>
                     {' '}

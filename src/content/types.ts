@@ -109,6 +109,14 @@ export interface Capability {
 
 export interface FaqItem {
   question: string;
-  /** 40 to 60 words. First sentence answers the question on its own. */
+  /** 20 to 35 words. First sentence answers the question on its own. */
   answer: string;
+}
+
+export interface Testimonial {
+  /** Verbatim, with permission, 30 words or fewer. */
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
 }

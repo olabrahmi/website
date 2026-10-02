@@ -5,14 +5,14 @@ export const charmIndustrial: CaseStudy = {
   kind: 'client',
   name: 'Charm Industrial',
   card: {
-    summary: 'Gatsby to Next.js rewrite of the site Charm sells through.',
+    summary: 'Rewrote the site Charm sells carbon removal through, from Gatsby to Next.js.',
     tags: ['Next.js', 'Tailwind', 'Stripe', 'Vercel'],
     cta: 'Read case study',
   },
   title: 'Rebuilding the site Charm Industrial sells through',
   seoDescription:
-    "I led Charm Industrial's rewrite from Gatsby to Next.js and built the internal dashboard that streams live factory cameras to many viewers with Express.",
-  updated: '2026-09-30',
+    "I led Charm Industrial's rewrite from Gatsby to Next.js, on a site taking $300k+ a month through Stripe, and built a dashboard streaming live factory cameras.",
+  updated: '2026-10-02',
   facts: {
     client: 'Charm Industrial (via Bejamas)',
     role: 'Led the frontend',
@@ -21,13 +21,13 @@ export const charmIndustrial: CaseStudy = {
     live: [{ label: 'charmindustrial.com', href: 'https://www.charmindustrial.com' }],
   },
   shortVersion:
-    'Charm removes carbon from the atmosphere, and its website is where clients buy. I led the rewrite from Gatsby to Next.js, and built the internal tool that watches their factories.',
+    'Charm removes carbon for buyers like Alphabet, Shopify, Meta and JPMorgan Chase. Its site takes $300k+ a month through Stripe. I led the rewrite from Gatsby to Next.js and built a dashboard that streams live factory cameras.',
   context:
     'Gatsby was slow and costly to work in. Plugins bloated the site, and some were deprecated and a security risk. The site needed live data and a modern stack.',
   built: [
     {
       title: 'charmindustrial.com',
-      body: 'Full rewrite from Gatsby to Next.js with server rendering for live data. Dead code and unused dependencies gone. Stripe checkout takes hundreds of thousands of dollars a month.',
+      body: 'Full rewrite from Gatsby to Next.js, with server rendering for live data. Dead code and unused dependencies gone. $300k+ a month goes through its Stripe checkout.',
       href: 'https://www.charmindustrial.com',
     },
     {
@@ -61,7 +61,7 @@ export const charmIndustrial: CaseStudy = {
   hardParts: [
     {
       problem: 'Rewriting a site that takes payments without a day of downtime.',
-      call: 'Rebuilt behind the same Stripe checkout and held 99.9% uptime.',
+      call: 'Rebuilt behind the same Stripe checkout, so payments never moved.',
     },
     {
       problem: 'Streaming several camera feeds to many viewers without the backend falling over.',
@@ -69,9 +69,7 @@ export const charmIndustrial: CaseStudy = {
     },
   ],
   metrics: [
-    { value: '3X', label: 'faster page loads', up: true },
-    { value: '+86%', label: 'performance improvement', up: true },
-    { value: '30%', label: 'lift in conversions', up: true },
+    { value: '$300k+', label: 'a month through Stripe checkout' },
     { value: '100k+', label: 'monthly visitors' },
   ],
   media: {

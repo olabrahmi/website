@@ -12,7 +12,7 @@ export const o1labs: CaseStudy = {
   title: "A page builder o1Labs' marketing team runs alone",
   seoDescription:
     "I rebuilt o1Labs' site as a page builder on Next.js and Sanity, so marketing publishes new pages alone, with product pages, Algolia search and instant publish.",
-  updated: '2026-09-30',
+  updated: '2026-10-02',
   facts: {
     client: 'o1Labs (via Bejamas)',
     role: 'Frontend developer',
@@ -21,7 +21,7 @@ export const o1labs: CaseStudy = {
     live: [{ label: 'o1labs.org', href: 'https://www.o1labs.org' }],
   },
   shortVersion:
-    'o1Labs builds zero-knowledge tooling. Their site felt outdated and marketing needed a developer for every new page. We rebuilt it as a page builder marketing runs alone.',
+    'o1Labs builds zero-knowledge tooling. Marketing needed a developer for every new page. We rebuilt the site as a page builder they run alone.',
   context:
     'The old site buried the products, and the blog lived on Medium, away from the site. Adding a page meant asking a developer.',
   builtTitle: 'What we built',
@@ -51,9 +51,9 @@ export const o1labs: CaseStudy = {
   },
   hardParts: [],
   metrics: [
+    { value: '0', label: 'dev tickets to publish a page', up: true },
     { value: '50+', label: 'reusable sections' },
     { value: 'Instant', label: 'publish, via on-demand revalidation' },
-    { value: '0', label: 'dev tickets to publish a page', up: true },
   ],
   media: {
     hero: true,

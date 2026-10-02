@@ -4,15 +4,12 @@ import { Metric, Reveal, SpotlightCard } from '@/components/motion';
 import { ArrowRight, ArrowUpRight, Tag } from '@/components/ui';
 import { buildingNow } from '@/content/projects';
 
-// Shaza has real bookings, so it gets the wider card.
-const spans = ['md:col-span-8', 'md:col-span-4'];
-
 export default function AgentCards() {
   return (
     <>
       <ul className="mt-6 grid gap-4 md:grid-cols-12">
         {buildingNow.map((project, index) => (
-          <Reveal as="li" key={project.slug} index={index} className={spans[index]}>
+          <Reveal as="li" key={project.slug} index={index} className="md:col-span-6">
             <SpotlightCard as="article" className="group/card flex h-full flex-col gap-6 p-6 md:p-7">
               {/* The whole card is the link. */}
               <Link

@@ -1,17 +1,17 @@
-import type { Capability, FaqItem, SocialLink } from './types';
+import type { Capability, FaqItem, SocialLink, Testimonial } from './types';
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://labrahmi.me';
 
 export const person = {
   name: 'Oussama Labrahmi',
-  jobTitle: 'Senior full-stack product engineer',
+  jobTitle: 'Senior product engineer',
   location: 'Casablanca, Morocco',
   email: 'oussama@labrahmi.me',
   callUrl: 'https://cal.com/labrahmi/15min',
 } as const;
 
 export const description =
-  'Oussama Labrahmi, senior full-stack product engineer. Frontend, backend, monitoring, on-call and AI agents. Hire me full-time or freelance, remote.';
+  'Oussama Labrahmi, senior product engineer. I build web platforms and AI agents, from the first screen to on-call. Freelance or full-time, remote.';
 
 export const socials: SocialLink[] = [
   { label: 'GitHub', href: 'https://github.com/olabrahmi' },
@@ -29,24 +29,32 @@ export const nav = [
 
 export const hero = {
   headline: 'I build web platforms and AI agents.',
-  subline:
-    "I'm Oussama Labrahmi. I take web products from frontend to backend to on-call, and I build AI agents. Six years with PAYBACK, Takeda and Descope.",
-  status: 'Open to senior roles and freelance projects · Remote, CET',
+  subline: "I'm Oussama, a senior product engineer. Six years shipping for clients like PAYBACK, Takeda and Descope.",
+  status: 'Open to freelance projects and senior roles · Remote, GMT',
 } as const;
 
 export const about = {
   heading: 'About me',
   body: [
-    "I'm Oussama. I taught myself to code at 10. Joining 1337 in Khouribga grew my skills and network.",
-    "Six years building across Europe and the US. I own PAYBACK's sign-up flow and I'm stakeholder and technical advisor at Dali.",
-    'I also build coding agents for fun, mostly late at night.',
+    'I taught myself to code at 10, then trained at 1337, part of the 42 network.',
+    'Six years shipping for teams in Germany, Poland, the US and Morocco.',
+    "I'm stakeholder and technical advisor at {dali}, where AI matches creators with brands.",
+    'I also build coding agents for fun.',
   ],
-  facts: ['Casablanca, Morocco', '1337 alum', '6 years', 'Advisor at Dali', 'Full-time or freelance'],
+  links: { dali: { label: 'Dali', href: 'https://daliplatform.com' } },
+  facts: [
+    'Casablanca, GMT',
+    'English, French, Arabic',
+    '6 years remote',
+    '1337 alum',
+    'Won the 1337 and UNFPA hackathon',
+    'Freelance or full-time',
+  ],
 } as const;
 
 export const contact = {
   heading: 'Hiring, or need a product built?',
-  body: 'I reply within a day.',
+  body: 'I reply within a day. Calls are 15 minutes, no prep needed.',
 } as const;
 
 export const notFound = {
@@ -54,36 +62,29 @@ export const notFound = {
   button: 'See my work',
 } as const;
 
-export const workIntro = "AI agents I'm building now, and the platforms I've shipped for clients.";
-
 export const capabilities = {
   eyebrow: 'End to end',
   heading: 'What I do',
   intro: 'One person from the first screen to the pager.',
   items: [
     {
-      title: 'Frontend',
-      body: 'Next.js, React and TypeScript. Sign-up flows, marketing sites, docs and page builders editors run alone.',
-      proof: ['payback', 'takeda', 'descope'],
+      title: 'Web platforms',
+      body: 'Next.js, React and TypeScript. Sign-up flows, marketing sites, docs, and page builders your team runs alone.',
+      proof: ['payback', 'takeda', 'descope', 'o1labs'],
     },
     {
       title: 'Backend and data',
-      body: 'Node and Express services, Postgres with Drizzle, ticketing, payments with Stripe, video fan-out.',
+      body: 'Node and Express services, Postgres with Drizzle, ticketing, live video fan-out.',
       proof: ['charm-industrial', 'akasec', 'shaza'],
     },
     {
-      title: 'Monitoring and on-call',
-      body: 'Datadog SLOs and synthetic checks, circuit breakers, and one week a month of 24/7 on-call.',
+      title: 'Reliability and on-call',
+      body: 'Datadog SLOs, circuit breakers, Playwright on every path, Terraform on GCP. I carry the pager one week a month.',
       proof: ['payback'],
     },
     {
-      title: 'Infra and delivery',
-      body: 'GCP with Terraform, Vercel, Playwright on every path, Vitest for logic.',
-      proof: ['payback'],
-    },
-    {
-      title: 'AI agents and workflows',
-      body: 'Claude agents that call tools and book real rooms, and a coding agent that opens its own pull requests.',
+      title: 'AI agents',
+      body: 'Claude agents with real tools. One books hotel rooms. One turns tickets into pull requests.',
       proof: ['shaza', 'maya'],
     },
   ] satisfies Capability[],
@@ -96,27 +97,34 @@ export const faq = {
     {
       question: 'What kind of work do you take on?',
       answer:
-        'Web products end to end. I build the frontend in Next.js and React, the backend and database behind it, the monitoring that tells you when it breaks, and AI agents that do real work. Recent clients include PAYBACK, Takeda and Descope.',
+        'Web products, end to end: Next.js frontends, the backend behind them, monitoring, and AI agents that do real work. Recent clients include PAYBACK, Takeda and Descope.',
     },
     {
-      question: 'Are you open to full-time roles or freelance?',
+      question: 'Are you available for freelance or full-time work?',
       answer:
-        'Both. I take senior full-time roles and freelance or contract projects, fully remote. I work Central European hours and overlap with the US East Coast in the afternoon. Email me with what you are building and I reply within a day.',
+        "Both. Freelance is monthly or scoped, fully remote. I also take senior full-time roles. It starts with a 15-minute call where you tell me what you're building.",
+    },
+    {
+      question: 'Where are you based, and which hours do you work?',
+      answer:
+        "I'm in Casablanca, on GMT. I work full days with teams in Europe, and my afternoons overlap the US East Coast morning. I work in English, French and Arabic.",
     },
     {
       question: 'Do you do backend and on-call, or only frontend?',
       answer:
-        'Both. At PAYBACK I own the frontend of sign-up, set up Datadog SLOs and synthetic checks, and take 24/7 on-call one week a month. For Charm Industrial I built the internal factory dashboard, where one Express service fans out camera streams to many viewers.',
+        'Both. At PAYBACK I set up Datadog SLOs and synthetic checks, and carry the pager one week a month. For Charm Industrial I built the backend that streams factory cameras.',
     },
     {
       question: 'What AI agents have you built?',
       answer:
-        'Shaza answers hotel guests on WhatsApp, Booking.com, Airbnb and email, checks live availability and books the room, using Claude and n8n. Maya is a coding agent that turns Linear tickets into tested pull requests with headless Claude Code.',
-    },
-    {
-      question: 'Where are you based?',
-      answer:
-        'Casablanca, Morocco. I have worked remotely for six years with teams in Germany, Poland, the US and Morocco. I learned at 1337, the peer-to-peer coding school in Khouribga.',
+        'Shaza answers hotel guests on WhatsApp, Booking.com, Airbnb and email, and books the room. It saves staff 3+ hours a day. Maya turns Linear tickets into pull requests. I merge 80% unchanged.',
     },
   ] satisfies FaqItem[],
 } as const;
+
+/** Real quotes only, verbatim, with the person's permission. Empty hides the section. */
+export const testimonials = {
+  eyebrow: 'In their words',
+  heading: 'What people say',
+  items: [] as Testimonial[],
+};
