@@ -62,6 +62,7 @@ export const notFound = {
   button: 'See my work',
 } as const;
 
+/** Top to bottom: the order of the stack in "What I do" (screen on top, pager at the bottom). Keep the CV in step. */
 export const capabilities = {
   eyebrow: 'End to end',
   heading: 'What I do',
@@ -73,19 +74,19 @@ export const capabilities = {
       proof: ['payback', 'takeda', 'descope', 'o1labs'],
     },
     {
+      title: 'AI agents',
+      body: "Claude agents that plug into a company's internal systems, so they do real work for employees and clients.",
+      proof: ['shaza', 'maya'],
+    },
+    {
       title: 'Backend and data',
-      body: 'Node and Express services, Postgres with Drizzle, ticketing, live video fan-out.',
+      body: 'Node and Postgres services that store your data and run your business logic behind the interface.',
       proof: ['charm-industrial', 'akasec', 'shaza'],
     },
     {
       title: 'Reliability and on-call',
-      body: 'Datadog SLOs, circuit breakers, Playwright on every path, Terraform on GCP. I carry the pager one week a month.',
+      body: 'Monitoring, alerts and on-call that keep your product running, and fix it quickly when it breaks.',
       proof: ['payback'],
-    },
-    {
-      title: 'AI agents',
-      body: 'Claude agents with real tools. One books hotel rooms. One turns tickets into pull requests.',
-      proof: ['shaza', 'maya'],
     },
   ] satisfies Capability[],
 } as const;
@@ -97,7 +98,7 @@ export const faq = {
     {
       question: 'What kind of work do you take on?',
       answer:
-        'Web products, end to end: Next.js frontends, the backend behind them, monitoring, and AI agents that do real work. Recent clients include PAYBACK, Takeda and Descope.',
+        'Web products, end to end: Next.js frontends, the backend behind them, monitoring, and AI agents that do real work for your team.',
     },
     {
       question: 'Are you available for freelance or full-time work?',
@@ -112,12 +113,12 @@ export const faq = {
     {
       question: 'Do you do backend and on-call, or only frontend?',
       answer:
-        'Both. At PAYBACK I set up Datadog SLOs and synthetic checks, and carry the pager one week a month. For Charm Industrial I built the backend that streams factory cameras.',
+        'Both. I build a product end to end: the Next.js frontend, the backend and database behind it, and the monitoring and alerts that tell me when something breaks.',
     },
     {
-      question: 'What AI agents have you built?',
+      question: 'Which tools and stack do you work with?',
       answer:
-        'Shaza answers hotel guests on WhatsApp, Booking.com, Airbnb and email, and books the room. It saves staff 3+ hours a day. Maya turns Linear tickets into pull requests. I merge 80% unchanged.',
+        'Next.js, React and TypeScript on the frontend, Node and Postgres on the backend, Datadog for monitoring, and Claude for AI agents. If your stack is different, tell me and we can talk.',
     },
   ] satisfies FaqItem[],
 } as const;

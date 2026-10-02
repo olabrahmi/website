@@ -8,6 +8,8 @@ interface SectionHeadingProps {
   eyebrow: string;
   children: ReactNode;
   intro?: string;
+  /** Extra classes for the intro paragraph, so a parent can restyle it through a group state. */
+  introClassName?: string;
   align?: 'left' | 'center';
   className?: string;
 }
@@ -17,6 +19,7 @@ export default function SectionHeading({
   eyebrow,
   children,
   intro,
+  introClassName,
   align = 'left',
   className,
 }: SectionHeadingProps) {
@@ -26,7 +29,7 @@ export default function SectionHeading({
       <h2 id={id} className="type-h2 text-ink mt-3">
         {children}
       </h2>
-      {intro && <p className="text-ink-muted mt-3">{intro}</p>}
+      {intro && <p className={cn('text-ink-muted mt-3', introClassName)}>{intro}</p>}
     </div>
   );
 }

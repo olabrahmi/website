@@ -90,6 +90,28 @@ fixed`: about 107ms of GPU and 700ms of main-thread work per 3s). Do not bring t
 - **Wipe:** `data-wipe` reveals an element with a left-to-right `clip-path` line (no fade), driven by the same provider,
   gate and failsafe as Reveal. Used by the inline clip in About (`public/gif.webm`, `InlineClip`).
 - Metric numbers count up once, only when they start below the fold, and never flash from 0 above it.
+- **Capability stack:** "What I do" is a pinned 3D stack of glass slabs (`capability-stack.tsx`, scene in
+  `three/capability-stack-scene.ts`). Gated by a media query (width, height, reduced motion) and WebGL2; everyone else
+  keeps the 2x2 grid and never downloads three. It never switches layout while the section is on screen: it waits until
+  the section is fully off screen, and if that is above the viewport it scrolls by the height change so nothing moves.
+  A deep link to it keeps the grid until the visitor scrolls away and comes back.
+  The pinned list is one screen tall, so `capability-stack.tsx` zooms the left column down (floor 0.6) until all four
+  cards fit the window height; stack-mode cards use smaller type and spacing. The list order in `content/site.ts` matches the slab order: screen on top, pager at the bottom.
+- **Contact wordmark:** the Contact section (`home/contact.tsx`) is a full-bleed band: no card, no border, no rounded
+  corners, content at 1040px, and `-mb-10` so it meets the footer. Only its bottom is clipped (`clip-path`, not
+  `overflow-hidden`): the transparent canvas reaches 10rem above the band so the word can rise past the top edge, and
+  the backdrop plane covers just the band. The band's surface, glows and canvas all fade in over the top 9rem (masks), so
+  there is no hard top edge; keep the three fades in step. The static fallback word is clipped by its own box
+  (`overflow-hidden`), otherwise it adds blank scroll height below the footer. `glass-wordmark.tsx` draws "Say hello" as beveled glass
+  along its bottom edge: the light-mode accent (`#4125f9`) in both themes, mostly opaque so the backdrop cannot wash it
+  out, with a deeper shade on the extruded edges (two materials, ExtrudeGeometry groups 0 and 1). The dark-mode face glow
+  is solved against the Neutral tone mapper to render the same color as light mode; redo it if the accent changes. The
+  word is capped at 1260px wide (band `max-w-[1500px]`). Transmission only refracts the WebGL scene, so the section
+  background and the hero aurora are duplicated in `three/aurora-backdrop.ts`: its colors, angles and periods must change
+  together with `.aurora-*`, `--aurora-a` and `--aurora-b` in `globals.css`, and with the section's gradients. Those CSS
+  glows fade out once it is drawn (`group-data-[gl=on]/cta`). Caps: DPR 1.5, 60fps, renders only while the section is on
+  screen. Glyphs come from `three/wordmark-glyphs.json`, generated once from Geist Bold with opentype.js (not a dependency).
+- `three` is only ever loaded with `import()` from an effect, never from the motion barrel. No `@react-three/fiber`.
 
 ## Themes
 

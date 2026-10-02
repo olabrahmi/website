@@ -6,7 +6,7 @@ import SectionHeading from './section-heading';
 
 export default function Faq() {
   return (
-    <Container as="section" id="faq" aria-labelledby="faq-heading" className="py-14 md:py-20">
+    <Container as="section" id="faq" aria-labelledby="faq-heading" className="pt-14 pb-8 md:pt-20 md:pb-12">
       <Reveal>
         <SectionHeading id="faq-heading" eyebrow={faq.eyebrow} align="center">
           {faq.heading}

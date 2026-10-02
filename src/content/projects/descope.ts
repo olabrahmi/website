@@ -9,7 +9,7 @@ export const descope: CaseStudy = {
     tags: ['Next.js', 'Contentful', 'Fumadocs', 'Vercel'],
     cta: 'Read case study',
   },
-  title: 'Four sites for Descope, one frontend lead',
+  title: "Leading the frontend behind Descope's four sites",
   seoDescription:
     'I led the frontend and 10+ engineers on four Descope sites: a redesign, 1,500+ pages of docs, an AI site and a hackathon site live in one week.',
   updated: '2026-10-02',

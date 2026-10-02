@@ -76,7 +76,7 @@ export default function LogoStrip({ sources }: { sources: Record<string, LogoSou
         </ul>
         <div
           aria-hidden="true"
-          className="text-ink-muted flex w-full flex-wrap items-center gap-x-6 gap-y-2 md:grid md:grid-cols-[repeat(3,10rem)] md:justify-center md:gap-x-2"
+          className="text-ink-muted flex w-full flex-nowrap items-center gap-x-6 md:grid md:grid-cols-[repeat(3,10rem)] md:justify-center md:gap-x-2"
         >
           {cycles.map((cycle, slot) => {
             const index = (slot + SLOTS * cycle) % logoNames.length;
@@ -86,7 +86,7 @@ export default function LogoStrip({ sources }: { sources: Record<string, LogoSou
                 layout
                 transition={{ duration: reduce ? 0.2 : 0.45, ease: [0.23, 1, 0.32, 1] }}
                 key={slot}
-                className="relative flex h-11 shrink-0 items-center md:justify-center"
+                className="relative flex h-11 min-w-0 items-center md:justify-center"
               >
                 <AnimatePresence initial={false} mode="popLayout">
                   <motion.div
