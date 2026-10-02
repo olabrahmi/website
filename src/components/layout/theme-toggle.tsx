@@ -42,7 +42,7 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
-      className="border-rule bg-surface text-ink hover:border-accent/60 grid size-9 shrink-0 cursor-pointer place-items-center rounded-full border transition-colors duration-150 active:scale-95"
+      className="border-ink/10 bg-ink/5 text-ink hover:border-accent/40 grid size-9 shrink-0 cursor-pointer place-items-center rounded-full border backdrop-blur-md transition-colors duration-150 active:scale-95"
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       onClick={() => applyTheme(isDark ? 'light' : 'dark', { persist: true })}
     >

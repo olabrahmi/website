@@ -112,6 +112,12 @@ fixed`: about 107ms of GPU and 700ms of main-thread work per 3s). Do not bring t
   glows fade out once it is drawn (`group-data-[gl=on]/cta`). Caps: DPR 1.5, 60fps, renders only while the section is on
   screen. Glyphs come from `three/wordmark-glyphs.json`, generated once from Geist Bold with opentype.js (not a dependency).
 - `three` is only ever loaded with `import()` from an effect, never from the motion barrel. No `@react-three/fiber`.
+- **3D performance guards** (`three/supports-webgl.ts`, `three/quality-watch.ts`): `canRunWebGLEffects()` keeps the plain
+  layout on Save-Data, 2G/3G, 2 cores or 2GB or less, and software renderers. `isLowEnd()` (4 cores or 4GB or less) caps
+  the pixel ratio at 1 and lowers glyph detail. Both scenes are created in `whenIdle()` and compile shaders with
+  `compileAsync`. `createQualityWatch` drops to pixel ratio 1 when frames average over 22ms and, if that is still too
+  slow, calls `onFail` so the page falls back to the grid and the static word. Never `forceContextLoss()` on dispose:
+  the canvas is reused (Strict Mode, media query changes) and would get a dead context.
 
 ## Themes
 

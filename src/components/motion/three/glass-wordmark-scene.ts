@@ -17,7 +17,9 @@ import { createAuroraBackdrop } from './aurora-backdrop';
 import { cssToRgb, isDark, watchTheme } from './css-color';
 import { clamp, damp, easeInOutCubic, easeOutBack, easeOutQuart, lerp, range } from './damp';
 import { createEnvironment } from './environment';
+import { createQualityWatch } from './quality-watch';
 import { createLoop } from './render-loop';
+import { isLowEnd } from './supports-webgl';
 import glyphData from './wordmark-glyphs.json';
 
 // Tune by eye.
@@ -100,7 +102,7 @@ function buildGlyph(commands: GlyphCommand[], scale: number) {
 
 export function createGlassWordmark({ canvas, band, onFail }: GlassWordmarkOptions): GlassWordmark {
   const host = canvas.parentElement!;
-  const lowEnd = (navigator.hardwareConcurrency ?? 8) <= 4;
+  const lowEnd = isLowEnd();
   const dprCap = lowEnd ? 1 : DPR_CAP;
 
   const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'default' });
@@ -116,6 +118,7 @@ export function createGlassWordmark({ canvas, band, onFail }: GlassWordmarkOptio
   const camera = new PerspectiveCamera(FOV, 1, 0.1, 60);
   const environment = createEnvironment(renderer);
   const backdrop = createAuroraBackdrop();
+  const watchQuality = createQualityWatch({ renderer, onResize: () => resize(), onGiveUp: onFail });
 
   camera.position.set(0, 0, CAMERA_Z);
   scene.add(backdrop.mesh);
@@ -167,8 +170,9 @@ export function createGlassWordmark({ canvas, band, onFail }: GlassWordmarkOptio
       bevelThickness: BEVEL_THICKNESS * cap,
       bevelSize: BEVEL_SIZE * cap,
       bevelOffset: 0,
-      bevelSegments: BEVEL_SEGMENTS,
-      curveSegments: CURVE_SEGMENTS,
+      // Fewer segments on weak machines: the glyph geometry is the biggest one-off cost of this scene.
+      bevelSegments: lowEnd ? 3 : BEVEL_SEGMENTS,
+      curveSegments: lowEnd ? 6 : CURVE_SEGMENTS,
     });
 
     geometry.computeBoundingBox();
@@ -299,7 +303,6 @@ export function createGlassWordmark({ canvas, band, onFail }: GlassWordmarkOptio
   let pointerClientY = 0;
   let pointerSeen = false;
   let lastMove = -Infinity;
-  const frameTimes: number[] = [];
 
   const onPointerMove = (event: PointerEvent) => {
     pointerClientX = event.clientX;
@@ -379,20 +382,7 @@ export function createGlassWordmark({ canvas, band, onFail }: GlassWordmarkOptio
 
     backdrop.update(time);
 
-    // Adaptive quality: if 60fps cannot be held, drop to DPR 1 once and never come back up.
-    if (dt > 0) {
-      frameTimes.push(dt * 1000);
-      if (frameTimes.length > 90) {
-        frameTimes.shift();
-        const mean = frameTimes.reduce((sum, value) => sum + value, 0) / frameTimes.length;
-
-        if (mean > 22 && renderer.getPixelRatio() > 1) {
-          renderer.setPixelRatio(1);
-          resize();
-          frameTimes.length = 0;
-        }
-      }
-    }
+    watchQuality(dt);
   }
 
   const loop = createLoop({
@@ -443,17 +433,21 @@ export function createGlassWordmark({ canvas, band, onFail }: GlassWordmarkOptio
 
   const stopThemeWatch = watchTheme(applyColors);
 
-  // Everything is built synchronously: draw the first frame (letters still below the edge) before reporting ready.
+  // Build, compile the shaders off the main thread (KHR_parallel_shader_compile), then draw the first frame (letters
+  // still below the edge) before reporting ready.
+  let disposed = false;
   applyColors();
   resize();
   update(0, performance.now() / 1000);
-  renderer.render(scene, camera);
 
-  const ready = Promise.resolve();
+  const ready = renderer.compileAsync(scene, camera).then(() => {
+    if (!disposed) renderer.render(scene, camera);
+  });
 
   return {
     ready,
     dispose() {
+      disposed = true;
       loop.dispose();
       stopThemeWatch();
       visibility.disconnect();

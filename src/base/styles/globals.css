@@ -613,6 +613,39 @@ html.js:not(.reveal-ready) [data-wipe]:not([data-in]) {
   }
 }
 
+/*
+ * FAQ answers: height grows and the text blurs in (and back out on close). Pure CSS on the native <details>:
+ * ::details-content plus interpolate-size animates to `height: auto`, and allow-discrete keeps the closed content
+ * hidden once it has finished fading. Browsers without support open instantly, as a plain <details> does.
+ */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+
+.faq-item::details-content {
+  height: 0;
+  opacity: 0;
+  filter: blur(8px);
+  overflow: clip;
+  transition:
+    height 400ms var(--ease-out-strong),
+    opacity 300ms var(--ease-out-strong),
+    filter 400ms var(--ease-out-strong),
+    content-visibility 400ms allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  height: auto;
+  opacity: 1;
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item::details-content {
+    transition-duration: 0.01ms;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .aurora-curtain,
   .aurora-glow {

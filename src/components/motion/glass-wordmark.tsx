@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 import { cn } from '@/utils/cn';
 
-import { supportsWebGL2 } from './three/supports-webgl';
+import { canRunWebGLEffects, whenIdle } from './three/supports-webgl';
 
 const QUERY = '(min-width: 48rem) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
 
@@ -45,6 +45,7 @@ export default function GlassWordmark({ className }: { className?: string }) {
     const mount = async () => {
       const { createGlassWordmark } = await import('./three/glass-wordmark-scene');
 
+      await whenIdle();
       if (cancelled || !media.matches) return;
 
       const created = createGlassWordmark({ canvas, band, onFail: teardown });
@@ -55,7 +56,7 @@ export default function GlassWordmark({ className }: { className?: string }) {
     };
 
     const start = () => {
-      if (scene || observer || !media.matches || !supportsWebGL2()) return;
+      if (scene || observer || !media.matches || !canRunWebGLEffects()) return;
 
       observer = new IntersectionObserver(
         (entries) => {

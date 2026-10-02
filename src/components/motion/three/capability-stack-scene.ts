@@ -27,7 +27,9 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { cssToRgb, cssVar, cssVarRgb, isDark, watchTheme } from './css-color';
 import { clamp, damp, easeInOutCubic, easeOutQuart, lerp, range } from './damp';
 import { createEnvironment } from './environment';
+import { createQualityWatch } from './quality-watch';
 import { createLoop } from './render-loop';
+import { isLowEnd, yieldToMain } from './supports-webgl';
 
 // Tune by eye. World units: a slab footprint is 3.2 x 3.2.
 const SLAB_W = 3.2;
@@ -46,7 +48,7 @@ const LOOK_AT_Y = -0.1; // aims a touch low so the stack sits a little high; the
 const AZIMUTH_FROM = 38;
 const AZIMUTH_TO = 52;
 const MERGE_ZOOM = 1.12;
-const DPR_CAP = 2;
+const DPR_CAP = 1.5; // 1 on low-end machines (see isLowEnd)
 
 // Scroll story, as fractions of the pinned scroll distance.
 const WALK_START = 0.08;
@@ -140,7 +142,7 @@ export function createCapabilityStack({
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = NeutralToneMapping;
   renderer.toneMappingExposure = 1;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, DPR_CAP));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isLowEnd() ? 1 : DPR_CAP));
   renderer.setClearColor(0x000000, 0);
 
   const scene = new Scene();
@@ -553,9 +555,13 @@ export function createCapabilityStack({
     renderer.render(scene, camera);
   }
 
+  const watchQuality = createQualityWatch({ renderer, onResize: () => resize(), onGiveUp: onFail });
+
   const loop = createLoop({
     frame: (dt, time) => {
       const moving = update(dt, time);
+
+      watchQuality(dt);
 
       render();
 
@@ -651,6 +657,7 @@ export function createCapabilityStack({
   visibility.observe(canvas);
 
   const stopThemeWatch = watchTheme(applyColors);
+  let disposed = false;
 
   const ready = (async () => {
     const body = getComputedStyle(document.body);
@@ -665,11 +672,14 @@ export function createCapabilityStack({
     ]);
 
     applyColors();
+    await yieldToMain(); // keep each task short: label textures above, first layout and compile below
     resize();
     updateScroll();
     progress = targetProgress;
     update(0, performance.now() / 1000);
-    render();
+    // Shaders compile in parallel off the main thread (KHR_parallel_shader_compile) instead of hitching the first frame.
+    await renderer.compileAsync(scene, camera);
+    if (!disposed) render();
   })();
 
   return {
@@ -679,6 +689,7 @@ export function createCapabilityStack({
       loop.start();
     },
     dispose() {
+      disposed = true;
       loop.dispose();
       stopThemeWatch();
       visibility.disconnect();

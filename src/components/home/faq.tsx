@@ -16,7 +16,11 @@ export default function Faq() {
         {/* Native details: every answer is in the HTML even when closed, and it needs no JavaScript. */}
         <div className="mt-8 flex max-w-[40rem] flex-col gap-2 md:mx-auto">
           {faq.items.map((item, index) => (
-            <details key={item.question} open={index === 0} className="border-rule bg-surface group rounded-xl border">
+            <details
+              key={item.question}
+              open={index === 0}
+              className="faq-item border-rule bg-surface group rounded-xl border"
+            >
               <summary className="text-ink flex cursor-pointer list-none items-center justify-between gap-4 p-4 [&::-webkit-details-marker]:hidden">
                 <h3 className="type-h3 text-lg">{item.question}</h3>
                 <span

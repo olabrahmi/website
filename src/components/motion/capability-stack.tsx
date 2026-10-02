@@ -4,7 +4,7 @@ import { type ReactNode, type PointerEvent as ReactPointerEvent, useEffect, useR
 
 import Reveal from './reveal';
 import type { CapabilityStack as StackScene, CapabilityStackOptions } from './three/capability-stack-scene';
-import { supportsWebGL2 } from './three/supports-webgl';
+import { canRunWebGLEffects, whenIdle } from './three/supports-webgl';
 
 /** Height taken by the header above the pinned content and the breathing room below it (pt-24 and pb-6, below). */
 const PIN_TOP = 96;
@@ -83,6 +83,7 @@ export default function CapabilityStack({ heading, children, data }: CapabilityS
     };
 
     const activate = async (create: (_options: CapabilityStackOptions) => StackScene) => {
+      await whenIdle();
       if (cancelled || !media.matches) return;
 
       // Switching the layout changes the section's height. If it is above the viewport, keep what the visitor is
@@ -130,7 +131,7 @@ export default function CapabilityStack({ heading, children, data }: CapabilityS
     };
 
     const start = () => {
-      if (scene || observer || waiter || !media.matches || !supportsWebGL2()) return;
+      if (scene || observer || waiter || !media.matches || !canRunWebGLEffects()) return;
 
       observer = new IntersectionObserver(
         (entries) => {
