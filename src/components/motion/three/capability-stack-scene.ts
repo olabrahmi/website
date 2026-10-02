@@ -561,11 +561,11 @@ export function createCapabilityStack({
     frame: (dt, time) => {
       const moving = update(dt, time);
 
+      render();
+      // After the render: giving up disposes the whole scene, so nothing may touch the renderer after this call.
       watchQuality(dt);
 
-      render();
-
-      return visible && moving;
+      return !disposed && visible && moving;
     },
   });
 

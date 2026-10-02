@@ -141,3 +141,6 @@ Dark from 19:00 to 06:59 (visitor's clock), light otherwise, until the visitor p
   (Email, GitHub, LinkedIn; no X, the owner does not use it). The clock reads "Local Time: 02:58:28 PM" (12-hour, in GMT).
   The hero status line says GMT too.
 - `next/font/google` needs network at build time.
+- **Do not turn on `experimental.inlineCss`.** Tried it: the HTML grows from 22KB to 65KB gzipped (Next duplicates the CSS in
+  its streaming payload) to save one 14KB stylesheet request. The single CSS file stays external. Lighthouse also
+  flags Next's own framework chunk for "legacy JavaScript" (a guarded polyfill module); there is no supported switch.

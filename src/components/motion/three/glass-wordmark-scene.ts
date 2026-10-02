@@ -381,8 +381,6 @@ export function createGlassWordmark({ canvas, band, onFail }: GlassWordmarkOptio
     });
 
     backdrop.update(time);
-
-    watchQuality(dt);
   }
 
   const loop = createLoop({
@@ -390,8 +388,10 @@ export function createGlassWordmark({ canvas, band, onFail }: GlassWordmarkOptio
     frame: (dt, time) => {
       update(dt, time);
       renderer.render(scene, camera);
+      // After the render: giving up disposes the whole scene, so nothing may touch the renderer after this call.
+      watchQuality(dt);
 
-      return visible;
+      return !disposed && visible;
     },
   });
 
