@@ -68,7 +68,11 @@ export const charmIndustrial: CaseStudy = {
       call: 'One Express service pulls each Verkada stream once and fans it out, so the cameras see one viewer.',
     },
   ],
-  metrics: [{ value: '100k+', label: 'monthly visitors' }],
+  metrics: [
+    { value: '100k+', label: 'monthly visitors' },
+    { value: '+86%', label: 'performance improvement', up: true },
+    { value: '3x', label: 'faster loading', up: true },
+  ],
   media: {
     hero: true,
     details: 1,
