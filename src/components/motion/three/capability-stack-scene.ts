@@ -396,9 +396,12 @@ export function createCapabilityStack({
 
   function updateScroll() {
     const rect = section.getBoundingClientRect();
-    const distance = rect.height - window.innerHeight;
+    // The pinned child is at most 60rem tall and centered in the window when the window is taller.
+    const pinHeight = (section.firstElementChild as HTMLElement).offsetHeight;
+    const top = Math.max(0, (window.innerHeight - pinHeight) / 2);
+    const distance = rect.height - pinHeight;
 
-    targetProgress = distance > 0 ? clamp(-rect.top / distance) : 0;
+    targetProgress = distance > 0 ? clamp((top - rect.top) / distance) : 0;
   }
 
   function setLit(index: number, lit: boolean) {

@@ -54,7 +54,8 @@ export default function CapabilityStack({ heading, children, data }: CapabilityS
     // The pinned view is one screen tall, so the list must fit it whatever the window height: zoom the left column
     // down (never below MIN_FIT) until it does. Re-measured from full size on every resize.
     const fit = () => {
-      const available = window.innerHeight - PIN_TOP - PIN_BOTTOM;
+      const pin = section.firstElementChild as HTMLElement;
+      const available = pin.offsetHeight - PIN_TOP - PIN_BOTTOM;
       let zoom = 1;
 
       column.style.zoom = '1';
@@ -186,9 +187,9 @@ export default function CapabilityStack({ heading, children, data }: CapabilityS
       id="capabilities"
       aria-labelledby="capabilities-heading"
       data-stack="off"
-      className="group/caps relative data-[stack=on]:h-[240svh]"
+      className="group/caps relative [--pin:min(100svh,60rem)] data-[stack=on]:h-[calc(var(--pin)*2.4)]"
     >
-      <div className="group-data-[stack=on]/caps:sticky group-data-[stack=on]/caps:top-0 group-data-[stack=on]/caps:flex group-data-[stack=on]/caps:h-svh group-data-[stack=on]/caps:items-center">
+      <div className="group-data-[stack=on]/caps:sticky group-data-[stack=on]/caps:top-[calc((100svh-var(--pin))/2)] group-data-[stack=on]/caps:flex group-data-[stack=on]/caps:h-[var(--pin)] group-data-[stack=on]/caps:items-center">
         <div className="mx-auto w-full max-w-[1040px] px-5 py-14 group-data-[stack=on]/caps:pt-24 group-data-[stack=on]/caps:pb-6 sm:px-8 md:py-20">
           <div className="group-data-[stack=on]/caps:grid group-data-[stack=on]/caps:grid-cols-12 group-data-[stack=on]/caps:items-center group-data-[stack=on]/caps:gap-10">
             <div ref={columnRef} className="group-data-[stack=on]/caps:col-span-5">
@@ -213,7 +214,7 @@ export default function CapabilityStack({ heading, children, data }: CapabilityS
             >
               <canvas
                 ref={canvasRef}
-                className="aspect-square max-h-[calc(100svh-9rem)] w-full opacity-0 transition-opacity duration-500 data-[ready]:opacity-100"
+                className="aspect-square max-h-[calc(var(--pin)-9rem)] w-full opacity-0 transition-opacity duration-500 data-[ready]:opacity-100"
               />
             </div>
           </div>

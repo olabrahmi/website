@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
 import { cn } from '@/utils/cn';
@@ -10,7 +11,7 @@ const QUERY = '(min-width: 48rem) and (pointer: fine) and (prefers-reduced-motio
 
 /**
  * The big "Say hello" at the bottom of the contact card. Rendered in WebGL as beveled glass that refracts a copy of the
- * card's background and aurora; everyone else sees the static wordmark. It must sit inside a `relative isolate
+ * card's background and aurora; everyone else (phones, reduced motion, weak devices) sees a pre-rendered image of it. It must sit inside a `relative isolate
  * overflow-hidden group/cta` card and returns two things for the card to lay out:
  *
  *   - a canvas that covers the whole card (so the WebGL background and the CSS one have no seam)
@@ -100,11 +101,18 @@ export default function GlassWordmark({ className }: { className?: string }) {
       <div
         ref={bandRef}
         aria-hidden="true"
-        className={cn('@container relative aspect-[100/17] w-full overflow-hidden', className)}
+        className={cn('@container relative w-full overflow-hidden md:aspect-[100/17]', className)}
       >
-        <span className="font-display text-ink/[0.07] pointer-events-none absolute inset-x-0 bottom-0 block translate-y-[10%] text-center text-[21cqw] leading-[0.8] font-bold tracking-[-0.075em] whitespace-nowrap transition-opacity duration-[600ms] select-none group-data-[gl=on]/cta:opacity-0">
-          Say hello
-        </span>
+        <div className="pointer-events-none px-5 transition-opacity duration-[600ms] select-none group-data-[gl=on]/cta:opacity-0 sm:px-8 md:absolute md:inset-x-0 md:bottom-0 md:flex md:h-full md:justify-center md:p-0">
+          <Image
+            src="/images/say-hello.webp"
+            alt=""
+            width={2172}
+            height={431}
+            sizes="(min-width: 1500px) 1500px, 100vw"
+            className="-mb-[1.4vw] h-auto w-full md:mb-0 md:h-[108%] md:w-auto md:max-w-none md:translate-y-[8%] md:self-end"
+          />
+        </div>
       </div>
     </>
   );
