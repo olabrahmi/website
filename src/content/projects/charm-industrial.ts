@@ -11,8 +11,8 @@ export const charmIndustrial: CaseStudy = {
   },
   title: 'Rebuilding the site Charm Industrial sells through',
   seoDescription:
-    "I led Charm Industrial's rewrite from Gatsby to Next.js, on a site taking $300k+ a month through Stripe, and built a dashboard streaming live factory cameras.",
-  updated: '2026-10-02',
+    "I led Charm Industrial's rewrite from Gatsby to Next.js and built a dashboard streaming live factory cameras.",
+  updated: '2026-10-03',
   facts: {
     client: 'Charm Industrial (via Bejamas)',
     role: 'Led the frontend',
@@ -21,13 +21,13 @@ export const charmIndustrial: CaseStudy = {
     live: [{ label: 'charmindustrial.com', href: 'https://www.charmindustrial.com' }],
   },
   shortVersion:
-    'Charm removes carbon for buyers like Alphabet, Shopify, Meta and JPMorgan Chase. Its site takes $300k+ a month through Stripe. I led the rewrite from Gatsby to Next.js and built a dashboard that streams live factory cameras.',
+    'Charm removes carbon for buyers like Alphabet, Shopify, Meta and JPMorgan Chase. I led the rewrite from Gatsby to Next.js and built a dashboard that streams live factory cameras.',
   context:
     'Gatsby was slow and costly to work in. Plugins bloated the site, and some were deprecated and a security risk. The site needed live data and a modern stack.',
   built: [
     {
       title: 'charmindustrial.com',
-      body: 'Full rewrite from Gatsby to Next.js, with server rendering for live data. Dead code and unused dependencies gone. $300k+ a month goes through its Stripe checkout.',
+      body: 'Full rewrite from Gatsby to Next.js, with server rendering for live data. Dead code and unused dependencies gone.',
       href: 'https://www.charmindustrial.com',
     },
     {
@@ -68,10 +68,7 @@ export const charmIndustrial: CaseStudy = {
       call: 'One Express service pulls each Verkada stream once and fans it out, so the cameras see one viewer.',
     },
   ],
-  metrics: [
-    { value: '$300k+', label: 'a month through Stripe checkout' },
-    { value: '100k+', label: 'monthly visitors' },
-  ],
+  metrics: [{ value: '100k+', label: 'monthly visitors' }],
   media: {
     hero: true,
     details: 1,
