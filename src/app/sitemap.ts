@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 
+import { allNotes } from '@/content/notes';
 import { allProjects } from '@/content/projects';
 import { siteUrl } from '@/content/site';
 
@@ -23,5 +24,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...pages, ...work];
+  const notes = [
+    {
+      url: `${siteUrl}/notes`,
+      lastModified: new Date(allNotes[0].updated),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    ...allNotes.map((note) => ({
+      url: `${siteUrl}/notes/${note.slug}`,
+      lastModified: new Date(note.updated),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+  ];
+
+  return [...pages, ...notes, ...work];
 }

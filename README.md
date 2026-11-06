@@ -80,7 +80,7 @@ docs/plans       the redesign plan
 
 ## Deploying
 
-Deploys on Vercel. Set `NEXT_PUBLIC_SITE_URL`. Before the first deploy, read the `pnpm build` output: it lists metrics
+Deploys on Vercel. Set `NEXT_PUBLIC_SITE_URL`, and `DATABASE_URL` (Neon Postgres) for the note votes. Before the first deploy, read the `pnpm build` output: it lists metrics
 that still need confirming.
 
 ## License

@@ -35,10 +35,12 @@ export default function SiteHeader() {
               {nav.map((item) => {
                 const isMail = item.href.startsWith('mailto:');
                 const className = cn(
-                  'relative isolate rounded-full px-3 py-2 text-base font-medium transition-colors duration-150 sm:px-4',
+                  'relative isolate rounded-full px-1.5 py-2 text-[0.9375rem] font-medium transition-colors duration-150 sm:px-4 sm:text-base',
                   hovered === item.href ? 'text-accent' : 'text-ink',
                   // On phones the hero already has this button.
                   isMail && 'max-sm:hidden',
+                  // The narrowest phones can't fit four links next to the mark and the toggle.
+                  item.href === '/#capabilities' && 'max-[359px]:hidden',
                 );
                 const onPointerEnter = (event: React.PointerEvent) => {
                   if (event.pointerType === 'mouse') setHovered(item.href);

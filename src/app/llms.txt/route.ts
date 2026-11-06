@@ -1,3 +1,4 @@
+import { allNotes } from '@/content/notes';
 import { allProjects } from '@/content/projects';
 import { capabilities, description, faq, person, siteUrl, socials } from '@/content/site';
 
@@ -17,6 +18,12 @@ export function GET() {
     '## Case studies',
     ...allProjects.map((project) => `- [${project.title}](${siteUrl}/work/${project.slug}): ${project.card.summary}`),
     '',
+    '## Notes',
+    ...allNotes.flatMap((note) => [
+      `### [${note.title}](${siteUrl}/notes/${note.slug})`,
+      `Published ${note.published}. ${note.shortAnswer}`,
+      '',
+    ]),
     '## Questions',
     ...faq.items.flatMap((item) => [`### ${item.question}`, item.answer, '']),
     '## Profiles',

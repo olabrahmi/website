@@ -1,0 +1,87 @@
+Geoffrey Hinton won a Nobel Prize in 2024 and is known as one of the "godfathers of AI". In 2016, he said we [should stop training radiologists](https://www.auntminnie.com/imaging-informatics/artificial-intelligence/article/15746014/hinton-acknowledges-mistake-in-predicting-ai-replacement-of-radiologists), because within five years AI would read medical images better than any doctor.
+
+We're almost in 2027, and AI has become very good at reading scans. In a [Swedish trial of more than 80,000 women](https://pubmed.ncbi.nlm.nih.gov/37541274/), AI-supported mammogram screening found cancers at a similar rate to two human readers, with 44% less reading work.
+
+Radiologists did not disappear. They're still being trained, and in the US the [shortage is projected to last until 2055](https://www.healthday.com/healthpro-news/public-health/current-radiologist-shortage-projected-to-persist-to-2055).
+
+So why? If AI does so much of the reading, why do we still need radiologists, and why do we need more of them? The answer I keep coming back to is Jevons Paradox.
+
+## What is Jevons Paradox?
+
+<Callout label="Definition">
+  When you make something cheaper and easier to use, people don't use the same amount. They use more.
+</Callout>
+
+In 1865, an English economist called William Stanley Jevons wrote [a book about coal](https://en.wikipedia.org/wiki/Jevons_paradox). Engineers had made steam engines much better, and the new engines used far less coal to do the same work. You would expect the country to burn less coal.
+
+It was the opposite. Coal use went up, a lot. The engine was now cheap to run, so everyone wanted one: more factories, more trains, more ships. Each engine used less coal, but there were so many more engines that the total went up.
+
+<JevonsDiagram />
+
+Back to radiology. As reading a scan gets faster and cheaper, doctors can ask for more scans. Hospitals can screen people who are not sick yet. Scans nobody would pay for before start to make sense. More scans means more results to check, more reports to sign, and more patients who need a real doctor to talk to. The machine is fast, but the work grows even faster.
+
+AI isn't the only cause. [People live longer, and imaging is used for more conditions than ever](https://6abc.com/post/ai-was-supposed-replace-radiologists-now-more-demand-heres/20000210/). But cheaper reading pushes in the same direction.
+
+## What other fields does this apply to?
+
+Many. I'll use the one I know: software development.
+
+I've built software for clients for six years, mostly on the frontend. Five years ago, a small app or website cost real money and took weeks. Only companies with serious budgets could pull it off. A small hotel in Morocco, a local shop, a gym, a co-working space: they ran on WhatsApp and paper. Nobody built software for them, because it was too expensive.
+
+Now AI writes a lot of the code. I use it every day. An app that took me weeks to build by hand now takes a weekend. The cost of building software is going down fast.
+
+So what happens? Not less software. More software. The hotel wants a WhatsApp booking agent ([I built one](/work/shaza)). The shop wants its own online store. The gym wants a dashboard. These were too small to be worth it.
+
+Big companies work the same way. They all have a long list of projects they want but never start: internal tools, features for a small market, rebuilding a legacy system. Most of these die on the list because they cost more than they bring back. When AI makes them cheaper to build, many start to make sense. The company says yes to more projects, and those projects need experienced developers.
+
+That's the good part of the story. Now the part that's hard to explain.
+
+## So why are people still getting laid off?
+
+Because the jobs being cut and the jobs being added are not the same jobs.
+
+<StatCards>
+  <Stat
+    value="50K+"
+    label="Tech job cuts announced in Q1 2026"
+    source="Challenger, Gray & Christmas"
+    href="https://www.challengergray.com/blog/challenger-report-march-cuts-rise-25-from-february-ai-leads-reasons/"
+  />
+  <Stat
+    value="+30%"
+    label="Software engineering openings, reported increase"
+    source="TrueUp, via Business Insider"
+    href="https://www.businessinsider.com/ai-isnt-killing-software-coding-jobs-booming-trueup-2026-4"
+    up
+  />
+  <Stat
+    value="-20%"
+    label="Jobs for developers aged 22 to 25, against the late 2022 peak"
+    source="Stanford study, ADP data"
+    href="https://www.adpresearch.com/yes-ai-is-affecting-employment-heres-the-data"
+  />
+</StatCards>
+
+In the first three months of 2026, tech companies announced 52,050 job cuts. In about the same period, one tracker showed software engineering openings up about 30%, at a three-year high. Both are true at the same time. Other data is less rosy: [Indeed](https://hiringlab.indeed.com/2026/07/08/ai-and-job-postings-from-destruction-to-creation/) shows postings up about 15% since early 2025, and still about 27% below 2020.
+
+The growth is in senior engineers and AI work. On Indeed, [senior roles were 71% of the rise](https://hiringlab.indeed.com/2026/07/08/ai-and-job-postings-from-destruction-to-creation/) in US software postings from May 2025 to May 2026, while [entry-level postings across all jobs fell 7.5%](https://hiringlab.indeed.com/2026/07/23/the-labor-market-is-tilting-toward-seniority/).
+
+A [Stanford study](https://digitaleconomy.stanford.edu/publications/canaries-in-the-coal-mine/) found that software developers aged 22 to 25 had about 20% fewer jobs in July 2025 than at the peak in late 2022. Older workers were mostly fine. The study's August 2026 update says the gap has widened, mainly because companies hire fewer young people, not because they fire more of them.
+
+It makes sense when you think about it. The simple tasks juniors used to do are the same tasks AI does best. Companies are also moving money: less for salaries, more for AI tools and servers. So they cut in one place and hire in another.
+
+<Callout label="The catch">
+  Jevons Paradox says the total amount of work grows. It does not say it happens fast, and it does not say it goes to the same people. A junior developer without a job today cannot wait ten years for the market to adjust.
+</Callout>
+
+And be careful with the word "AI" in layoff news. Companies choose the reason they give, and "AI" sounds better than "we hired too many people in 2021". Challenger counted AI as the stated reason for [about 24% of announced US job cuts](https://www.challengergray.com/blog/challenger-report-layoffs-fall-hiring-picks-up-ai-leads-for-fifth-straight-month/) through July 2026, and [40% in May alone](https://foxbusiness.com/economy/ai-remains-top-reason-us-job-cuts-third-straight-month-employers-axed-97000-workers-may). Those numbers count what companies said, which may not be what happened.
+
+## So what does this mean for us?
+
+Hinton was right about the skill. AI can read scans, and it can write code. I think he was wrong about what happens next. He has [said himself](https://www.auntminnie.com/imaging-informatics/artificial-intelligence/article/15746014/hinton-acknowledges-mistake-in-predicting-ai-replacement-of-radiologists) that he spoke too broadly in 2016. When something gets cheap, people don't do the same work with fewer people. They ask for more.
+
+I'm not going to lie and say I'm fully relaxed. I'm a developer, and I use these tools every day, so I see how fast they are getting better. And I know the market is hard right now, especially for people who are just starting. That is real, and Jevons Paradox does not fix it for them this year.
+
+But I also see the other side. Every month, I see more things that someone wants to build than people who can build them. The job is changing. Typing code by hand is becoming the small part. Knowing what to build, and checking that the machine did it right, is becoming the big part.
+
+Radiologists did not lose the game. They moved from finding the problem to deciding what to do about it. I think developers are doing the same thing right now, and the future is for the ones who adapt.
