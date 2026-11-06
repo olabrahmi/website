@@ -120,3 +120,30 @@ export interface Testimonial {
   role: string;
   company: string;
 }
+
+export interface NoteSource {
+  label: string;
+  publisher: string;
+  href: string;
+}
+
+/** A note's metadata. The body lives next to it in src/content/notes/<slug>.mdx. */
+export interface Note {
+  slug: string;
+  title: string;
+  /** Finishes "Read my latest note: ..." in the hero. */
+  teaser: string;
+  /** Meta description, about 150 characters. */
+  description: string;
+  /** The answer in 40 to 60 words. First thing on the page, and what answer engines quote. */
+  shortAnswer: string;
+  published: string;
+  updated: string;
+  topic: string;
+  cover: { src: string; alt: string };
+  keywords: string[];
+  /** Named concepts, with a page that identifies them for search engines. */
+  about: { name: string; sameAs: string }[];
+  faq: FaqItem[];
+  sources: NoteSource[];
+}

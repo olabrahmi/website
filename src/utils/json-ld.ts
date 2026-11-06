@@ -1,6 +1,7 @@
+import { allNotes } from '@/content/notes';
 import { allProjects } from '@/content/projects';
 import { capabilities, description, faq, person, siteUrl, socials } from '@/content/site';
-import type { CaseStudy } from '@/content/types';
+import type { CaseStudy, Note } from '@/content/types';
 
 export const ids = {
   person: `${siteUrl}/#person`,
@@ -119,6 +120,85 @@ export function caseStudyGraph(project: CaseStudy) {
           { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
           { '@type': 'ListItem', position: 2, name: 'Work', item: `${siteUrl}/#work` },
           { '@type': 'ListItem', position: 3, name: project.name, item: url },
+        ],
+      },
+      personNode,
+    ],
+  };
+}
+
+export function notesGraph() {
+  const url = `${siteUrl}/notes`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Blog',
+        '@id': `${url}#blog`,
+        url,
+        name: `Notes by ${person.name}`,
+        author: { '@id': ids.person },
+        publisher: { '@id': ids.person },
+        isPartOf: { '@id': ids.website },
+        inLanguage: 'en',
+        blogPost: allNotes.map((note) => ({
+          '@type': 'BlogPosting',
+          headline: note.title,
+          url: `${url}/${note.slug}`,
+          datePublished: note.published,
+          dateModified: note.updated,
+        })),
+      },
+      personNode,
+    ],
+  };
+}
+
+export function noteGraph(note: Note, stats: { wordCount: number; minutes: number }) {
+  const url = `${siteUrl}/notes/${note.slug}`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${url}#article`,
+        headline: note.title,
+        description: note.description,
+        abstract: note.shortAnswer,
+        url,
+        mainEntityOfPage: url,
+        // The path without the ?hash query Next adds to og:image still returns the PNG.
+        image: [`${siteUrl}${note.cover.src}`, `${url}/opengraph-image`],
+        datePublished: note.published,
+        dateModified: note.updated,
+        author: { '@id': ids.person },
+        publisher: { '@id': ids.person },
+        isPartOf: { '@type': 'Blog', '@id': `${siteUrl}/notes#blog`, url: `${siteUrl}/notes` },
+        articleSection: note.topic,
+        keywords: note.keywords.join(', '),
+        about: note.about.map((item) => ({ '@type': 'Thing', ...item })),
+        citation: note.sources.map((source) => source.href),
+        wordCount: stats.wordCount,
+        timeRequired: `PT${stats.minutes}M`,
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${url}#questions`,
+        mainEntity: note.faq.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+          { '@type': 'ListItem', position: 2, name: 'Notes', item: `${siteUrl}/notes` },
+          { '@type': 'ListItem', position: 3, name: note.title, item: url },
         ],
       },
       personNode,

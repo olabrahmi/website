@@ -678,6 +678,63 @@ html.js:not(.reveal-ready) [data-wipe]:not([data-in]) {
 }
 
 /*
+ * Notes. The reading bar follows the article with a scroll-driven animation, so it runs without JavaScript or a scroll
+ * listener. Browsers without support don't show it. The dots in the Jevons diagram light up one by one when the
+ * figure reveals, using the same html.js gate and data-in as [data-reveal].
+ */
+.reading-progress {
+  display: none;
+}
+
+@supports (animation-timeline: view()) {
+  #note {
+    view-timeline-name: --note;
+    /* The default inset is the html scroll-padding, which would start the bar early. */
+    view-timeline-inset: 0;
+  }
+
+  .reading-progress {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 60;
+    height: 2px;
+    background-color: var(--accent);
+    transform-origin: left;
+    animation: reading-progress linear both;
+    animation-timeline: --note;
+    animation-range: contain 0% contain 100%;
+  }
+}
+
+@keyframes reading-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.jevons-dot {
+  transition:
+    opacity 300ms var(--ease-out-strong),
+    scale 300ms var(--ease-out-strong);
+  transition-delay: calc(200ms + var(--d, 0) * 18ms);
+}
+
+html.js [data-reveal]:not([data-in]) .jevons-dot {
+  opacity: 0;
+  scale: 0.25;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jevons-dot {
+    transition: none;
+  }
+}
+
+/*
  * Page transitions (React <ViewTransition>, driven by Link transitionTypes).
  * Forward: old page slides left, new page arrives from the right. Back: the reverse.
  * Header and footer stay put. Logos and metrics morph between card and case study.

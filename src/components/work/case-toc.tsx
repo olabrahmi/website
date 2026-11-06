@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 import { cn } from '@/utils/cn';
 
@@ -18,24 +18,35 @@ export interface TocItem {
  *
  *   lg and up: a sticky rail beside the text.   Below lg: a floating island under the header.
  */
-export default function CaseToc({ items, className }: { items: TocItem[]; className?: string }) {
+export default function CaseToc({
+  items,
+  footer,
+  className,
+}: {
+  items: TocItem[];
+  /** Under the list, on the rail only. */
+  footer?: ReactNode;
+  className?: string;
+}) {
   const [active, setActive] = useState(items[0]?.id);
   const list = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const visible = new Set<string>();
+    // Anything above the line 30% down the screen counts as passed. The last one passed is the one being read, so
+    // this works for whole sections and for bare headings.
+    const passed = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) visible.add(entry.target.id);
-          else visible.delete(entry.target.id);
+          if (entry.isIntersecting) passed.add(entry.target.id);
+          else passed.delete(entry.target.id);
         }
 
-        const first = items.find((item) => visible.has(item.id));
+        const current = items.findLast((item) => passed.has(item.id));
 
-        if (first) setActive(first.id);
+        if (current) setActive(current.id);
       },
-      { rootMargin: '-20% 0px -60% 0px' },
+      { rootMargin: '1000000px 0px -70% 0px' },
     );
 
     for (const item of items) {
@@ -77,14 +88,14 @@ export default function CaseToc({ items, className }: { items: TocItem[]; classN
               data-toc={item.id}
               aria-current={active === item.id ? 'true' : undefined}
               className={cn(
-                'relative isolate block rounded-full px-3 py-1.5 text-sm whitespace-nowrap transition-colors duration-150',
+                'relative isolate block rounded-full px-3 py-1.5 text-sm whitespace-nowrap transition-colors duration-150 lg:rounded-xl lg:leading-snug lg:whitespace-normal',
                 active === item.id ? 'text-accent' : 'text-ink-muted hover:text-ink',
               )}
             >
               {active === item.id && (
                 <motion.span
                   layoutId="toc-pill"
-                  className="bg-accent-soft absolute inset-0 -z-10 rounded-full"
+                  className="bg-accent-soft absolute inset-0 -z-10 rounded-full lg:rounded-xl"
                   transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
                 />
               )}
@@ -93,6 +104,7 @@ export default function CaseToc({ items, className }: { items: TocItem[]; classN
           </li>
         ))}
       </ul>
+      {footer && <div className="mt-4 hidden lg:block">{footer}</div>}
     </nav>
   );
 }

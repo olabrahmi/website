@@ -18,11 +18,11 @@ export const socials: SocialLink[] = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/olabrahmi/' },
 ];
 
-/** Blog is hidden for now: add `{ label: 'Blog', href: '/blog' }` back with the route. */
 export const nav = [
   { label: 'Work', href: '/#work' },
   { label: 'Services', href: '/#capabilities' },
   { label: 'About', href: '/#about' },
+  { label: 'Notes', href: '/notes' },
   // Hidden on phones: the hero already has this button.
   { label: 'Email me', href: `mailto:${person.email}` },
 ] as const;
@@ -31,6 +31,7 @@ export const hero = {
   headline: 'I build web platforms and AI agents.',
   subline: "I'm Oussama, a senior product engineer. Six years shipping for clients like PAYBACK, Takeda and Descope.",
   status: 'Open to freelance projects and senior roles · Remote, GMT',
+  noteCta: 'Read my latest note',
 } as const;
 
 export const about = {

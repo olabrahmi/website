@@ -1,6 +1,9 @@
+import Link from 'next/link';
+
 import { AuroraBackground } from '@/components/motion';
-import { ArrowDown, Button, Container } from '@/components/ui';
+import { ArrowDown, ArrowRight, Button, Container } from '@/components/ui';
 import { EmailIcon } from '@/components/ui/social-icons';
+import { latestNote } from '@/content/notes';
 import { hero, person } from '@/content/site';
 
 const step = (index: number) => ({ '--i': index }) as React.CSSProperties;
@@ -50,6 +53,16 @@ export default function Hero() {
             <EmailIcon className="size-4" />
           </Button>
         </div>
+        <p style={step(words.length + 3)} className="rise mt-6 max-w-[46ch] text-[0.9375rem] leading-snug">
+          <Link
+            href={`/notes/${latestNote.slug}`}
+            transitionTypes={['nav-forward']}
+            className="group/note text-ink-muted hover:text-ink transition-colors duration-150"
+          >
+            <span className="text-ink font-medium">{hero.noteCta}:</span> {latestNote.teaser}
+            <ArrowRight className="text-accent ease-out-strong ml-1.5 inline size-4 align-[-0.15em] transition-transform duration-150 [@media(hover:hover)]:group-hover/note:translate-x-0.5" />
+          </Link>
+        </p>
       </Container>
     </AuroraBackground>
   );
